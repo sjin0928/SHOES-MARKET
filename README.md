@@ -39,7 +39,7 @@
 
 <div>
 <h3>4. 프로젝트 설계</h3>
-  &nbsp<h4>1) 요구사항 명세서</h4>
+  <h4>1) 요구사항 명세서</h4>
   &nbsp&nbsp<a href="https://www.notion.so/cd11c361c83d4c30bc6ee9faeaf0342f?v=ff682c6147644b7ca0da413389245086&pvs=4">요구사항 명세서</a>
   &nbsp<h4>2) 화면구현</h4>
   &nbsp&nbsp<a href="https://share.balsamiq.com/c/3p2Z1s6ePVpknwkYtB9Qq4.png">메인</a><br>
