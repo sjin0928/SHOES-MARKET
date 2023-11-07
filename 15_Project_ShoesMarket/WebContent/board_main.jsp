@@ -6,37 +6,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>문의게시글</title>
-<script>
-function board_main(){
-	let form = document.formButton;
-	form.action="controller?type=board";
-	form.submit();
-}
-function notice_list(){
-	let form = document.formButton;
-	
-	form.action="controller?type=noticeList";
-	form.submit();
-}
-function board_inquiry() {
-	let form = document.formButton;
-	
-	form.action="controller?type=list";
-	form.submit();
-}
-function review_list() {
-	let form = document.formButton;
-	
-	form.action="controller?type=reviewList";
-	form.submit();
-}
-</script>
+<title>게시판</title>
  <script>
  <%@ include file="include/popup.js" %>
  <%@ include file="include/search.js" %>
  </script>
+<!-- 메뉴바 외 코드 -->
 <link href="css/style.css" rel="stylesheet" />
+<!-- 메뉴바 부트스트랩 템플릿 사용 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/lux/bootstrap.min.css" integrity="sha384-9+PGKSqjRdkeAU7Eu4nkJU8RFaH8ace8HGXnkiKMP9I9Te0GJ4/km3L1Z8tXigpG" crossorigin="anonymous">
 </head>
 <body>
 	<!-- start hero area -->
@@ -45,71 +23,78 @@ function review_list() {
 	<!-- end header section -->
 	<!-- end hero area -->
   	
-	<!-- 공지사항 내용 시작 -->
-	<div class="contents">
-		<div class="menu">
-	    	<form method="post" name="formButton">
-	    	<ul>
-	    		<li><input class="inputbutton" type="button" value="메인게시판" onclick="board_main()"></li>
-	    		<li><input class="inputbutton" type="button" value="공지사항" onclick="notice_list()"></li>
-	    		<li><input class="inputbutton" type="button" value="문의게시판" onclick="board_inquiry()"></li>
-	    		<li><input class="inputbutton" type="button" value="리뷰게시판" onclick="review_list()"></li>
-	    	</ul>
-	    	</form>
-	  		<div class="menu_contents">
-	    		<div id="menu_top">
-          			<div id="hello">
-            			<i class="fa fa-comment" style="font-size:24px"></i>
+	<!-- 게시판 내용 시작 -->
+   	<%@ include file="include/boardBtn.jspf" %>
+   	
+ 		<div class="class=col-10 menu_contents">
+   			<div id="menu_top">
+        		<div id="hello">
+          			<i class="fa fa-comment" style="font-size:24px"></i>
+	       			<p>
+	        			안녕하세요! 고객님!<br>
+	        			빠르고 친절한 답변을 위해 노력하겠습니다.
+	       			</p>
+	       			   			
+      			<div class="inquiry_icon">
+        			<i class="fa fa-truck" style="font-size:24px"></i><br>
+        			주문/배송(조회)<br>
+	   			</div>
+	   			<div class="inquiry_icon">
+        			<i class="fa fa-shopping-bag" style="font-size:24px"></i><br>
+        			취소, 반품교환<br>
+	   			</div>
+      			<div class="inquiry_icon">
+        			<i class="fa fa-id-card" style="font-size:24px"></i><br>
+        			회원정보수정<br>
+     			</div>
+   			
+       				<!-- <button id="inner-button" onclick="inquiry_list()">자주 묻는 질문 바로가기</button> -->
+     			</div>
+     			<div id="consult">
+          			<i class="fa fa-phone" style="font-size:24px"></i>
 	        			<p>
-		        			안녕하세요! 고객님!<br>
-		        			빠르고 친절한 답변을 위해 노력하겠습니다.
-	        			</p>
-	        			<!-- <button id="inner-button" onclick="inquiry_list()">자주 묻는 질문 바로가기</button> -->
-	      			</div>
-	      			<div id="consult">
-            			<i class="fa fa-phone" style="font-size:24px"></i>
-  	        			<p>
-	  	        			고객상담실<br>
-		        			1588-8282<br>
-		        			상담시간 : 오전 10:00 ~ 오후 17:00<br>
-		        			(주말/공휴일 휴무, 점심시간 제외)<br>
-		        			점심시간 : 오전 11:30 ~ 오후 12:30
-	        			</p>
-	      			</div>
-	    		</div>
-	    		<div id="menu_bottom">
-	    			<div id="inquiry_icon_box">
-	          			<div class="inquiry_icon">
-	            			<i class="fa fa-truck" style="font-size:24px"></i><br>
-	            			주문/배송(조회)<br>
-		      			</div>
-		      			<div class="inquiry_icon">
-	            			<i class="fa fa-shopping-bag" style="font-size:24px"></i><br>
-	            			취소, 반품교환<br>
-		      			</div>
-	          			<div class="inquiry_icon">
-	            			<i class="fa fa-id-card" style="font-size:24px"></i><br>
-	            			회원정보수정<br>
-	  	      			</div>
-  	      			</div>
-		  			<div id="notice">
-            			<h4>공지사항</h4>
-            			<ul>
-            				<li>
-            				
-            				</li>
-            			</ul>
-            			<a href="board_notice.jsp">+ 더보기</a><br> 
-	      			</div>
-  	    		</div>
-			</div>
-		</div>
+ 	        			고객상담실<br>
+        				1588-8282<br>
+        				상담시간 : 오전 10:00 ~ 오후 17:00<br>
+        				(주말/공휴일 휴무, 점심시간 제외)<br>
+        				점심시간 : 오전 11:30 ~ 오후 12:30
+       					</p>
+     			</div>
+   			</div>
+   		<div id="menu_bottom">
+
+  			<div id="notice">
+  				<i class="fa fa-bell" style="font-size:24px"></i>
+      			<h4>공지사항</h4>
+      			<div>
+      			<table>
+	      			<tr>
+		      			<th>글번호</th>
+		      			<th>제목</th>
+		      			<th>내용</th>
+		      			<th>작성일</th>
+	      			</tr>
+	      			<c:forEach var="vo" items="${list }">   
+	      				<tr>
+	      					<td id="notice_num">${vo.noticeNum }</td>
+	      					<td id="notice_title"><a href="controller?type=noticeView&noticeNum=${vo.noticeNum }&idx=${idx}&keyword=${keyword}">${vo.noticeTitle }</a></td>
+	      					<td id="notice_contents">${vo.contents }</td>
+	      					<td id="notice_regdate">${vo.regDate }</td>
+	      				</tr>
+      				</c:forEach>
+      			</table>
+      			<br>
+      			<a href="controller?type=noticeList" style="text-align: right">+ 더보기</a>
+      			</div>
+   			</div>
+   		</div>
 	</div>
   	<!-- 공지사항 내용 끝 -->
 
   	<!-- info section -->
   	<!-- footer section -->
   	<%@ include file="include/footer.jspf" %>
-
+<!-- 부트스트랩 -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 </body>
 </html>

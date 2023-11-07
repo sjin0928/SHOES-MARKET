@@ -69,6 +69,7 @@ public class InquirySearchCommand implements Command{
 		request.setAttribute("list", list);
 		request.setAttribute("idx", idx);
 		request.setAttribute("keyword", keyword);
+		request.setAttribute("cPage", cPage);
 		request.setAttribute("pvo", p);
 		
 		System.out.println(list);

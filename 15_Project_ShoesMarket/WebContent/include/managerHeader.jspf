@@ -1,66 +1,98 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-	<div class="hero_area">
-		<!-- header section strats -->
-		<header class="header_section">
-			<div class="header_top">
-				<a class="col-1 navbar-brand" href="managerMain.jsp">
-					<i class="fa fa-home" style="font-size:36px"></i>
-        		</a>
-        		<a class="col-10 navbar-brand" href="managerMain.jsp">
-          			<span>
-            		SHOES MARKET
-          			</span>
-        		</a>
-	        	<div class="col-1 dropdown">
-		    		<i class="fa fa-bars" style="font-size:36px"></i>
-		      		<div class="dropdown-content">
-			    		<a href="index.html">Home <span class="sr-only">(current)</span></a>
-			    		<a href="#">상품현황</a>
-			    		<a href="#">판매량</a>
-			    		<a href="#">배송현황</a>
-			    		<a href="managerBullletinBoard.jsp">게시판 관리</a>
-			    		<a href="#">회원 관리</a>
-			    		<a href="login.jsp">
-	              			<i class="fa fa-user"></i>
-	            		</a>
-	            		<a href="sign_in.jsp">
-	              			<i class="fa fa-shopping-bag"></i>
-	            		</a>
-		      		</div>
-		    	</div>
-	  		</div>
-			<div class="header_navbar">
-		    	<nav class="navbar navbar-expand-lg custom_nav-container ">
-		      		<div class="navbar-collapse">
-	            		<ul class="navbar-nav">
-	              			<li class="nav-item">
-	              	  			<a class="nav-link" href="#">상품현황</a>
-	              			</li>
-	              			<li class="nav-item">
-	                			<a class="nav-link" href="#">판매량</a>
-	              			</li>
-	              			<li class="nav-item">
-	                			<a class="nav-link" href="#">배송현황</a>
-	              			</li>
-	              			<li class="nav-item">
-	                			<a class="nav-link" href="managerBullletinBoard.jsp">게시판 관리</a>
-	              			</li>
-	              			<li class="nav-item">
-	                			<a class="nav-link" href="#">회원 관리</a>
-	              			</li>
-	            		</ul>
-	            		<div class="user_option">
-	              			<a href="login.jsp">관리자 모드</a>
-	            		</div>
-	          		</div>
-	        	</nav>
-	      	</div>
-    	</header>
-	</div>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	<!-- 최상단 -->
+	<header class="header_section">
+		<!-- 최상단 왼쪽 집모양  -->
+      		<!-- 최상단 SHOES MARKET 로고 -->
+      		
+      		<!-- 최상단 오른쪽  -->
+      		<div class="text-right">
+      		<a class="col-10 navbar-brand" href="managerMain.jsp" style="font-weight: bold; font-size: 40px;">
+        			<span style="display: block; text-align: center; margin-left: 240px; color: black;">
+          		SHOES MARKET
+        			</span>
+      		</a>
+	             <a href="login.jsp">관리자모드</a>
+	             <span style="margin: 0 10px;">|</span> <!-- 간격을 조절하는 부분 -->
+	             <a href="controller?type=logout">로그아웃</a>
+	             <span style="margin: 0 10px;"></span> <!-- 간격을 조절하는 부분 -->
+	              
+	              		
+	            
+       		<i class="fa fa-bars"  style="font-size:36px;  display: inline-block;" data-bs-toggle="dropdown" href="controller?type=brand" role="button" aria-haspopup="true" aria-expanded="false"></i>
+      			<div class="dropdown-menu">
+		            <a class="dropdown-item" href="#">Home</a>
+		            <a class="dropdown-item" href="#">상품현황</a>
+		            <a class="dropdown-item" href="#">판매량</a>
+		            <a class="dropdown-item" href="#">배송현황</a>
+		            <a class="dropdown-item" href="managerBullletinBoard.jsp">게시판 관리</a>
+		            <a class="dropdown-item" href="#">BulletinBoard 2</a>
+		            
+		            <div class="dropdown-divider"></div>
+		            <!-- 마이 페이지 -->
+		            <a href="login.jsp" style="display: block; text-align: center;">
+	              			<i class="fa fa-user" style="font-size: 18px; margin: 0 auto;"></i>
+	            	</a>
+	            	<!-- 장바구니 -->
+	            	<div class="dropdown-divider"></div>
+	            	<a href="sign_in.jsp" style="display: block; text-align: center;">
+	              			<i class="fa fa-shopping-bag" style="font-size: 18px; margin: 0 auto;"></i>
+	            	</a>
+	          </div>
+	          </div>
+	  
 	
-    <!-- end header section -->
-  	<!-- end hero area -->
-  	
-  	<!-- ------------------------------------------------------------------------ -->
-  	
+	<!-- 상단 메뉴바 시작 -->
+	<div>
+	<nav class="navbar navbar-expand-lg bg-light" data-bs-theme="light" style="max-width: 100%">
+  <div class="container-fluid">
+    <a class="navbar-brand">MANAGER MENU</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarColor03">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="#">상품현황</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">판매량</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">배송현황</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="managerBullletinBoard.jsp">게시판 관리</a>
+        </li> <li class="nav-item">
+          <a class="nav-link" href="#">회원 관리</a>
+        </li>
+        
+      </ul>
+      
+      <!-- 서치바 -->
+      <form class="d-flex ml-auto" action="controller?type=search" method="post" name="myForm">
+        <select name="idx" style="width:100px; height:30px ">
+  				<option value="1" style="font-size: 12px">상품명</option>
+  				<option value="2">브랜드</option>
+  			</select>
+  			<ul class="navbar-nav me-auto">
+         <li class="nav-item">
+        </li>
+         </ul>
+        <input class="form-control me-sm-2" name="keyword" title="검색어" type="search" placeholder="Search">
+         <ul class="navbar-nav me-auto">
+         <li class="nav-item">
+        </li>
+         </ul>
+        <button class="btn btn-secondary my-2 my-sm-0" value="search" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
+</div>
+</header>
+</div>
+	<!-- 상단 메뉴바 끝 -->
+
+

@@ -52,15 +52,17 @@ public class InquiryDAO {
 	}
 	
 	//게시글 키워드 검색 수 조회
-	public static int getNoticeSearchCount(String keyword) {
-		
-		System.out.println(">>> getSearchCount keyword : " +  keyword);
+	public static int getSearchCount(String idx, String keyword) {
+		Map<String, String> map = new HashMap<>();
+		map.put("idx", idx);
+		map.put("keyword", keyword);
+		System.out.println(">>> getSearchCount idx, keyword : " + idx + ", " +  keyword);
 		SqlSession ss = null;
 		int searchCount = 0;
 		
 		try {
 			ss = DBService.getFactory().openSession();
-			searchCount = ss.selectOne("shoesmarket.noticeSearchCount", keyword);
+			searchCount = ss.selectOne("shoesmarket.searchCount", map);
 			
 			System.out.println(searchCount);
 		} catch (Exception e) {
@@ -86,7 +88,7 @@ public class InquiryDAO {
 		
 		try {
 			ss = DBService.getFactory().openSession();
-			list = ss.selectList("shoesmarket.inquiry_search", map);
+			list = ss.selectList("shoesmarket.inquirySearch", map);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -105,7 +107,7 @@ public class InquiryDAO {
 		
 		try {
 			ss = DBService.getFactory().openSession();
-			vo = ss.selectOne("shoesmarket.inquiry_view", inquiryNum);
+			vo = ss.selectOne("shoesmarket.inquiryView", inquiryNum);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -127,7 +129,7 @@ public class InquiryDAO {
 		
 		try {
 			ss = DBService.getFactory().openSession(true);
-			voUp = ss.update("shoesmarket.inquiry_update", vo);
+			voUp = ss.update("shoesmarket.inquiryUpdateFile", vo);
 			System.out.println("voUp" + voUp);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -149,7 +151,7 @@ public class InquiryDAO {
 		
 		try {
 			ss = DBService.getFactory().openSession(true);
-			voUp = ss.update("shoesmarket.inquiry_update", vo);
+			voUp = ss.update("shoesmarket.inquiryUpdate", vo);
 			System.out.println("voUp" + voUp);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -169,7 +171,7 @@ public class InquiryDAO {
 		
 		try {
 			ss = DBService.getFactory().openSession(true);
-			result = ss.update("shoesmarket.inquiry_delete", inquiryNum);
+			result = ss.update("shoesmarket.inquiryDelete", inquiryNum);
 			System.out.println("result" + result);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -187,7 +189,7 @@ public class InquiryDAO {
 		
 		try {
 			ss = DBService.getFactory().openSession(true);
-			result = ss.insert("shoesmarket.inquiry_write", vo);
+			result = ss.insert("shoesmarket.inquiryWrite", vo);
 			System.out.println("result" + result);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -198,14 +200,14 @@ public class InquiryDAO {
 		}
 		return result;
 	}
-
+	// 게시글 등록 아이템 검색
 	public static int inquiryItemSearch(String itemName) {
 		SqlSession ss = null;
 		int itemNum = 0;
 		
 		try {
 			ss = DBService.getFactory().openSession();
-			itemNum = ss.selectOne("shoesmarket.inquiry_item_search", itemName);
+			itemNum = ss.selectOne("shoesmarket.inquiryItemSearch", itemName);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

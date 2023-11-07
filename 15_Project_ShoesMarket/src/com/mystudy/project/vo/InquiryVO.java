@@ -14,7 +14,6 @@ public class InquiryVO {
 	private String cusNickname;
 	private String cusEmail;
 	private String cusPassword;
-	private int rNum;
 	private String inqImgPath;
 	private String inqImgName;
 
@@ -23,7 +22,7 @@ public class InquiryVO {
 	}
 
 	public InquiryVO(int inquiryNum, int cusNum, String secretStatus, String title, String contents, Date regDate,
-			Date modDate, int itemNum, String cusNickname, String cusEmail, String cusPassword, int rNum, String inqImgPath, String inqImgName) {
+			Date modDate, int itemNum, String cusNickname, String cusEmail, String cusPassword, String inqImgPath, String inqImgName) {
 		super();
 		this.inquiryNum = inquiryNum;
 		this.cusNum = cusNum;
@@ -36,7 +35,6 @@ public class InquiryVO {
 		this.cusNickname = cusNickname;
 		this.cusEmail = cusEmail;
 		this.cusPassword = cusPassword;
-		this.rNum = rNum;
 		this.inqImgPath = inqImgPath;
 		this.inqImgName = inqImgName;
 	}
@@ -71,14 +69,6 @@ public class InquiryVO {
 
 	public void setInqImgPath(String inqImgPath) {
 		this.inqImgPath = inqImgPath;
-	}
-
-	public int getrNum() {
-		return rNum;
-	}
-
-	public void setrNum(int rNum) {
-		this.rNum = rNum;
 	}
 
 	public int getInquiryNum() {
@@ -174,7 +164,7 @@ public class InquiryVO {
 		return "InquiryVO [inquiryNum=" + inquiryNum + ", cusNum=" + cusNum + ", secretStatus=" + secretStatus
 				+ ", title=" + title + ", contents=" + contents + ", regDate=" + regDate + ", modDate=" + modDate
 				+ ", itemNum=" + itemNum + ", cusNickname=" + cusNickname + ", cusEmail=" + cusEmail + ", cusPassword="
-				+ cusPassword + ", rNum=" + rNum + ", inqImgPath=" + inqImgPath + ", inqImgName=" + inqImgName + "]";
+				+ cusPassword + ", inqImgPath=" + inqImgPath + ", inqImgName=" + inqImgName + "]";
 	}
 
 

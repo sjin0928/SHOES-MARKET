@@ -18,7 +18,7 @@ public class ItemDetailCommand implements Command{
 	public String exec(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// 게시판 목록에서 상품명 누르면 이동 
 		// 전달받은 파라미터 값 (상품번호)
-		String itemNum = req.getParameter("itemNum");
+		int itemNum = Integer.parseInt(req.getParameter("itemNum"));
 		System.out.println(">> ItemDetailCommand itemNum : " + itemNum);
 				
 		ItemVO itemVo = ItemDAO.getProductDetail(itemNum);

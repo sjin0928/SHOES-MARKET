@@ -16,7 +16,8 @@ public class NewCommand implements Command {
 
 	@Override
 	public String exec(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-ItemPaging p = new ItemPaging();
+		System.out.println(">> NewCommand 실행");
+		ItemPaging p = new ItemPaging();
 		
 		//1. 전체 상품 게시물 수량 구하기 
 		p.setTotalRecord(ItemDAO.getItemTotalCount());

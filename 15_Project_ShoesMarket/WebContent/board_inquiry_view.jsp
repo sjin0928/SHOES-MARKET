@@ -11,12 +11,11 @@
  <%@ include file="include/popup.js" %>
  <%@ include file="include/search.js" %>
  </script>
-<link href="css/style.css" rel="stylesheet" />
 <script>
 	function update_view() {
 		let form = document.myform;
 		
-		form.action="controller?type=updateView";
+		form.action="controller?type=inquiryUpdateView";
 		form.submit();
 	}
 	function delete_inquiry() {
@@ -29,7 +28,7 @@
 	function list_go() {
 		let form = document.myform;
 		
-		form.action="controller?type=list";
+		form.action="controller?type=inquiryList";
 		form.submit();
 	}
 	
@@ -40,6 +39,11 @@
 		form.submit();
 	}
 </script>
+<!-- 메뉴바 외 코드 -->
+<link href="css/style.css" rel="stylesheet" />
+<!-- 메뉴바 부트스트랩 템플릿 사용 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/lux/bootstrap.min.css" integrity="sha384-9+PGKSqjRdkeAU7Eu4nkJU8RFaH8ace8HGXnkiKMP9I9Te0GJ4/km3L1Z8tXigpG" crossorigin="anonymous">
+</head>
 <body>
 <%@ include file="include/header.jspf" %>
 <div id="contents_view">
@@ -86,6 +90,7 @@
 					<form method="post" name="myform" ><!-- enctype="multipart/form-data" -->
 						<input type="button" value="수정" onclick="update_view()">
 						<input type="button" value="목록보기" onclick="list_go()">
+						
 						<h4>비밀번호 입력 후 삭제를 누르시면 게시글이 삭제 됩니다.</h4>
 						<p>
 						비밀번호 <input type="text" name="passwordConfirm">
@@ -112,8 +117,9 @@
 		<c:forEach var="inqCommVO" items="${list }">
 	
 		<ul>
-			<li>작성자: admin &nbsp;&nbsp; </li>
+			<li>작성자: 관리자 &nbsp;&nbsp; </li>
 			<li>작성일: ${inqCommVO.regDate }</li>
+			<li>수정일: ${inqCommVO.modDate }</li>
 			<li>내용 : ${inqCommVO.contents }</li>
 		</ul>
 			<!-- 세션에 게시글데이터, 페이지번호가 없으면 명시적으로 데이터 넘기기 -->
@@ -129,5 +135,7 @@
 	
 	<!-- footer section -->
   	<%@ include file="include/footer.jspf" %>
+  	<!-- 부트스트랩 -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 </body>
 </html>

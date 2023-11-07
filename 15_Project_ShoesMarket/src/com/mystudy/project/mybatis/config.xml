@@ -39,6 +39,9 @@
 
 		<typeAlias type="com.mystudy.project.vo.ReviewVO"
 			alias="ReviewVO" />
+			
+		<typeAlias type="com.mystudy.project.vo.NoticeVO"
+			alias="NoticeVO" />
 	</typeAliases>
 			
 	<environments default="development">

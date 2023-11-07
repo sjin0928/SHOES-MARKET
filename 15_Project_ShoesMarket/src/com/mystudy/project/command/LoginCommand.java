@@ -46,6 +46,7 @@ public class LoginCommand implements Command {
             if (customer != null) {
             	// 로그인 정보 세션에 저장 
             	session.setAttribute("customer", customer);
+            	session.setAttribute("successMessage", "로그인 성공!");
                 return "beforeMain.jsp";
             } else {
                 request.setAttribute("message", "아이디 또는 비밀번호가 일치하지 않습니다.");
@@ -56,7 +57,6 @@ public class LoginCommand implements Command {
         
         // 메인으로 가되 , header에서 로그인 / 회원가입 -> 로그아웃으로 변경 
         // 로그아웃 누르면 로그아웃 처리해야 함 
-        //return "login.jsp";
         return "login.jsp";
     }
 }

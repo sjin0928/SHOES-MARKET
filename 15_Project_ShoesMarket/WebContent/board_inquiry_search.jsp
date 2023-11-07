@@ -10,43 +10,25 @@
 <title>문의게시글</title>
 
 <script>
-function board_main(){
-	location.href = "board_main.jsp"
-}
-function notice_list(){
-	location.href = "noticeList.jsp"
-}
-/* function board_inquiry() {
-	location.href = "controller?type=list"
-} */
-function review_list() {
-	location.href = "reviewList.jsp"
-}
+<%@ include file="include/popup.js" %>
+<%@ include file="include/search.js" %>
 </script>
- <script>
- <%@ include file="include/popup.js" %>
- <%@ include file="include/search.js" %>
- </script>
+<!-- 메뉴바 외 코드 -->
 <link href="css/style.css" rel="stylesheet" />
+<!-- 메뉴바 부트스트랩 템플릿 사용 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/lux/bootstrap.min.css" integrity="sha384-9+PGKSqjRdkeAU7Eu4nkJU8RFaH8ace8HGXnkiKMP9I9Te0GJ4/km3L1Z8tXigpG" crossorigin="anonymous">
 </head>
 <body>
 	<!-- start header section -->
 		<%@ include file="include/header.jspf" %>
-	
+
   	<!-- 문의게시판 내용 시작 -->
-  	
-    <div class="contents">
-	    <div class="menu">
-	    	<ul>
-	    		<li><button onclick="board_main()">메인게시판</button></li>
-	    		<li><button onclick="notice_list()">공지사항</button></li>
-		    	<!-- <li><button id="board_inquiry">문의게시판</button></li> -->
-		    	<li><button onclick="review_list()">리뷰게시판</button></li>
-		  	</ul>
-		<div class="menu_contents">
-			
+  	   	<%@ include file="include/boardBtn.jspf" %>
+  <div class="container" style="margin-top:30px">
+ 	<div class="row">
+		<div class="col-sm-10 menu_contents" >	
 			<!-- 키워드 검색 -->
-	    	<form action="controller?type=search" method="post">
+	    	<form action="controller?type=inquirySearch" method="post">
 				<select name="idx">
 					<option value="0">작성자</option>
 					<option value="1">제목</option>
@@ -83,10 +65,17 @@ function review_list() {
 						<c:forEach var="vo" items="${list }">
 							<tr>
 								<td>${vo.inquiryNum }</td>
-								<td>${vo.secretStatus }</td>
+								<td>
+								<c:if test="${vo.secretStatus == 'on'}">
+								<i class="fa fa-lock" style="font-size:24px"></i>
+								</c:if>
+								<c:if test="${vo.secretStatus == 'off'}">
+								<i class="fa fa-unlock-alt" style="font-size:24px"></i>
+								</c:if>
+								</td>
 								<td>${vo.cusNickname }</td>
 								<td>
-									<a href="controller?type=view&
+									<a href="controller?type=InquiryView&
 										inquiryNum=${vo.inquiryNum }&cPage=${pvo.nowPage }&idx=${idx }&keyword=${keyword }">${vo.title }</a>
 								</td>
 								<td>${vo.itemNum }</td>
@@ -111,7 +100,7 @@ function review_list() {
 					</c:if>
 					<c:if test="${pvo.beginPage != 1 }">
 						<li>
-							<a href="controller?type=search&cPage=${pvo.beginPage - 1 }">
+							<a href="controller?type=inquirySearch&cPage=${pvo.beginPage - 1 }">
 							<i class="fa fa-angle-left" style="font-size:24px"></i>
 							</a>
 						</li>
@@ -124,7 +113,7 @@ function review_list() {
 					</c:if>	
 					<c:if test="${pageNo != pvo.nowPage }">
 						<li>
-							<a href="controller?type=search&cPage=${pageNo }&idx=${idx }&keyword=${keyword }">${pageNo }</a>
+							<a href="controller?type=inquirySearch&cPage=${pageNo }&idx=${idx }&keyword=${keyword }">${pageNo }</a>
 						</li>
 					</c:if>		
 						
@@ -136,7 +125,7 @@ function review_list() {
 					</c:if>
 					<c:if test="${pvo.endPage < pvo.totalPage }">
 						<li>
-							<a href="controller?type=search&cPage=${pvo.endPage + 1 }&">
+							<a href="controller?type=inquirySearch&cPage=${pvo.endPage + 1 }&">
 								<i class="fa fa-angle-right" style="font-size:24px"></i>
 							</a>
 						</li>
@@ -150,15 +139,16 @@ function review_list() {
 				</td>
 			</tr>
 		</tfoot>
-			</table>
-		</div>
-		</div>
-  	</div>
+		</table>
+	</div>	
+</div>
+</div>
 
   	<!-- 공지사항 내용 끝 -->
 
   	<!-- footer section -->
   	<%@ include file="include/footer.jspf" %>
-
+<!-- 부트스트랩 -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 </body>
 </html>

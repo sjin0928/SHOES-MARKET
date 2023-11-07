@@ -40,7 +40,7 @@ public class InquiryDeleteCommand implements Command {
 		
 		InquiryVO vo = InquiryDAO.getView(inquiryNum);
 		if(!passwordConfirm.equals(vo.getCusPassword())) {
-			return "controller?type=view";
+			return "controller?type=inquiryView";
 		}
 		
 		System.out.println("inquiryDelete vo : " + vo );
@@ -51,9 +51,9 @@ public class InquiryDeleteCommand implements Command {
 		System.out.println(result);
 
 		if(idx != -1) {
-			return "controller?type=list";
+			return "controller?type=inquiryList";
 		}
-		return "controller?type=search";
+		return "controller?type=inquirySearch";
 	}
 
 }

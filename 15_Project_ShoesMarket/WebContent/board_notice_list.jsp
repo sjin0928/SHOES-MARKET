@@ -9,51 +9,14 @@
 <meta charset="UTF-8">
 <title>공지사항</title>
 
-<script>
-function board_main(){
-	let form = document.formButton;
-	form.action="board_main.jsp";
-	//form.action="controller?type=boardMain";
-	form.submit();
-}
-function board_notice(){
-	let form = document.formButton;
-	
-	form.action="controller?type=boardNotice";
-	form.submit();
-}
-function board_inquiry() {
-	let form = document.formButton;
-	
-	form.action="controller?type=list";
-	form.submit();
-}
-function review_list() {
-	let form = document.formButton;
-	
-	form.action="controller?type=reviewList";
-	form.submit();
-}
-
-//board_inquiry_view 이동
-/* function board_inquiry_view() {
-	let form = document.tableForm;
-	
-	form.action="controller?type=view";
-	form.submit();
-} */
-/* function passwordConfirm () {
-	let form = document.passwordForm;
-	
-	form.action="controller?type=passwordConfirm";
-	form.submit();
-} */
-</script>
  <script>
  <%@ include file="include/popup.js" %>
  <%@ include file="include/search.js" %>
  </script>
+<!-- 메뉴바 외 코드 -->
 <link href="css/style.css" rel="stylesheet" />
+<!-- 메뉴바 부트스트랩 템플릿 사용 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/lux/bootstrap.min.css" integrity="sha384-9+PGKSqjRdkeAU7Eu4nkJU8RFaH8ace8HGXnkiKMP9I9Te0GJ4/km3L1Z8tXigpG" crossorigin="anonymous">
 </head>
 <body>
 	<!-- start hero area -->
@@ -64,18 +27,12 @@ function review_list() {
 	
   	<!-- 문의게시판 내용 시작 -->
   	
-    <div class="contents">
-	    <div class="menu">
-	    	<form method="post" name="formButton">
-	    	<ul>
-	    		<li><input class="inputbutton" type="button" value="메인게시판" onclick="board_main()"></li>
-	    		<li><input class="inputbutton" type="button" value="공지사항" onclick="board_notice()"></li>
-	    		<li><input class="inputbutton" type="button" value="문의게시판" onclick="board_inquiry()"></li>
-	    		<li><input class="inputbutton" type="button" value="리뷰게시판" onclick="review_list()"></li>
-	    	</ul>
-	    	</form>
-		<div class="menu_contents">
-		<h3 id="board_title">문의게시글 리스트</h3>
+	<!-- 게시판 내용 시작 -->
+   	<%@ include file="include/boardBtn.jspf" %>
+   	
+	<div class="class=col-10 menu_contents">
+    
+		<h3 id="board_title">공지사항</h3>
 			<!-- 키워드 검색 -->
 	    	<form action="controller?type=noticeSearch" method="post">
 	    		<i class="fa fa-search" style="font-size:14px"></i> 
@@ -106,11 +63,11 @@ function review_list() {
 					<c:otherwise>
 						<c:forEach var="vo" items="${list }">
 							<tr>
-								<td>${vo.inquiryNum }</td>
+								<td>${vo.noticeNum }</td>
 								<td>관리자</td>
 								<td>
 								<a href="controller?type=noticeView&
-									title=${vo.title }&inquiryNum=${vo.inquiryNum}&idx=${idx}&keyword=${keyword}">${vo.title }</a>
+									noticeNum=${vo.noticeNum }&idx=${idx }&keyword=${keyword }">${vo.noticeTitle }</a>
 								</td>
 								<td>${vo.regDate }</td>
 								<td>${vo.modDate }</td>
@@ -134,7 +91,7 @@ function review_list() {
 					</c:if>
 					<c:if test="${pvo.beginPage != 1 }">
 						<li>
-							<a href="controller?type=list&cPage=${pvo.beginPage - 1 }">
+							<a href="controller?type=noticeList&cPage=${pvo.beginPage - 1 }">
 							<i class="fa fa-angle-left" style="font-size:24px"></i>
 							</a>
 						</li>
@@ -147,7 +104,7 @@ function review_list() {
 					</c:if>	
 					<c:if test="${pageNo != pvo.nowPage }">
 						<li>
-							<a href="controller?type=list&cPage=${pageNo }">${pageNo }</a>
+							<a href="controller?type=noticeList&cPage=${pageNo }">${pageNo }</a>
 						</li>
 					</c:if>		
 						
@@ -159,7 +116,7 @@ function review_list() {
 					</c:if>
 					<c:if test="${pvo.endPage < pvo.totalPage }">
 						<li>
-							<a href="controller?type=list&cPage=${pvo.endPage + 1 }">
+							<a href="controller?type=noticeList&cPage=${pvo.endPage + 1 }">
 								<i class="fa fa-angle-right" style="font-size:24px"></i>
 							</a>
 						</li>
@@ -171,8 +128,7 @@ function review_list() {
 			</tfoot>
 			</table>
 		</div>
-		</div>
-  	</div>
+
 	<br><br><br><br><br><br><br><br>
   	<!-- 공지사항 내용 끝 -->
 
@@ -181,5 +137,7 @@ function review_list() {
   	<div>
   	<%@ include file="include/footer.jspf" %>
 	</div>
+<!-- 부트스트랩 -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 </body>
 </html>

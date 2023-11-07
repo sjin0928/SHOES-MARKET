@@ -6,12 +6,10 @@ import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import com.mystudy.project.common.Paging;
-import com.mystudy.project.dao.InquiryDAO;
-import com.mystudy.project.vo.CustomerVO;
-import com.mystudy.project.vo.InquiryVO;
+import com.mystudy.project.common.NoticePaging;
+import com.mystudy.project.dao.NoticeDAO;
+import com.mystudy.project.vo.NoticeVO;
 
 public class NoticeListCommand implements Command {
 
@@ -19,17 +17,11 @@ public class NoticeListCommand implements Command {
 	public String exec(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//0. 파라미터 값 전체조회
 		System.out.println("NoticeListCommand");
-		Paging p = new Paging();
-		
-		// 세션에 저장된 로그인 정보
-		HttpSession session = request.getSession();
-		CustomerVO customer = (CustomerVO)session.getAttribute("customer");
-		System.out.println(customer);
-		session.setAttribute("customer", customer);
+		NoticePaging p = new NoticePaging();
 		
 		//1. 전체 게시물 수량 구하기
-		p.setTotalRecord(NoticeDAO.getNoticeTotalCount());
-		System.out.println(NoticeDAO.getNoticeTotalCount());
+		p.setTotalRecord(NoticeDAO.getTotalCount());
+		System.out.println(NoticeDAO.getTotalCount());
 		p.setTotalPage();
 		System.out.println(p.getNowPage());
 		//2. 현재 페이지 구하기
@@ -60,7 +52,7 @@ public class NoticeListCommand implements Command {
 		}
 		
 		//4. DB에서 전체 게시글 조회(DAO사용)
-		List<InquiryVO> list = NoticeDAO.getList(p.getBegin(), p.getEnd());
+		List<NoticeVO> list = NoticeDAO.getList(p.getBegin(), p.getEnd());
 		
 		//5. 조회된 데이터를 응답페이지(board_inquiry.jsp)에서 사용토록 scope에 저장
 		request.setAttribute("list", list);

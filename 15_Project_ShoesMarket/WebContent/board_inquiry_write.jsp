@@ -13,10 +13,10 @@
 	function list_go() {
 		let form = document.myform;
 		
-		form.action = "controller?type=list";
+		form.action = "controller?type=inquiryList";
 		form.submit();
 	}
-	function inquiry_insert() {
+	function inquiry_write() {
 		let form = document.myform;
 		
 		form.action = "controller?type=inquiryWrite";
@@ -37,21 +37,19 @@
  <%@ include file="include/popup.js" %>
  <%@ include file="include/search.js" %>
  </script>
+
+<!-- 메뉴바 외 코드 -->
 <link href="css/style.css" rel="stylesheet" />
+<!-- 메뉴바 부트스트랩 템플릿 사용 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/lux/bootstrap.min.css" integrity="sha384-9+PGKSqjRdkeAU7Eu4nkJU8RFaH8ace8HGXnkiKMP9I9Te0GJ4/km3L1Z8tXigpG" crossorigin="anonymous">
 </head>
 <body>
+	<!-- start header section -->
+		<%@ include file="include/header.jspf" %>
 
-	<%@ include file="include/header.jspf" %>
-	
   	<!-- 문의게시판 내용 시작 -->
-  	
-    <div class="contents">
-	    <div class="menu">
-  	    	<ul>
-  	    		<li><button onclick="board_main()">메인게시판</button></li>
-    			<li><button onclick="notice_list()">공지사항</button></li>
-	    		<li><button onclick="review_list()">리뷰게시판</button></li>
-	  		</ul>
+  	   	<%@ include file="include/boardBtn.jspf" %>
+  	   	
 			<div class="menu_contents">
 				
 				<!-- 문의게시판 글쓰기 -->
@@ -74,9 +72,7 @@
 							<tr>
 							<th>작성자</th>
 								<td>
-									<!-- 합친 후 value에 세션 넣어줘야 함 -->
-									<!-- InquiryWriteCommand에 cusNum 보내줘야함 아래 인풋 -->
-									<input type="text" name="cusNickname" title="작성자" value="test11" readonly>
+									<input type="text" name="cusNickname" title="작성자" value="${customer.cusNickName }" readonly>
 								</td>
 							</tr>
 							<tr class="inquiry_write_tr_td">
@@ -104,17 +100,14 @@
 						<tfoot>
 							<tr class="inquiry_write_tr_td">
 								<td colspan="2">
-									<input type="button" value="저장" onclick="inquiry_insert()">
+									<input type="button" value="저장" onclick="inquiry_write()">
 									<input type="reset" value="초기화">
 									<input type="button" value="목록보기" onclick="list_go()">
 			
-									<input type="hidden" name="inquiryNum" value="${vo.inquiryNum }">	
-									<input type="hidden" name="cusPassword" value="${vo.cusPassword }">	
+									<input type="hidden" name="inquiryNum" value="${vo.inquiryNum }">
 									<input type="hidden" name="idx" value="${idx }">	
 									<input type="hidden" name="keyword" value="${keyword }">	
-									<input type="hidden" name="cPage" value="${cPage }">
-									<!-- InquiryWriteCommand에 cusNum 보내줘야함 -->	
-									<%-- <input type="hidden" name="cusNum" value="${cusNum }"> --%>	
+									<input type="hidden" name="cPage" value="${cPage }">	
 								</td>
 							</tr>
 						</tfoot>
@@ -129,6 +122,7 @@
   	<!-- info section -->
   	<!-- footer section -->
   	<%@ include file="include/footer.jspf" %>
-
+<!-- 부트스트랩 -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 </body>
 </html>

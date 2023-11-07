@@ -4,9 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <title>로그인</title>
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
- 	<link href="css/style.css" rel="stylesheet" />
+    <!-- 메뉴바 외 코드 -->
+	<link href="css/style.css" rel="stylesheet" />
+	<!-- 메뉴바 부트스트랩 템플릿 사용 -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/lux/bootstrap.min.css" integrity="sha384-9+PGKSqjRdkeAU7Eu4nkJU8RFaH8ace8HGXnkiKMP9I9Te0GJ4/km3L1Z8tXigpG" crossorigin="anonymous">
+<!--     <link rel="stylesheet" type="text/css" href="css/login.css">   -->
  <script>
  <%@ include file="include/popup.js" %>
  <%@ include file="include/search.js" %>
@@ -64,6 +66,7 @@
     
      <!-- ------------------------------------------------------------------------ -->
       
-     <%@ include file="include/footer.jspf" %>
+      <%@ include file="include/footer.jspf" %>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 </body>
 </html>

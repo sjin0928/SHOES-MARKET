@@ -13,7 +13,7 @@ import com.mystudy.project.vo.NoticeVO;
 /* 231024 박수진 */
 public class NoticeDAO {
 
-	//게시글 전체 건수 조회
+	//공지사항 전체 건수 조회
 	public static int getTotalCount() {
 		int totalCount = 0;
 		
@@ -30,8 +30,29 @@ public class NoticeDAO {
 		}
 		return totalCount;
 	}
+	// 공지사항 메인 페이지 용 최신 공지사항 조회
+	public static List<NoticeVO> getNewList(int begin, int end) {
+		Map<String, Integer> map = new HashMap<>();
+		map.put("begin", begin);
+		map.put("end", end);
+		
+		SqlSession ss = null;
+		List<NoticeVO> list = null;
+		try {
+			ss = DBService.getFactory().openSession();
+			list = ss.selectList("shoesmarket.noticeList", map);
+			System.out.println("noticeList : " + list);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (ss != null) {
+				ss.close();
+			}
+		}
+		return list;
+	}
 
-	//게시글 전체 조회
+	//공지사항 전체 조회
 	public static List<NoticeVO> getList(int begin, int end) {
 		Map<String, Integer> map = new HashMap<>();
 		map.put("begin", begin);
@@ -41,7 +62,8 @@ public class NoticeDAO {
 		List<NoticeVO> list = null;
 		try {
 			ss = DBService.getFactory().openSession();
-			list = ss.selectList("shoesmarket.NoticeList", map);
+			list = ss.selectList("shoesmarket.noticeList", map);
+			System.out.println(list);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -52,7 +74,7 @@ public class NoticeDAO {
 		return list;
 	}
 	
-	//게시글 키워드 검색 수 조회
+	//공지사항 키워드 검색 수 조회
 	public static int getSearchCount(String keyword) {
 		System.out.println(">>> getSearchCount idx, keyword : " + keyword);
 		SqlSession ss = null;
@@ -73,7 +95,7 @@ public class NoticeDAO {
 		
 		return searchCount;
 	}
-	// 게시글 키워드 검색
+	// 공지사항 키워드 검색
 	public static List<NoticeVO> getSearch(String keyword, int begin, int end) {
 		Map<String, String> map = new HashMap<>();
 		map.put("keyword", keyword);
@@ -85,7 +107,7 @@ public class NoticeDAO {
 		
 		try {
 			ss = DBService.getFactory().openSession();
-			list = ss.selectList("shoesmarket.inquiry_search", map);
+			list = ss.selectList("shoesmarket.inquirySearch", map);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -96,7 +118,7 @@ public class NoticeDAO {
 		return list;
 	}
 	
-	// 게시글 상세 보기	
+	// 공지사항 상세 보기	
 	public static NoticeVO getView(int noticeNum) {
 		
 		SqlSession ss = null;
@@ -104,7 +126,7 @@ public class NoticeDAO {
 		
 		try {
 			ss = DBService.getFactory().openSession();
-			vo = ss.selectOne("shoesmarket.inquiry_view", noticeNum);
+			vo = ss.selectOne("shoesmarket.noticeView", noticeNum);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -116,7 +138,8 @@ public class NoticeDAO {
 	}
 	
 	// 관리자 페이지에서 씀
-	// 게시글 수정하기(파일) 
+	/*
+	// 공지사항 수정하기(파일) 
 
 	public static int inquiryUpdateFile(String title, String contents, String fileName, String filePath, int noticeNum) {
 		NoticeVO vo = new NoticeVO(noticeNum, title, contents, filePath, fileName);
@@ -139,8 +162,9 @@ public class NoticeDAO {
 		}
 		return voUp;
 	}
+	*/
 	
-	// 게시글 수정하기(파일x)
+	// 공지사항 수정하기(파일x)
 	public static int inquiryUpdate(String title, String contents, int inquiryNum) {
 		InquiryVO vo = new InquiryVO(inquiryNum, title, contents);
 		
@@ -163,7 +187,7 @@ public class NoticeDAO {
 		return voUp;
 	}
 	
-	// 게시글 삭제하기
+	// 공지사항 삭제하기
 	public static int inquiryDelete(int inquiryNum) {
 	
 		SqlSession ss = null;
@@ -182,7 +206,7 @@ public class NoticeDAO {
 		}
 		return result;
 	}
-	// 게시글 작성
+	// 공지사항 작성
 	public static int inquiryWrite(InquiryVO vo) {
 		SqlSession ss = null;
 		int result = -1;

@@ -55,7 +55,7 @@ public class InquiryWriteCommand implements Command {
 		
 		System.out.println("result" + result);
 		
-		return "controller?type=list";
+		return "controller?type=inquiryList";
 	}
 
 }

@@ -11,34 +11,53 @@
 	<!-- 전체 상품 조회(신상품순) -->
 	<select id="allNew" resultType="ItemVO">
 		SELECT ITEM_NUM, NAME, PRICE, STOCK, IMAGE_PATH, 
-				ITEM_DETAIL, REG_DATE, MOD_DATE, BRAND
+				ITEM_DETAIL, REG_DATE, MOD_DATE, BRAND , ITEM_STATUS
 		FROM ITEM
+		WHERE ITEM_STATUS = 'Y'
 		ORDER BY ITEM_NUM DESC
 	</select>
 	
 	<!-- 전체 상품 조회(판매수량순 / 판매 내역 없는 것 포함 / 판매 내역 없는 건 신상품 순 -->
 	<select id="allBest" resultType="ItemVO">
 		SELECT I.ITEM_NUM, I.NAME, I.PRICE, I.STOCK, I.IMAGE_PATH,
-	       I.ITEM_DETAIL, I.REG_DATE, I.MOD_DATE, BRAND
+	       I.ITEM_DETAIL, I.REG_DATE, I.MOD_DATE, I.BRAND , I.ITEM_STATUS
 		FROM ITEM I
 		LEFT OUTER JOIN ORDERITEMS O ON I.ITEM_NUM = O.ITEM_NUM
+		WHERE I.ITEM_STATUS = 'Y'
 		ORDER BY O.QUANTITY DESC NULLS LAST, I.ITEM_NUM DESC
 	</select>
 	
 	<!-- 상품 번호로 상품 상세 조회 -->
-	<select id="productDetail" parameterType="string" resultType="ItemVO">
+	<select id="productDetail" parameterType="int" resultType="ItemVO">
 		SELECT ITEM_NUM, NAME, PRICE, STOCK, IMAGE_PATH, 
-				ITEM_DETAIL, REG_DATE, MOD_DATE, BRAND
+				ITEM_DETAIL, REG_DATE, MOD_DATE, BRAND , ITEM_STATUS
 		FROM ITEM
-		WHERE ITEM_NUM = #{itemNum}
+		WHERE ITEM_STATUS = 'Y'
+		AND ITEM_NUM = #{itemNum}
 	</select>
+	
+	<!-- 주문 내역이 있는 상품들 조회 -->
+	<!-- <select id="orderedAll" resultType="ItemVO">
+	SELECT *
+		FROM ITEM I
+			LEFT OUTER JOIN ORDERITEMS O 
+       		ON I.ITEM_NUM = O.ITEM_NUM
+        WHERE O.ORDERITEM_NUM IS NOT NULL
+	</select> -->
+	
+	<!-- ITEM_STATUS 'N'으로 update -->
+	<update id="statusUpdate" parameterType="int">
+	UPDATE ITEM 
+	SET ITEM_STATUS = 'N'
+	WHERE ITEM_NUM = #{itemNum }
+	</update>
 	
 	<insert id="itemWrite" parameterType="ItemVO">
 		INSERT INTO ITEM (
 	    ITEM_NUM, NAME, PRICE, STOCK, IMAGE_PATH, 
-	    ITEM_DETAIL, REG_DATE, MOD_DATE, BRAND )
+	    ITEM_DETAIL, REG_DATE, MOD_DATE, BRAND ,ITEM_STATUS )
 		VALUES (ITEM_SEQ.NEXTVAL, #{name }, #{price }, #{stock }, #{imagePath },
-		    #{itemDetail }, SYSDATE, SYSDATE, #{brand }
+		    #{itemDetail }, SYSDATE, SYSDATE, #{brand } ,'Y'
 		)
 	</insert>
 	
@@ -54,14 +73,14 @@
 		WHERE ITEM_NUM = #{itemNum }
 	</update>
 	
-	<delete id="itemDelete" parameterType="int">
+	<!-- <delete id="itemDelete" parameterType="int">
 		DELETE FROM ITEM WHERE ITEM_NUM = #{itemNum }
-	</delete>
+	</delete> -->
 	
 	<!-- 제품 검색해서 조회 -->
 	<select id="itemSearch" parameterType="map" resultType="ItemVO">
 		SELECT ITEM_NUM, NAME, PRICE, STOCK, IMAGE_PATH, 
-				ITEM_DETAIL, REG_DATE, MOD_DATE, BRAND
+				ITEM_DETAIL, REG_DATE, MOD_DATE, BRAND ,ITEM_STATUS
 		FROM ITEM
 		<where>
 			<!-- 상품명 -->
@@ -72,6 +91,7 @@
 			<if test="idx == 2">
 				BRAND LIKE '%'|| #{keyword } ||'%'
 			</if>
+			AND ITEM_STATUS = 'Y'
 		</where>
 		<!-- 신상품 순 -->
 		ORDER BY ITEM_NUM DESC
@@ -80,37 +100,42 @@
 	<!-- 브랜드 카테고리 -->
 	<select id="allAdidas" resultType="ItemVO">
 		SELECT ITEM_NUM, NAME, PRICE, STOCK, IMAGE_PATH, 
-				ITEM_DETAIL, REG_DATE, MOD_DATE, BRAND
+				ITEM_DETAIL, REG_DATE, MOD_DATE, BRAND, ITEM_STATUS
 		FROM ITEM
-		WHERE BRAND = '아디다스'
+		WHERE ITEM_STATUS = 'Y'
+		AND BRAND = '아디다스'
 	</select>
 	
 	<select id="allNewBal" resultType="ItemVO">
 		SELECT ITEM_NUM, NAME, PRICE, STOCK, IMAGE_PATH, 
-				ITEM_DETAIL, REG_DATE, MOD_DATE, BRAND
+				ITEM_DETAIL, REG_DATE, MOD_DATE, BRAND, ITEM_STATUS 
 		FROM ITEM
-		WHERE BRAND = '뉴발란스'
+		WHERE ITEM_STATUS = 'Y'
+		AND BRAND = '뉴발란스'
 	</select>
 	
 	<select id="allConverse" resultType="ItemVO">
 		SELECT ITEM_NUM, NAME, PRICE, STOCK, IMAGE_PATH, 
-				ITEM_DETAIL, REG_DATE, MOD_DATE, BRAND
+				ITEM_DETAIL, REG_DATE, MOD_DATE, BRAND, ITEM_STATUS
 		FROM ITEM
-		WHERE BRAND = '컨버스'
+		WHERE ITEM_STATUS = 'Y'
+		AND BRAND = '컨버스'
 	</select>
 	
 	<!-- 전체 게시글 건수 조회 -->
 	<select id="itemTotalCount" resultType="int">
 		SELECT COUNT(*) AS CNT FROM ITEM
+		WHERE ITEM_STATUS = 'Y'
 	</select>
 	
 	<!-- (상품게시글)페이지에 해당하는 게시글 조회 -->
 	<select id="itemList" resultType="ItemVO" parameterType="map">
 		SELECT ITEM_NUM, NAME, PRICE, STOCK, IMAGE_PATH, 
-				ITEM_DETAIL, REG_DATE, MOD_DATE, BRAND 
+				ITEM_DETAIL, REG_DATE, MOD_DATE, BRAND, ITEM_STATUS
 			FROM (SELECT ROWNUM AS RNUM, I.*
 			        FROM (SELECT * 
 			              FROM ITEM 
+			              WHERE ITEM_STATUS = 'Y'
 			              ORDER BY ITEM_NUM DESC ) I
 			      )
 			WHERE RNUM BETWEEN #{begin} AND #{end}
@@ -124,6 +149,7 @@
               FROM (SELECT I.*
                     FROM ITEM I
                     	LEFT OUTER JOIN ORDERITEMS O ON I.ITEM_NUM = O.ITEM_NUM
+                    	WHERE I.ITEM_STATUS = 'Y'
                     	ORDER BY O.QUANTITY DESC NULLS LAST, I.ITEM_NUM DESC) T
                     ) 
                     WHERE RNUM BETWEEN #{begin} AND #{end}
@@ -214,6 +240,58 @@
 		WHERE CUS_ID = #{cusId} AND CUS_NAME = #{cusName} AND CUS_EMAIL = #{cusEmail}
 	</select>
 	
+	<!-- 주영 -->
+	<!-- Cart 장바구니 보기(selectall) -->
+	<select id="cart" resultType="CartVO"> 
+		SELECT c.*, i.price, i.name, i.item_detail
+		FROM cart c
+		INNER JOIN item i ON c.item_Num = i.item_Num
+		ORDER BY c.CART_NUM
+	</select>
+	
+	<!-- Cart 개별 장바구니 항목 불러오기(select) -->
+	<select id="getCartItemByCartNum" resultType="com.mystudy.project.vo.CartVO">
+	    SELECT * FROM CART WHERE CART_NUM = #{cartNum}
+	</select>
+	
+	<!-- Cart 장바구니 담기(insert) fk(itemNum, id) -->
+	<insert id="cartInsert" parameterType="CartVO"> 
+		INSERT INTO CART (CART_NUM, ITEM_NUM, CUS_NUM, CART_QUANTITY, CART_REGDATE) 
+		VALUES (cart_seq.nextval, #{itemNum}, #{cusNum}, #{cartQuantity}, #{cartRegdate}) 
+	</insert>
+	
+	<!-- Cart 장바구니수량 수정(update) -->
+	<update id="cartUpdate" parameterType="CartVO"> 
+    	UPDATE CART SET CART_QUANTITY = #{cartQuantity} WHERE CART_NUM = #{cartNum} 
+	</update>
+	
+	<!-- Cart 장바구니 삭제(delete) -->
+	<delete id="cartDelete" parameterType="int"> 
+		DELETE FROM CART WHERE CART_NUM = #{cartNum} 
+	</delete>
+	
+	<!-- Cart 장바구니에 담긴 내역 조회 -->
+	<select id="getCartList" parameterType="int" resultType="CartVO"> 
+		SELECT c.*, i.price, i.name, i.item_detail
+	    FROM cart c
+	    INNER JOIN item i ON c.item_Num = i.item_Num
+	    WHERE c.CART_NUM = #{cartNum}
+	</select>
+	
+	
+	<!-- Buy 결제창에서 Purchase로 이동해서 결제 -->
+	<select id="getBuyList" resultType="OrderItemsVO">
+	    SELECT c.*, o.orderitem_Num, o.price, o.reg_Date
+	    FROM cart c
+	    INNER JOIN orderitems o ON c.item_Num = o.item_Num
+	</select>
+	
+	<insert id="putCart" parameterType="CartVO">
+	INSERT INTO CART (
+	CART_NUM, ITEM_NUM, CUS_NUM, CART_QUANTITY, CART_REGDATE)
+	VALUES (CART_SEQ.NEXTVAL , #{itemNum}, #{cusNum}, #{cartQuantity}, SYSDATE)
+	</insert>
+	
 	<!-- 231024 박수진 -->
 	<!-- 전체 게시글 건수 조회 -->
 	<select id="totalCount" resultType="int">
@@ -254,7 +332,7 @@
 	
 
 	<!-- 문의게시글 동적검색 -->
-	<select id="inquiry_search" parameterType="map" resultType="InquiryVO">
+	<select id="inquirySearch" parameterType="map" resultType="InquiryVO">
 		SELECT *
   		  FROM (SELECT ROWNUM AS RNUM, DATA.*
           		  FROM (SELECT INQ.INQUIRY_NUM, INQ.SECRET_STATUS, CUS.CUS_NICK_NAME, 
@@ -278,7 +356,7 @@
 	</select>
 	
 	<!-- 게시글의 내용 -->
-	<select id="inquiry_view" parameterType="int" resultType="InquiryVO">
+	<select id="inquiryView" parameterType="int" resultType="InquiryVO">
 		SELECT *
  		  FROM CUSTOMER CUS, INQUIRY INQ
  		 WHERE CUS.CUS_NUM = INQ.CUS_NUM
@@ -286,7 +364,7 @@
 	</select>
 	
 	<!-- 게시글의 댓글 리스트 -->
-	<select id="inquiry_comment_all" parameterType="int" resultType="InquiryCommentVO">
+	<select id="inquiryCommentAll" parameterType="int" resultType="InquiryCommentVO">
  		SELECT *
  		  FROM INQUIRY_COMMENT
  		 WHERE INQUIRY_NUM = #{inquiryNum}
@@ -294,7 +372,7 @@
 	</select>
 	
 	<!-- 게시글의 내용 수정 -->
-	<update id="inquiry_update" parameterType="InquiryVO">
+	<update id="inquiryUpdateFile" parameterType="InquiryVO">
 		UPDATE INQUIRY
 		   SET TITLE = #{title}, 
 		       CONTENTS = #{contents}, 
@@ -305,14 +383,14 @@
 	</update>
 	
 	<!-- 게시글 삭제 -->
-	<delete id="inquiry_delete" parameterType="InquiryVO">
+	<delete id="inquiryDelete" parameterType="InquiryVO">
 		DELETE FROM INQUIRY
 		 WHERE INQUIRY_NUM = #{inquiryNum}
 	</delete>
 	
 	
-	<!-- 문의게시글 입력 -->
-	<insert id="inquiry_write" parameterType="InquiryVO">
+	<!-- 문의게시글 쓰기 -->
+	<insert id="inquiryWrite" parameterType="InquiryVO">
 		INSERT INTO INQUIRY
     		   (INQUIRY_NUM, CUS_NUM, SECRET_STATUS, TITLE, CONTENTS, 
     		   REG_DATE, MOD_DATE, ITEM_NUM, INQ_IMG_PATH, INQ_IMG_NAME)
@@ -321,7 +399,7 @@
 	</insert>
 	
 	<!-- 상품번호 조회 -->
-	<select id="inquiry_item_search" parameterType="String" resultType="int">
+	<select id="inquiryItemSearch" parameterType="String" resultType="int">
 		SELECT ITEM_NUM
 		FROM ITEM
 		WHERE NAME = #{itemName}
@@ -333,13 +411,15 @@
 	</select>
 	
 	<!-- 공지사항 게시글 전체 검색 -->
-	<select id="noticeList" parameterType="map" resultType="InquiryVO">
-		SELECT ROWNUM AS RNUM, *
-          FROM NOTICE
+	<select id="noticeList" parameterType="map" resultType="NoticeVO">
+		SELECT *
+	 	  FROM (SELECT ROWNUM RNUM, N.*
+		          FROM NOTICE N
+		         ORDER BY NOTICE_NUM DESC)
 		 WHERE RNUM BETWEEN #{begin} AND #{end}
-		 ORDER BY NOTICE_NUM DESC
 	</select>
-		<!-- 게시글 검색 건수 조회 -->
+	
+	<!-- 공지사항 게시글 검색 건수 조회 -->
 	<select id="noticeSearchCount" parameterType="map" resultType="int">
 		SELECT COUNT(*) AS CNT
   		  FROM CUSTOMER CUS, INQUIRY INQ
@@ -358,8 +438,8 @@
 	</select>
 	
 
-	<!-- 문의게시글 동적검색 -->
-	<select id="notice_search" parameterType="map" resultType="InquiryVO">
+	<!-- 공지사항 문의게시글 동적검색 -->
+	<select id="noticeSearch" parameterType="map" resultType="NoticeVO">
 		SELECT ROWNUM AS RNUM, DATA.*
        	  FROM (SELECT INQ.INQUIRY_NUM, INQ.SECRET_STATUS, CUS.CUS_NICK_NAME, 
             		   INQ.TITLE, INQ.ITEM_NUM, INQ.REG_DATE, INQ.MOD_DATE
@@ -373,4 +453,25 @@
 	</select>
 	
 	
+	<!-- 게시글의 내용 -->
+	<select id="noticeView" parameterType="int" resultType="NoticeVO">
+		SELECT *
+		  FROM NOTICE
+		 WHERE NOTICE_NUM = #{noticeNum}
+	</select>
+	
+	<!-- 문의게시글 댓글 쓰기 -->
+	<insert id="commentWrite" parameterType="InquiryCommentVO">
+		INSERT INTO INQUIRY_COMMENT
+   		   (IQ_COMMENT_NUM, INQUIRY_NUM,
+           CONTENTS, REG_DATE, MOD_DATE)
+  	   VALUES (INQUIRY_COMMENT_SEQ.NEXTVAL, #{inquiryNum},
+            #{contents}, SYSDATE, SYSDATE)
+	</insert>
+	
+	<!-- 문의게시글 댓글 삭제 -->
+	<delete id="deleteComment" parameterType="int">
+		DELETE FROM INQUIRY_COMMENT
+		 WHERE IQ_COMMENT_NUM = #{iqCommentNum}
+	</delete>
 </mapper>

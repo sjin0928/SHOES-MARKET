@@ -35,12 +35,7 @@ function toggleDropdownMenu(event) {
         showDropdownMenu();
     }
 }
-function board_main(){
-	let form = document.formButton;
-	form.action="board_main.jsp";
-	//form.action="controller?type=boardMain";
-	form.submit();
-}
+
 // 문서의 다른 부분을 클릭하면 드롭다운 메뉴 닫기
 document.addEventListener('click', function (event) {
     const dropdownMenu = document.querySelector('.dropdown-brand');

@@ -6,31 +6,46 @@ import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.mystudy.project.dao.InquiryCommentDAO;
 import com.mystudy.project.dao.InquiryDAO;
+import com.mystudy.project.vo.CustomerVO;
 import com.mystudy.project.vo.InquiryCommentVO;
 import com.mystudy.project.vo.InquiryVO;
 
 public class InquiryViewCommand implements Command {
 	@Override
 	public String exec(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		System.out.println("InquiryViewCommand");
+		// 세션에 저장된 로그인 정보
+		HttpSession session = request.getSession();
+
+		int inquiryNum = Integer.parseInt(request.getParameter("inquiryNum"));
+		System.out.println("inquiryNum : " + inquiryNum);
+		InquiryVO vo = InquiryDAO.getView(inquiryNum);
+		
+		CustomerVO customer = (CustomerVO)session.getAttribute("customer");
+		
+		System.out.println("customer : " + customer);
+		
+		if(session.getAttribute("customer") == null && "on".equals(vo.getSecretStatus())) {
+			return "notCustomer.jsp";
+		}
+		if("on".equals(vo.getSecretStatus()) && customer.getCusNum() != vo.getCusNum()) {
+			return "notCustomer.jsp";
+		}
+		
 		// 파라미터 값 추출(확인)
 		request.setCharacterEncoding("UTF-8");
 		
-		String inqImgPath = request.getParameter("inqImgPath");
-		System.out.println("inqImgPath : " + inqImgPath);
-		String secretStatus = request.getParameter("secretStatus");
-		System.out.println("secretStatus : " + secretStatus);
-
-		System.out.println("InquiryViewCommand");
 		int cPage = 1;
 		if(request.getParameter("cPage")!=null) {
 			cPage = Integer.parseInt(request.getParameter("cPage"));
 		}
 		System.out.println("cPage : " + cPage);
-		int inquiryNum = Integer.parseInt(request.getParameter("inquiryNum"));
-		System.out.println("inquiryNum : " + inquiryNum);
+		
 		
 		int idx = -1;
 		int keyword = -1;
@@ -50,20 +65,15 @@ public class InquiryViewCommand implements Command {
 		
 		// DB연동 데이터 검색 처리
 		// 게시글 
-		InquiryVO vo = InquiryDAO.getView(inquiryNum);
 		// 비밀글 비번 확인
-		if("on".equals(secretStatus)) {
-			if(request.getParameter("paswordConfirm").equals(vo.getCusPassword())) {
-				String paswordConfirm = request.getParameter("paswordConfirm");
-				paswordConfirm.equals(vo.getCusPassword());
-				return "board_inquiry.jsp";
-			}
-			else {
-				
-				return "secretStatus_password_error.jsp";
-			}
-		}
+		// 작성자와 로그인 정보 일치 확인
+		System.out.println("vo : " + vo);
+		System.out.println("secretStatus : " + vo.getSecretStatus());
+		System.out.println("customer : " + customer);
+		System.out.println("customer.getCusNum() : " + customer.getCusNum());
+		System.out.println("vo.getCusNum() : " + vo.getCusNum());
 		
+
 		request.setAttribute("vo", vo);
 		request.setAttribute("cPage", cPage);
 		request.setAttribute("idx", idx);
@@ -71,9 +81,12 @@ public class InquiryViewCommand implements Command {
 		System.out.println("InquiryVO : " + vo);
 		
 		//게시글의 댓글 
-		List<InquiryCommentVO> list = InquiryCommentDAO.getCommList(inquiryNum);
-		request.setAttribute("list", list);
-
+		List<InquiryCommentVO> list = null;
+		
+		if(InquiryCommentDAO.getCommList(inquiryNum) != null) {
+			list = InquiryCommentDAO.getCommList(inquiryNum);
+			request.setAttribute("list", list);
+		}
 		System.out.println("list" + list);
 		
 		return "board_inquiry_view.jsp";

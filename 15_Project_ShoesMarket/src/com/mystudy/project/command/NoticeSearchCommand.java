@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.mystudy.project.common.Paging;
 import com.mystudy.project.dao.InquiryDAO;
+import com.mystudy.project.dao.NoticeDAO;
 import com.mystudy.project.vo.InquiryVO;
 
 /* 231024 박수진 */
@@ -25,7 +26,7 @@ public class NoticeSearchCommand implements Command{
 		Paging p = new Paging();
 		
 		//1. 검색 게시물 수량 구하기
-		int searchCount = InquiryDAO.getSearchCount(idx, keyword);
+		int searchCount = NoticeDAO.getSearchCount(keyword);
 		p.setTotalRecord(searchCount);
 		System.out.println("InquiryDAO.getSearchCount" + searchCount);
 		p.setTotalPage();

@@ -21,12 +21,6 @@ public class InquiryListCommand implements Command {
 		System.out.println("InquiryListCommand");
 		Paging p = new Paging();
 		
-		// 세션에 저장된 로그인 정보
-		HttpSession session = request.getSession();
-		CustomerVO customer = (CustomerVO)session.getAttribute("customer");
-		System.out.println(customer);
-		session.setAttribute("customer", customer);
-		
 		//1. 전체 게시물 수량 구하기
 		p.setTotalRecord(InquiryDAO.getTotalCount());
 		System.out.println(InquiryDAO.getTotalCount());

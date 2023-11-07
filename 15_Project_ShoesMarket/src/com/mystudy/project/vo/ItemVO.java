@@ -12,6 +12,7 @@ public class ItemVO {
 	private Date regDate;
 	private Date modDate;
 	private String brand;
+	private String itemStatus;
 
 	public ItemVO() {}
 	
@@ -39,7 +40,7 @@ public class ItemVO {
 	}
 
 	public ItemVO(int itemNum, String name, int price, int stock, String imagePath,
-			String itemDetail, Date regDate, Date modDate, String brand) {
+			String itemDetail, Date regDate, Date modDate, String brand, String itemStatus) {
 		super();
 		this.itemNum = itemNum;
 		this.name = name;
@@ -50,10 +51,18 @@ public class ItemVO {
 		this.regDate = regDate;
 		this.modDate = modDate;
 		this.brand = brand;
+		this.itemStatus = itemStatus;
+		
 	}
 
-	
-	
+	public String getItemStatus() {
+		return itemStatus;
+	}
+
+	public void setItemStatus(String itemStatus) {
+		this.itemStatus = itemStatus;
+	}
+
 	public String getBrand() {
 		return brand;
 	}
@@ -130,8 +139,10 @@ public class ItemVO {
 	public String toString() {
 		return "ItemVO [itemNum=" + itemNum + ", name=" + name + ", price=" + price + ", stock=" + stock
 				+ ", imagePath=" + imagePath + ", itemDetail=" + itemDetail + ", regDate=" + regDate + ", modDate="
-				+ modDate + ", brand=" + brand + "]";
+				+ modDate + ", brand=" + brand + ", itemStatus=" + itemStatus + "]";
 	}
+
+	
 
 	
 

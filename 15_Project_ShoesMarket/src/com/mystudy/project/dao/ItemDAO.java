@@ -106,8 +106,45 @@ public class ItemDAO {
 		return list;
 	}
 	
+	// 주문 내역 있는 제품 조회 
+	public static List<ItemVO> getOrderedAll(){
+		SqlSession ss = null;
+		List<ItemVO> list = null;
+		
+		try {
+			ss = DBService.getFactory().openSession();
+			list = ss.selectList("shoesmarket.orderedAll");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			ss.close();
+		}
+		
+		return list;
+		
+	}
+	
+	// 주문 내역 있는 제품 ITEM_STATUS 'N'으로 update
+	public static int productUpdate(int itemNum) {
+		SqlSession ss = null;
+		int result = -1;
+		
+		try {
+			ss = DBService.getFactory().openSession(true);
+			result = ss.update("shoesmarket.statusUpdate", itemNum);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			ss.close();
+		}
+		
+		
+		return result;
+	}
+	
+	
 	// 상품 상세
-	public static ItemVO getProductDetail(String itemNum){
+	public static ItemVO getProductDetail(int itemNum){
 		SqlSession ss = null;
 		ItemVO vo = null;
 

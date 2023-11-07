@@ -9,7 +9,6 @@ public class NoticeVO {
 	private String contents;
 	private Date regDate;
 	private Date modDate;
-	
 	public NoticeVO() {
 		super();
 	}
@@ -21,7 +20,7 @@ public class NoticeVO {
 		this.contents = contents;
 	}
 	
-	public NoticeVO(int noticeNum, String noticeTitle, String contents, String filePath, String fileName) {
+	public NoticeVO(int noticeNum, String noticeTitle, String contents) {
 		super();
 		this.noticeNum = noticeNum;
 		this.noticeTitle = noticeTitle;
@@ -66,8 +65,10 @@ public class NoticeVO {
 	@Override
 	public String toString() {
 		return "NoticeVO [noticeNum=" + noticeNum + ", adminNum=" + adminNum + ", noticeTitle=" + noticeTitle
-				+ ", contents=" + contents + ", regDate=" + regDate + ", modDate=" + modDate + "]";
+				+ ", contents=" + contents + ", regDate=" + regDate + ", modDate=" + modDate
+				+ "]";
 	}
+
 
 	
 }

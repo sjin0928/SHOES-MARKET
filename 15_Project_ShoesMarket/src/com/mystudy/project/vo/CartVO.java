@@ -10,6 +10,14 @@ public class CartVO {
 	private Date cartRegDate;
 
 	public CartVO() {}
+	
+
+	public CartVO(int itemNum, int cusNum, int cartQuantity) {
+		super();
+		this.itemNum = itemNum;
+		this.cusNum = cusNum;
+		this.cartQuantity = cartQuantity;
+	}
 
 	public CartVO(int cartNum, int itemNum, int cusNum, int cartQuantity, Date cartRegDate) {
 		super();

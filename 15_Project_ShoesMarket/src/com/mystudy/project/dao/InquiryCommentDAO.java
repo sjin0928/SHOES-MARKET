@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.mystudy.project.mybatis.DBService;
 import com.mystudy.project.vo.InquiryCommentVO;
+import com.mystudy.project.vo.InquiryVO;
 
 public class InquiryCommentDAO {
 	
@@ -19,7 +20,7 @@ public class InquiryCommentDAO {
 		try {
 			ss = DBService.getFactory().openSession();
 			System.out.println(inquiryNum);
-			list = ss.selectList("Shoesmarket.inquiry_comment_all", inquiryNum);
+			list = ss.selectList("shoesmarket.inquiryCommentAll", inquiryNum);
 			System.out.println(list);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -27,6 +28,43 @@ public class InquiryCommentDAO {
 			ss.close();
 		}
 		return list;
+	}
+
+	// 게시글 작성
+	public static int commentWrite(InquiryCommentVO vo) {
+		SqlSession ss = null;
+		int result = -1;
+		
+		try {
+			ss = DBService.getFactory().openSession(true);
+			result = ss.insert("shoesmarket.commentWrite", vo);
+			System.out.println("result" + result);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (ss != null) {
+				ss.close();
+			}
+		}
+		return result;
+	}
+	// 게시글 삭제
+	public static int deleteComment(int iqCommentNum) {
+		SqlSession ss = null;
+		int result = -1;
+		
+		try {
+			ss = DBService.getFactory().openSession(true);
+			result = ss.insert("shoesmarket.deleteComment", iqCommentNum);
+			System.out.println("result" + result);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (ss != null) {
+				ss.close();
+			}
+		}
+		return result;
 	}
 
 }
