@@ -12,13 +12,16 @@ public class InquiryVO {
 	private Date modDate;
 	private int itemNum;
 	private String cusNickname;
+	private int rNum;
+	private String inqImgPath;
+	private String inqImgName;
 
 	public InquiryVO() {
 		super();
 	}
 
 	public InquiryVO(int inquiryNum, int cusNum, String secretStatus, String title, String contents, Date regDate,
-			Date modDate, int itemNum, String cusNickname) {
+			Date modDate, int itemNum, String cusNickname, int rNum, String inqImgPath, String inqImgName) {
 		super();
 		this.inquiryNum = inquiryNum;
 		this.cusNum = cusNum;
@@ -29,6 +32,33 @@ public class InquiryVO {
 		this.modDate = modDate;
 		this.itemNum = itemNum;
 		this.cusNickname = cusNickname;
+		this.rNum = rNum;
+		this.inqImgPath = inqImgPath;
+		this.inqImgName = inqImgName;
+	}
+
+	public String getInqImgName() {
+		return inqImgName;
+	}
+
+	public void setInqImgName(String inqImgName) {
+		this.inqImgName = inqImgName;
+	}
+
+	public String getInqImgPath() {
+		return inqImgPath;
+	}
+
+	public void setInqImgPath(String inqImgPath) {
+		this.inqImgPath = inqImgPath;
+	}
+
+	public int getrNum() {
+		return rNum;
+	}
+
+	public void setrNum(int rNum) {
+		this.rNum = rNum;
 	}
 
 	public int getInquiryNum() {
@@ -107,7 +137,8 @@ public class InquiryVO {
 	public String toString() {
 		return "InquiryVO [inquiryNum=" + inquiryNum + ", cusNum=" + cusNum + ", secretStatus=" + secretStatus
 				+ ", title=" + title + ", contents=" + contents + ", regDate=" + regDate + ", modDate=" + modDate
-				+ ", itemNum=" + itemNum + ", cusNickname=" + cusNickname + "]";
+				+ ", itemNum=" + itemNum + ", cusNickname=" + cusNickname + ", rNum=" + rNum + ", inqImgPath="
+				+ inqImgPath + ", inqImgName=" + inqImgName + "]";
 	}
 
 

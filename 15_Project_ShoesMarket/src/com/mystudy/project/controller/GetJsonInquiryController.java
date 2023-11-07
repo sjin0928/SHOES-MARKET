@@ -24,7 +24,7 @@ public class GetJsonInquiryController extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8");
 		
 		//DB 데이터 가져오기
-		List<InquiryVO> list = InquiryDAO.getList();
+		List<InquiryVO> list = null;//InquiryDAO.getList();
 		System.out.println("list : " + list);
 		
 		//JSON 형식 문자열 만들고 응답처리
@@ -35,7 +35,6 @@ public class GetJsonInquiryController extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		out.print(result);
 		}
-	
 	
 	
 	@Override

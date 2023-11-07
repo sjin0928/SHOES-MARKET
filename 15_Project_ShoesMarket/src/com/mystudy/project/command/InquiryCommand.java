@@ -15,7 +15,7 @@ public class InquiryCommand implements Command {
 
 	@Override
 	public String exec(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//1. 파라미터 값 X 전체조회
+		//0. 파라미터 값 전체조회
 		Paging p = new Paging();
 		
 		//1. 전체 게시물 수량 구하기

@@ -6,6 +6,7 @@
   <!-- 231024 박수진 -->
   
 <mapper namespace="Shoesmarket">
+
 	<!-- 전체 게시글 건수 조회 -->
 	<select id="totalCount" resultType="int">
 		SELECT COUNT(*) AS CNT FROM INQUIRY
@@ -33,26 +34,63 @@
 		 WHERE RNUM BETWEEN #{begin} AND #{end}
 		 ORDER BY INQUIRY_NUM DESC
 	</select>
+	
+	<!-- 게시글 검색 건수 조회 -->
+	<select id="searchCount" parameterType="map" resultType="int">
+		SELECT COUNT(*) AS CNT
+  		  FROM CUSTOMER CUS, INQUIRY INQ
+ 		 WHERE CUS.CUS_NUM = INQ.CUS_NUM
+		<choose>
+			<when test="idx == 0">
+				AND CUS_NICK_NAME LIKE '%'|| #{keyword} ||'%'
+			</when>
+			<when test="idx == 1">
+				AND TITLE LIKE '%'|| #{keyword} ||'%'
+			</when>
+			<when test="idx == 2">
+				AND ITEM_NUM = #{keyword}
+			</when>
+		</choose>
+	</select>
+	
 
 	<!-- 문의게시글 동적검색 -->
 	<select id="inquiry_search" parameterType="map" resultType="InquiryVO">
-
-		SELECT *
-		  FROM (SELECT INQ.INQUIRY_NUM, INQ.SECRET_STATUS, CUS.CUS_NICK_NAME, 
-        	   		   INQ.TITLE, INQ.ITEM_NUM, INQ.REG_DATE, INQ.MOD_DATE
-          	      FROM CUSTOMER CUS, INQUIRY INQ
-         		 WHERE CUS.CUS_NUM = INQ.CUS_NUM) DATA
-		<where>
-			<if test="idx == 0">
-				DATA.CUS_NICK_NAME LIKE '%'|| #{keyword} ||'%'
-			</if>
-			<if test="idx == 1">
-				DATA.TITLE LIKE '%'|| #{keyword} ||'%'
-			</if>
-			<if test="idx == 2">
-				DATA.ITEM_NUM = #{keyword}
-			</if>
-		</where>
-		ORDER BY DATA.INQUIRY_NUM DESC
+		SELECT DATA.*
+      	  FROM (SELECT ROWNUM AS RNUM, INQ.INQUIRY_NUM, INQ.SECRET_STATUS, CUS.CUS_NICK_NAME, 
+                       INQ.TITLE, INQ.ITEM_NUM, INQ.REG_DATE, INQ.MOD_DATE
+                  FROM CUSTOMER CUS, INQUIRY INQ
+	             WHERE CUS.CUS_NUM = INQ.CUS_NUM
+			<choose>
+				<when test="idx == 0">
+					AND CUS_NICK_NAME LIKE '%'|| #{keyword} ||'%'
+				</when>
+				<when test="idx == 1">
+					AND TITLE LIKE '%'|| #{keyword} ||'%'
+				</when>
+				<when test="idx == 2">
+					AND ITEM_NUM = #{keyword}
+				</when>
+			</choose>
+                 ORDER BY INQUIRY_NUM DESC) DATA
+		WHERE RNUM BETWEEN #{begin} AND #{end}
+		ORDER BY INQUIRY_NUM DESC
 	</select>
+	
+	<!-- 게시글의 내용 -->
+	<select id="inquiry_view" parameterType="int" resultType="InquiryVO">
+		SELECT *
+ 		  FROM CUSTOMER CUS, INQUIRY INQ
+ 		 WHERE CUS.CUS_NUM = INQ.CUS_NUM
+   		   AND INQUIRY_NUM = #{inquiryNum}
+	</select>
+	
+	<!-- 게시글의 댓글 리스트 -->
+	<select id="inquiry_comment_all" parameterType="int" resultType="InquiryCommentVO">
+ 		SELECT *
+ 		  FROM INQUIRY_COMMENT
+ 		 WHERE INQUIRY_NUM = #{inquiryNum}
+ 		 ORDER BY IQ_COMMENT_NUM DESC
+	</select>
+	
 </mapper>

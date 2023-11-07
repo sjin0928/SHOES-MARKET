@@ -10,7 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.mystudy.project.command.Command;
 import com.mystudy.project.command.InquiryCommand;
+import com.mystudy.project.command.InquiryDeleteCommand;
 import com.mystudy.project.command.InquirySearchCommand;
+import com.mystudy.project.command.InquiryUpdateCommand;
+import com.mystudy.project.command.InquiryViewCommand;
 
 
 @WebServlet("/controller")
@@ -21,9 +24,8 @@ public class FrontControllerCommand extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println(">> FrontControllerCommand doGet() 실행----");
 		String type = request.getParameter("type");
-		String cPage = request.getParameter("cPage");
-		System.out.println(">type : " + type);
 		
+		System.out.println(">type : " + type);
 		
 		Command command = null;
 		if ("list".equals(type)) {
@@ -32,18 +34,16 @@ public class FrontControllerCommand extends HttpServlet {
 		if ("search".equals(type)) {
 			command = new InquirySearchCommand();
 		}
-		/*
-		if ("dept".equals(type)) {
-			command = new DeptCommand();
+		if ("view".equals(type)) {
+			command = new InquiryViewCommand();
 		}
-		if ("deptList".equals(type)) {
-			command = new DeptListCommand();
+		if ("update".equals(type)) {
+			command = new InquiryUpdateCommand();
 		}
-		if ("fullname".equals(type)) {
-			command = new FullnameCommand();
+		if ("delete".equals(type)) {
+			command = new InquiryDeleteCommand();
 		}
 		
-		*/
 		String path = command.exec(request, response);
 		request.getRequestDispatcher(path).forward(request, response);
 	}	

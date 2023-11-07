@@ -1,0 +1,501 @@
+/* 231024 박수진 */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+@import url("font-awesome.min.css");
+body {
+  font-family: "poppins", sans-serif;
+  color: #101010;
+  background-color: #ffffff;
+}
+	/*  추가한 내용  */
+	* {
+	  box-sizing: border-box;
+	}
+	
+	.row::after {
+	  content: "";
+	  clear: both;
+	  display: table;
+	}
+	
+	[class*="col-"] {
+	  float: left;
+	  padding: 15px;
+	}
+	
+	.col-1 {width: 8.33%;}
+	.col-2 {width: 16.66%;}
+	.col-3 {width: 25%;}
+	.col-4 {width: 33.33%;}
+	.col-5 {width: 41.66%;}
+	.col-6 {width: 50%;}
+	.col-7 {width: 58.33%;}
+	.col-8 {width: 66.66%;}
+	.col-9 {width: 75%;}
+	.col-10 {width: 83.33%;}
+	.col-11 {width: 91.66%;}
+	.col-12 {width: 100%;}
+
+
+/*header section*/
+
+.hero_area {
+  padding: 0 45px;
+}
+
+.hero_area.sub_pages {
+  height: 100px;
+}
+
+.header_top {
+  display: block;
+  padding: 15px 0px;
+}
+
+.dropbtn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown {
+  display: inline;
+  float: right;
+  padding: 15px 0px;
+  text-align: center;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 130px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  padding: 5px 5px;
+  right: 0;
+  text-align: center;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: #3e8e41;
+}
+
+.header_navbar {
+  box-sizing: border-box;
+  display: inline-block;
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+  margin-top: 10px;
+  background-color: #f9ece6;
+
+}
+.navbar-nav .user_option {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.nav-item {
+  float: left;
+  list-style-type: none;
+}
+
+.nav-link {
+  display: block;
+  color: black;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.nav-link:hover {
+  background-color: #111;
+  color: white;
+  border-radius: 5px;
+}
+
+.user_option {
+  display: inline;
+  float: right;
+  margin: 25px;
+  padding: 0;
+}
+
+.user_option > a {
+  color: black;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+.user_option a:hover {
+  background-color: #111;
+  color: white;
+  border-radius: 5px; 
+}
+.user_option a span {
+  margin-left: 5px;
+}
+a:hover,
+a:focus {
+  color: initial;
+}
+
+.btn,
+.btn:focus {
+  outline: none !important;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.navbar-brand {
+  box-sizing: border-box;
+  text-align: center;
+  margin: 15px 0;
+  padding: 0;
+  color: rgba(0, 0, 0, 0.9);
+  text-decoration: none;
+}
+
+.navbar-brand span {
+  box-sizing: border-box;
+  font-size: 28px;
+  font-weight: bold;
+  color: #000000;
+  text-transform: uppercase;
+  margin: 0;
+  padding: 0;
+}
+
+/* end header section */
+
+/* 공지사항 내용 시작 */
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+.menu {
+  position: relative;
+  height: 600px;
+  /* border: 3px solid #73AD21; */
+  align-content: center;
+  margin: 50px 100px 50px 50px;
+}
+
+.menu_contents {
+/*   border: 1px solid black;
+  border-radius: 25px; */
+  margin-left: 160px;
+  width: auto;
+}
+.menu_contents form {
+	margin: 20px 10px 10px 10px;
+}
+
+#menu_table{
+	margin-left: 50px;
+}
+
+.menu ul {
+	list-style-type: none;
+	position: absolute;
+	top: 0px;
+	left: 0;
+	width: auto;
+	height: auto;
+	/* border: 3px solid #73AD21; */
+}
+
+.menu li {
+	color: #ffffff;
+	text-decoration: none;
+	padding: 8px;
+	border: none;
+	color: #ffffff;
+}
+.menu button {
+	width: 100px;
+	padding: 8px;
+	margin-bottom: 7px;
+	text-decoration: none;
+	align-content: right;
+	border: none;
+	background-color: #e0faed;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+#inner-button {
+	width: 180px;
+}
+.menu button:hover {
+	background-color: #111;
+	color: white;
+	border-radius: 5px; 
+}
+
+#menu_top {
+/*   border: 1px solid black;
+  border-radius: 25px; */
+	height: 200px;
+	margin-right: 50px;
+	border-collapse: collapse;
+	font-size: 14px;
+	padding: 8px;
+}
+#menu_top div {
+  	display:inline;
+  	float: left;
+  	min-height: 200px;
+  	min-width: 400px;
+  	margin-right: 10px;
+  	font-size: 14px;
+  	padding: 8px;
+	border: 1px solid black;
+	border-radius: 15px;
+	text-align: center;
+}
+
+#menu_bottom {
+  	height: 200px;
+  	margin-right: 20px;
+ 	border-collapse: collapse;
+  	font-size: 14px;
+  	padding: 8px;
+}
+#menu_bottom div {
+  	display:inline;
+  	float: left;
+  	margin-right: 10px;
+  	margin-top: 10px;
+  	border-collapse: collapse;
+  	font-size: 14px;
+  	padding: 8px;
+}
+
+#notice {
+	height: 200px;
+  	border: 1px solid black;
+  	border-radius: 15px;
+	min-width: 400px;
+	
+	text-align: center;
+}
+
+.inquiry_icon {
+  	/* box-sizing: border-box;
+  	border: 1px solid black; */
+  	float: left;
+  	border-radius: 25px;
+  	min-height: 50px;
+  	text-align: center;
+  	margin: 0px 10px;
+}
+
+#inquiry_icon_box {
+	margin-right: 38px;
+}
+
+
+
+/* 테이블 스타일 */
+	#menu_table {
+		display: inline-block;
+		min-width: 580px;
+		margin-left: 10px;
+		font-size: 14px;
+		border-collapse: collapse;
+		border: 1.5px solid black;
+		text-align: center;
+	}
+	#board_title h3 {
+		text-align: center;
+	}
+	#menu_table table caption {
+		font-size: 20px;
+		font-weight: bold;
+		margin-bottom: 10px;
+	}
+	#menu_table th, td {
+		border: 1px solid black;
+		padding: 4px 10px;
+	}
+	#menu_table_title {
+		width: 200px;
+		overflow: hidden;
+	}
+	#menu_table .align-left { text-align: left; }
+	
+	.menu_table_head {
+		background-color: #fff0f0;
+	}
+	#menu_table_num, #menu_table_secret, #menu_table_nickName,
+	#menu_table_pnum, #menu_table_regdate, #menu_table_moddate {
+		width: 120px;
+	}
+	#menu_table_title {
+		min-width: 300px;
+			
+	}
+/* 게시글 쓰기 테이블 스타일 */
+#inquiry_write {
+	border: 1px solid black;
+}
+.inquiry_write_tr_td {
+	border: none;
+}
+
+
+/*** 페이지 표시 영역 스타일(시작) ***/
+.paging { list-style: none; }
+.paging li {
+	float: left;
+	align-content: center;
+	margin: 0px 15px;
+	border: 1px solid silver;
+}
+.paging li a {
+	text-decoration: none;
+	padding: 5px;
+	font-weight: bold;
+	color: black;
+}
+.paging .disable {
+	/* border: 1px solid silver; */
+	padding: 5px;
+	color: silver;
+}
+.paging .now {
+	/* border: 1px solid #ff4aa5; */
+	padding: 5px;
+	margin: 0px 15px;
+	background-color: rgb(0, 0, 0);
+}
+/*** 페이지 표시 영역 스타일(끝) ***/
+.contents {
+	margin: auto;
+}
+	
+/* 공지사항 내용 끝 */
+
+/* info section */
+.info_section {
+  position: relative;
+  display: inline-block;
+  background-color: #2d2d2d;
+  color: #ffffff;
+  width: 100%;
+}
+
+.info_section .info_form form input {
+  outline: none;
+  width: 100%;
+  padding: 7px 10px;
+}
+
+.info_section .info_form form button {
+  padding: 8px 35px;
+  border: none;
+  color: #ffffff;
+  background: #f89cab;
+  margin-top: 15px;
+  text-transform: uppercase;
+}
+
+.info_section .row > div {
+  margin-top: 10px;
+}
+
+.info_section a {
+  text-transform: none;
+}
+
+.info_section h2 {
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-top: 25px;
+  text-align: center;
+}
+
+.info_section h4 {
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-top: 25px;
+  text-align: center;
+}
+
+.info_section p {
+  color: #cbc9c9;
+  font-size: 14px;
+  margin-top: 25px;
+  text-align: center;
+}
+
+.info_section button {
+  background-color: #2d2d2d;
+  color: #cbc9c9;
+  font-size: 14px;
+  outline: none !important;
+   	-webkit-box-shadow: none;
+  box-shadow: none;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 25px;
+}
+
+.info_section .info_link-box a:hover {
+  color: #ffffff;
+}
+
+.info_section .info_link-box a span {
+  color: #cbc9c9;
+}
+
+.info_section .info_link-box a:hover span {
+  color: #ffffff;
+}
+.row .contanier .info_container {
+	margin-top: 0px;
+	text-align: center;
+	width: 100%;
+}
+
+/* end info section */
+/* footer section*/
+.footer_section {
+  display: block;
+  margin-top: 45px;
+  font-weight: 500;
+}
+
+.footer_section p {
+  padding: 20px 0;
+  margin: 0 auto;
+  text-align: center;
+  border-top: 1.5px solid #eeeeee;
+  width: 80%;
+}
+
+.footer_section a {
+  color: #cbc9c9;
+}
+
+/* end footer section*/
+/*# sourceMappingURL=style.css.map */

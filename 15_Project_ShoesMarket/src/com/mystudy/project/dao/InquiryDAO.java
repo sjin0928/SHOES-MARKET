@@ -47,6 +47,29 @@ public class InquiryDAO {
 		}
 		return list;
 	}
+	
+	//게시글 키워드 검색 수 조회
+	public static int getSearchCount(String idx, String keyword) {
+		Map<String, String> map = new HashMap<>();
+		map.put("idx", idx);
+		map.put("keyword", keyword);
+		System.out.println(">>> getSearchCount idx, keyword : " + idx + ", " +  keyword);
+		SqlSession ss = null;
+		int searchCount = 0;
+		
+		try {
+			ss = DBService.getFactory().openSession();
+			searchCount = ss.selectOne("Shoesmarket.searchCount", map);
+			
+			System.out.println(searchCount);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			ss.close();
+		}
+		
+		return searchCount;
+	}
 	// 게시글 키워드 검색
 	public static List<InquiryVO> getSearch(String idx, String keyword, int begin, int end) {
 		Map<String, String> map = new HashMap<>();
@@ -55,20 +78,35 @@ public class InquiryDAO {
 		map.put("begin", String.valueOf(begin));
 		map.put("end", String.valueOf(end));
 		
-		SqlSession ss = DBService.getFactory().openSession();
-		List<InquiryVO> list = ss.selectList("Shoesmarket.inquiry_search", map);
-		ss.close();
+		SqlSession ss = null;
+		List<InquiryVO> list = null;
+		
+		try {
+			ss = DBService.getFactory().openSession();
+			list = ss.selectList("Shoesmarket.inquiry_search", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			ss.close();
+		}
 		return list;
 	}
 	
-
-	//================= 댓글 ===============
-	//게시글에 딸린 댓글 목록
-	public static List<CommentVO> getCommList(int bbsIdx) {
-		SqlSession ss = DBService.getFactory().openSession();
-		List<CommentVO> list = ss.selectList("Shoesmarket.commList", bbsIdx);
-		ss.close();
+	// 게시글 상세 보기	
+	public static InquiryVO getView(int inquiryNum, int cPage) {
 		
-		return list;
+		SqlSession ss = null;
+		InquiryVO vo = null;
+		
+		try {
+			ss = DBService.getFactory().openSession();
+			vo = ss.selectOne("Shoesmarket.inquiry_view", inquiryNum);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			ss.close();
+		}
+		return vo;
 	}
+	
 }
