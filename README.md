@@ -1,5 +1,8 @@
 # SHOES-MARKET
 ![header](https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=0,2,2,5,30&height=300&section=header&text=SHOES%20MARKET&fontSize=90&animation=fadeIn&fontAlignY=38&desc=sujin's%20portfolio)
+
+<h2>프로젝트 이름 : SHOES-MARKET</h2>
+<h3>팀원 : 박수진, 박주영, 박효정, 김서영</h3>
 <!-- 방문자수 --!>
 <p>
 <a href="https://hits.seeyoufarm.com"><img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fqkrtn0928@naver.com%2Fhit-counter&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false"/></a>
@@ -26,8 +29,6 @@
 </p>
 </div>
 <div>
-<h3>프로젝트 이름 : SHOES-MARKET</h3>
-<h3>팀원 : 박수진, 박주영, 박효정, 김서영</h3>
 <h3>1. 개발 동기 : </h3>
 <p>평상시에 자주 이용하고, 짧은 기간에도 가능한 많은 기능을 구현할 수 있으며, MVC를 잘 활용할 수 있는 웹 사이트를 찾았습니다.</p>
 <h3>2. 기획 사유 : </h3>
