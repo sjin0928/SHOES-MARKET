@@ -37,8 +37,19 @@
 신발 구매 사이트는 다른 사이트에도 있는 기본 기능(로그인, 회원가입 등)은 다 갖추고 있으며, 다양한 브랜드가 입점되어 있어 다양한 검색 기능을 만들 수 있다고 생각했습니다.<br>
 </p>
 
-<h3>4. 프로젝트 특징</h3>
+<h3>4. 프로젝트 설계</h3>
 <p>
+  <h4>요구사항 명세서</h4>
+  <a href="https://www.notion.so/cd11c361c83d4c30bc6ee9faeaf0342f?v=ff682c6147644b7ca0da413389245086&pvs=4">요구사항 명세서</a>
+  <h4>화면구현</h4>
+  <a href="https://share.balsamiq.com/c/3p2Z1s6ePVpknwkYtB9Qq4.png">메인</a><br>
+  <a href="https://share.balsamiq.com/c/4PmazuHffRBnPg8jsjHx1h.png">회원가입</a><br>
+  <a href="https://share.balsamiq.com/c/viK4sR9oy8Xdo4L24DQKWG.png">로그인</a><br>
+  <a href="https://share.balsamiq.com/c/gkmSeif993LZYTkPrFqNSr.png">상품목록 및 상세</a><br>
+  <a href="https://share.balsamiq.com/c/krUJB3KZMt9efQGbXuAtuZ.png">장바구니 및 결제</a><br>
+  <a href="https://share.balsamiq.com/c/vB9Ku8AbA2cptHSioPZdNY.png">마이페이지</a><br>
+  <a href="https://share.balsamiq.com/c/r44SBrLUh9cvN9CGexULCX.png">고객센터 및 게시판</a><br>
+  <a href="https://share.balsamiq.com/c/mwSvBNNghazwSA2T1FV1gs.png">관리자페이지 화면구현</a><br>
 <p>
 
 <h3>5. 개발 후기</h3>
