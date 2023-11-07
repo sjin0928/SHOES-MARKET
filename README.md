@@ -39,7 +39,7 @@
 
 <h3>4. 프로젝트 설계</h3>
 <p>
-  <h4>요구사항 명세서</h4>
+  <h4>&nbsp1) 요구사항 명세서</h4>
   <a href="https://www.notion.so/cd11c361c83d4c30bc6ee9faeaf0342f?v=ff682c6147644b7ca0da413389245086&pvs=4">요구사항 명세서</a>
   <h4>화면구현</h4>
   <a href="https://share.balsamiq.com/c/3p2Z1s6ePVpknwkYtB9Qq4.png">메인</a><br>
@@ -63,8 +63,9 @@ Back-End, Front-End 모두 적용하여 개발해 본 프로젝트는 이번이 
 가능한 UI를 일치시키기 위해 footer와 header를 처음에 만들어 팀원들과 공유를 했습니다. 프로젝트 마무리 직전에 다른 팀원이 구현한 페이지의
 css가 footer의 css와 충돌하여 글씨 색이 변한채로 발표를 진행했던 점이 아쉬웠습니다.
 <p>
-참고자료 : <a href="https://www.shoemarker.co.kr">SHOEMARKER</a>
-<a href="https://grandstage.a-rt.com">ABC마트</a>
+<h3>6.참고자료<h3>
+<a href="https://www.shoemarker.co.kr">SHOEMARKER</a><br>
+<a href="https://grandstage.a-rt.com">ABC마트</a><br>
 <p>
 </p>
 이 프로젝트는 어떤 문제를 해결하나요?
