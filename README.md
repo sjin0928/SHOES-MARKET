@@ -4,11 +4,8 @@
 <p>
 <a href="https://hits.seeyoufarm.com"><img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fqkrtn0928@naver.com%2Fhit-counter&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false"/></a>
 </p>
-
-?theme=THEME_NAME![sjin0928's GitHub stats](https://github-readme-stats.vercel.app/api?username=anuraghazra&theme=swift&show_icons=true)
-
 <div> 
-<p>techStack</p>
+techStack
 <p>Back-End : 
 <img src="https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white">
 <img src="https://img.shields.io/badge/Oracle-F80000?style=for-the-badge&logo=oracle&logoColor=white">
@@ -24,4 +21,12 @@
 <img src="https://img.shields.io/badge/Eclipse-FE7A16.svg?style=for-the-badge&logo=Eclipse&logoColor=white">
 <img src="https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white">
 </p>
+</div>
+<div>
+동기가 무엇이었나요?
+왜 이 프로젝트를 기획했나요?
+이 프로젝트는 어떤 문제를 해결하나요?
+이 프로젝트를 통해 무엇을 배우셨나요?
+이 프로젝트의 특징은 무엇인가요?
+만약 프로젝트의 특징이 너무 많다면, '특징' 섹션을 추가해서 이곳에 나열하세요.
 </div>
