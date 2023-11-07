@@ -40,7 +40,7 @@
 <div>
 <h3>4. 프로젝트 설계</h3>
   <h4>1) 요구사항 명세서</h4>
-  &nbsp&nbsp<a href="https://www.notion.so/cd11c361c83d4c30bc6ee9faeaf0342f?v=ff682c6147644b7ca0da413389245086&pvs=4">요구사항 명세서</a>
+  &nbsp&nbsp<a href="https://pricey-fear-6c4.notion.site/610d7fd51c624a00b831b3f22e26c939?v=144a992173424e0db42a9d018964a75d&pvs=4">요구사항 명세서</a>
   <h4>2) 화면구현</h4>
   &nbsp&nbsp<a href="https://share.balsamiq.com/c/3p2Z1s6ePVpknwkYtB9Qq4.png">메인</a><br>
   &nbsp&nbsp<a href="https://share.balsamiq.com/c/4PmazuHffRBnPg8jsjHx1h.png">회원가입</a><br>
