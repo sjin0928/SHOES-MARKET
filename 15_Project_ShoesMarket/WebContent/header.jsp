@@ -19,7 +19,7 @@
 			    		<a href="">브랜드</a>
 			    		<a href="">신상품</a>
 			    		<a href="">베스트</a>
-			    		<a href="contact.html">문의게시판</a>
+			    		<a href="controller?type=list">문의게시판</a>
 			    		<a href="contact.html">리뷰게시판</a>
 			    		<a href="login.jsp">
 	              			<i class="fa fa-user"></i>

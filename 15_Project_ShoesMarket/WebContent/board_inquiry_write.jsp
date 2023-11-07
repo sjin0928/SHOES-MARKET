@@ -27,21 +27,18 @@
 <link href="css/style.css" rel="stylesheet" />
 </head>
 <body>
-	<!-- start hero area -->
-	<!-- start header section -->
+
 		<%@ include file="header.jsp" %>
-	<!-- end header section -->	
-	<!-- end hero area -->
 	
   	<!-- 문의게시판 내용 시작 -->
   	
     <div class="contents">
 	    <div class="menu">
-	    	<ul>
-	    		<li><button onclick="board_main()">메인게시판</button></li>
-	    		<li><button onclick="notice_list()">공지사항</button></li>
-		    	<li><button onclick="review_list()">리뷰게시판</button></li>
-		  	</ul>
+  	    	<ul>
+  	    		<li><button onclick="board_main()">메인게시판</button></li>
+    			<li><button onclick="notice_list()">공지사항</button></li>
+	    		<li><button onclick="review_list()">리뷰게시판</button></li>
+	  		</ul>
 			<div class="menu_contents">
 				
 				<!-- 문의게시판 글쓰기 -->
