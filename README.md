@@ -50,6 +50,8 @@
   &nbsp&nbsp<a href="https://share.balsamiq.com/c/vB9Ku8AbA2cptHSioPZdNY.png">마이페이지</a><br>
   &nbsp&nbsp<a href="https://share.balsamiq.com/c/r44SBrLUh9cvN9CGexULCX.png">고객센터 및 게시판</a><br>
   &nbsp&nbsp<a href="https://share.balsamiq.com/c/mwSvBNNghazwSA2T1FV1gs.png">관리자페이지 화면구현</a><br>
+  <h4>2) 화면구현</h4>
+  &nbsp&nbsp<img src="D:\2차 프로젝트\결과\ERD.PNG">
 </div>
 
 <h3>5. 개발 후기</h3>
