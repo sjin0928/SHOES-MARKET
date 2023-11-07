@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <!-- 231024 박수진 -->
+  
+<mapper namespace="Shoesmarket">
+	<!-- 전체 게시글 건수 조회 -->
+	<select id="totalCount" resultType="int">
+		SELECT COUNT(*) AS CNT FROM INQUIRY
+	</select>
+	
+	<!-- 문의게시글 입력 -->
+	<insert id="insert" parameterType="InquiryVO">
+		INSERT INTO INQUIRY
+    		   (INQUIRY_NUM, CUS_NUM, SECRET_STATUS, TITLE, CONTENTS, 
+    		   REG_DATE, MOD_DATE, ITEM_NUM)
+		VALUES (INQUIRY_SEQ.NEXTVAL, #{cusNum}, #{secretStatus}, #{title}, #{contents},
+			   SYSDATE, SYSDATE, #{itemNum})
+	</insert>
+	
+	<!-- 문의게시글 전체 검색 -->
+	<select id="inquiry" parameterType="map" resultType="InquiryVO">
+		SELECT *
+		  FROM (SELECT ROWNUM AS RNUM, DATA.*
+		          FROM (SELECT INQ.INQUIRY_NUM, INQ.SECRET_STATUS, CUS.CUS_NICK_NAME, 
+		                       INQ.TITLE, INQ.ITEM_NUM, INQ.REG_DATE, INQ.MOD_DATE
+		                  FROM CUSTOMER CUS, INQUIRY INQ
+		                 WHERE CUS.CUS_NUM = INQ.CUS_NUM
+		                 ORDER BY INQUIRY_NUM DESC) DATA
+		       )
+		 WHERE RNUM BETWEEN #{begin} AND #{end}
+		 ORDER BY INQUIRY_NUM DESC
+	</select>
+
+	<!-- 문의게시글 동적검색 -->
+	<select id="inquiry_search" parameterType="map" resultType="InquiryVO">
+
+		SELECT *
+		  FROM (SELECT INQ.INQUIRY_NUM, INQ.SECRET_STATUS, CUS.CUS_NICK_NAME, 
+        	   		   INQ.TITLE, INQ.ITEM_NUM, INQ.REG_DATE, INQ.MOD_DATE
+          	      FROM CUSTOMER CUS, INQUIRY INQ
+         		 WHERE CUS.CUS_NUM = INQ.CUS_NUM) DATA
+		<where>
+			<if test="idx == 0">
+				DATA.CUS_NICK_NAME LIKE '%'|| #{keyword} ||'%'
+			</if>
+			<if test="idx == 1">
+				DATA.TITLE LIKE '%'|| #{keyword} ||'%'
+			</if>
+			<if test="idx == 2">
+				DATA.ITEM_NUM = #{keyword}
+			</if>
+		</where>
+		ORDER BY DATA.INQUIRY_NUM DESC
+	</select>
+</mapper>
