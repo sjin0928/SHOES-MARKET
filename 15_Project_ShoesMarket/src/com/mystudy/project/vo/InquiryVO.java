@@ -41,6 +41,15 @@ public class InquiryVO {
 		this.inqImgName = inqImgName;
 	}
 
+	public InquiryVO(int inquiryNum, String title, String contents, String inqImgPath, String inqImgName) {
+		super();
+		this.inquiryNum = inquiryNum;
+		this.title = title;
+		this.contents = contents;
+		this.inqImgPath = inqImgPath;
+		this.inqImgName = inqImgName;
+	}
+
 	public String getInqImgName() {
 		return inqImgName;
 	}

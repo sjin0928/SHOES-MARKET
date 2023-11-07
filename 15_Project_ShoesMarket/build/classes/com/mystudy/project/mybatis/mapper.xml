@@ -3,23 +3,14 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-  <!-- 231024 박수진 -->
+
   
 <mapper namespace="Shoesmarket">
-
+  <!-- 231024 박수진 -->
 	<!-- 전체 게시글 건수 조회 -->
 	<select id="totalCount" resultType="int">
 		SELECT COUNT(*) AS CNT FROM INQUIRY
 	</select>
-	
-	<!-- 문의게시글 입력 -->
-	<insert id="insert" parameterType="InquiryVO">
-		INSERT INTO INQUIRY
-    		   (INQUIRY_NUM, CUS_NUM, SECRET_STATUS, TITLE, CONTENTS, 
-    		   REG_DATE, MOD_DATE, ITEM_NUM)
-		VALUES (INQUIRY_SEQ.NEXTVAL, #{cusNum}, #{secretStatus}, #{title}, #{contents},
-			   SYSDATE, SYSDATE, #{itemNum})
-	</insert>
 	
 	<!-- 문의게시글 전체 검색 -->
 	<select id="inquiry" parameterType="map" resultType="InquiryVO">
@@ -93,14 +84,170 @@
  		 WHERE INQUIRY_NUM = #{inquiryNum}
  		 ORDER BY IQ_COMMENT_NUM DESC
 	</select>
+	
 	<!-- 게시글의 내용 수정 -->
 	<update id="inquiry_update" parameterType="InquiryVO">
 		UPDATE INQUIRY
-		SET TITLE = #{title}, 
-		     CONTENTS = #{contents}, 
-		     MOD_DATE = SYSDATE, 
-		     INQ_IMG_PATH = #{inqImgPath}, 
-		     INQ_IMG_NAME = #{inqImgName}
-		WHERE INQUIRY_NUM = #{inquiryNum}
+		   SET TITLE = #{title}, 
+		       CONTENTS = #{contents}, 
+		       MOD_DATE = SYSDATE, 
+		       INQ_IMG_PATH = #{inqImgPath}, 
+		       INQ_IMG_NAME = #{inqImgName}
+		 WHERE INQUIRY_NUM = #{inquiryNum}
 	</update>
+	
+	<!-- 게시글 삭제 -->
+	<delete id="inquiry_delete" parameterType="InquiryVO">
+		DELETE FROM INQUIRY
+		 WHERE INQUIRY_NUM = #{inquiryNum}
+	</delete>
+	
+	
+	<!-- 문의게시글 입력 -->
+	<insert id="inquiry_write" parameterType="InquiryVO">
+		INSERT INTO INQUIRY
+    		   (INQUIRY_NUM, CUS_NUM, SECRET_STATUS, TITLE, CONTENTS, 
+    		   REG_DATE, MOD_DATE, ITEM_NUM, INQ_IMG_PATH, INQ_IMG_NAME)
+		VALUES (INQUIRY_SEQ.NEXTVAL, #{cusNum}, #{secretStatus}, #{title}, #{contents},
+			   SYSDATE, SYSDATE, #{itemNum}, #{inqImgPath}, #{inqImgName})
+	</insert>
+	
+	<!-- 상품번호 조회 -->
+	<select id="inquiry_item_search" parameterType="String" resultType="int">
+		SELECT ITEM_NUM
+		FROM ITEM
+		WHERE NAME = #{itemName}
+	</select>
+	
+	
+	<!-- 231026 김서영 -->
+	
+	<!-- 전체 상품 조회(신상품순) -->
+	<select id="allNew" resultType="ItemVO">
+		SELECT ITEM_NUM, NAME, PRICE, STOCK, IMAGE_PATH, 
+				ITEM_DETAIL, REG_DATE, MOD_DATE, BRAND
+		FROM ITEM
+		ORDER BY ITEM_NUM DESC
+	</select>
+	
+	<!-- 전체 상품 조회(판매수량순 / 판매 내역 없는 것 포함 / 판매 내역 없는 건 신상품 순 -->
+	<select id="allBest" resultType="ItemVO">
+		SELECT I.ITEM_NUM, I.NAME, I.PRICE, I.STOCK, I.IMAGE_PATH,
+	       I.ITEM_DETAIL, I.REG_DATE, I.MOD_DATE, BRAND
+		FROM ITEM I
+		LEFT OUTER JOIN ORDERITEMS O ON I.ITEM_NUM = O.ITEM_NUM
+		ORDER BY O.QUANTITY DESC NULLS LAST, I.ITEM_NUM DESC
+	</select>
+	
+	<!-- 상품 번호로 상품 상세 조회 -->
+	<select id="productDetail" parameterType="string" resultType="ItemVO">
+		SELECT ITEM_NUM, NAME, PRICE, STOCK, IMAGE_PATH, 
+				ITEM_DETAIL, REG_DATE, MOD_DATE, BRAND
+		FROM ITEM
+		WHERE ITEM_NUM = #{itemNum}
+	</select>
+	
+	<insert id="itemWrite" parameterType="ItemVO">
+		INSERT INTO ITEM (
+	    ITEM_NUM, NAME, PRICE, STOCK, IMAGE_PATH, 
+	    ITEM_DETAIL, REG_DATE, MOD_DATE, BRAND )
+		VALUES (ITEM_SEQ.NEXTVAL, #{name }, #{price }, #{stock }, #{imagePath },
+		    #{itemDetail }, SYSDATE, SYSDATE, #{brand }
+		)
+	</insert>
+	
+	<update id="itemUpdate" parameterType="ItemVO">
+		UPDATE ITEM
+		SET NAME = #{name },
+			PRICE = #{price },
+			STOCK = #{stock },
+			IMAGE_PATH = #{imagePath },
+			ITEM_DETAIL = #{itemDetail },
+			MOD_DATE = SYSDATE,
+			BRAND = #{brand }
+		WHERE ITEM_NUM = #{itemNum }
+	</update>
+	
+	<delete id="itemDelete" parameterType="int">
+		DELETE FROM ITEM WHERE ITEM_NUM = #{itemNum }
+	</delete>
+	
+	<!-- 제품 검색해서 조회 -->
+	<select id="itemSearch" parameterType="map" resultType="ItemVO">
+		SELECT ITEM_NUM, NAME, PRICE, STOCK, IMAGE_PATH, 
+				ITEM_DETAIL, REG_DATE, MOD_DATE, BRAND
+		FROM ITEM
+		<where>
+			<!-- 상품명 -->
+			<if test="idx == 1">
+				NAME LIKE '%'|| #{keyword } ||'%'
+			</if>
+			<!-- 브랜드 -->
+			<if test="idx == 2">
+				BRAND LIKE '%'|| #{keyword } ||'%'
+			</if>
+		</where>
+		<!-- 신상품 순 -->
+		ORDER BY ITEM_NUM DESC
+	</select>
+	
+	<!-- 브랜드 카테고리 -->
+	<select id="allAdidas" resultType="ItemVO">
+		SELECT ITEM_NUM, NAME, PRICE, STOCK, IMAGE_PATH, 
+				ITEM_DETAIL, REG_DATE, MOD_DATE, BRAND
+		FROM ITEM
+		WHERE BRAND = '아디다스'
+	</select>
+	
+	<select id="allNewBal" resultType="ItemVO">
+		SELECT ITEM_NUM, NAME, PRICE, STOCK, IMAGE_PATH, 
+				ITEM_DETAIL, REG_DATE, MOD_DATE, BRAND
+		FROM ITEM
+		WHERE BRAND = '뉴발란스'
+	</select>
+	
+	<select id="allConverse" resultType="ItemVO">
+		SELECT ITEM_NUM, NAME, PRICE, STOCK, IMAGE_PATH, 
+				ITEM_DETAIL, REG_DATE, MOD_DATE, BRAND
+		FROM ITEM
+		WHERE BRAND = '컨버스'
+	</select>
+	
+	<!-- 전체 게시글 건수 조회 -->
+	<select id="itemTotalCount" resultType="int">
+		SELECT COUNT(*) AS CNT FROM ITEM
+	</select>
+	
+	<!-- (상품게시글)페이지에 해당하는 게시글 조회 -->
+	<select id="itemList" resultType="ItemVO" parameterType="map">
+		SELECT ITEM_NUM, NAME, PRICE, STOCK, IMAGE_PATH, 
+				ITEM_DETAIL, REG_DATE, MOD_DATE, BRAND 
+			FROM (SELECT ROWNUM AS RNUM, I.*
+			        FROM (SELECT * 
+			              FROM ITEM 
+			              ORDER BY ITEM_NUM DESC ) I
+			      )
+			WHERE RNUM BETWEEN #{begin} AND #{end}
+	</select>
+	
+	<!-- 상품 목록 페이징 처리 -->
+	<!-- 상품 목록 페이징 처리(베스트순) -->
+	<select id="itemBestList" resultType="ItemVO" parameterType="map">
+	SELECT *
+		FROM (SELECT ROWNUM AS RNUM, T.*
+              FROM (SELECT I.*
+                    FROM ITEM I
+                    	LEFT OUTER JOIN ORDERITEMS O ON I.ITEM_NUM = O.ITEM_NUM
+                    	ORDER BY O.QUANTITY DESC NULLS LAST, I.ITEM_NUM DESC) T
+                    ) 
+                    WHERE RNUM BETWEEN #{begin} AND #{end}
+	</select>
+	
+	<!-- 관리자 아이디, 비번 확인 -->
+	<select id="loginAdmin" resultType="AdminVO">
+	SELECT ADMIN_ID, ADMIN_PASSWORD 
+	FROM ADMIN
+	</select>
+	
+	
 </mapper>

@@ -11,16 +11,35 @@
 
 <script>
 function board_main(){
-	location.href = "board_main.jsp"
+	let form = document.formButton;
+	form.action="board_main.jsp";
+	//form.action="controller?type=boardMain";
+	form.submit();
 }
 function notice_list(){
-	location.href = "noticeList.jsp"
+	let form = document.forms["formButton"];
+	
+	form.action="controller?type=boardNotice";
+	form.submit();
 }
-/* function board_inquiry() {
-	location.href = "controller?type=list"
-} */
+function board_inquiry() {
+	let form = document.forms["formButton"];
+	
+	form.action="controller?type=list";
+	form.submit();
+}
 function review_list() {
-	location.href = "reviewList.jsp"
+	let form = document.forms["formButton"];
+	
+	form.action="controller?type=reviewList";
+	form.submit();
+}
+function board_inquiry_view() {
+	let form = document.forms["tableForm"];
+	
+	form.action="controller?type=view";
+	form.submit();
+	alert(form);
 }
 </script>
 <script type="text/javascript" src="popup.js"></script>
@@ -37,12 +56,14 @@ function review_list() {
   	
     <div class="contents">
 	    <div class="menu">
+	    	<form method="post" name="formButton">
 	    	<ul>
-	    		<li><button onclick="board_main()">메인게시판</button></li>
-	    		<li><button onclick="notice_list()">공지사항</button></li>
-		    	<!-- <li><button id="board_inquiry">문의게시판</button></li> -->
-		    	<li><button onclick="review_list()">리뷰게시판</button></li>
-		  	</ul>
+	    		<li><input class="inputbutton" type="button" value="메인게시판" onclick="board_main()"></li>
+	    		<li><input class="inputbutton" type="button" value="공지사항" onclick="notice_list()"></li>
+	    		<li><input class="inputbutton" type="button" value="문의게시판" onclick="board_inquiry()"></li>
+	    		<li><input class="inputbutton" type="button" value="리뷰게시판" onclick="review_list()"></li>
+	    	</ul>
+	    	</form>
 		<div class="menu_contents">
 			
 			<!-- 키워드 검색 -->
@@ -62,7 +83,7 @@ function review_list() {
 				<thead class="menu_table_head">
 					<tr>
 						<th id="menu_table_num">게시글 번호</th>
-						<th id="menu_table_secret">비밀글 여부</th>
+						<th id="menu_table_secret">비밀글</th>
 						<th id="menu_table_nickName">작성자</th>
 						<th id="menu_table_title">제목</th>
 						<th id="menu_table_pnum">상품번호</th>
@@ -83,12 +104,21 @@ function review_list() {
 						<c:forEach var="vo" items="${list }">
 							<tr>
 								<td>${vo.inquiryNum }</td>
-								<td>${vo.secretStatus }</td>
-								<td>${vo.cusNickname }</td>
 								<td>
-									<a href="controller?type=view&
-										inquiryNum=${vo.inquiryNum }&cPage=${pvo.nowPage }&idx=${idx }&keyword=${keyword }">${vo.title }</a>
+								<c:if test="${vo.secretStatus == 'on'}">
+								<i class="fa fa-lock" style="font-size:24px"></i>
+								</c:if>
+								<c:if test="${vo.secretStatus == 'off'}">
+								<i class="fa fa-unlock-alt" style="font-size:24px"></i>
+								</c:if>
 								</td>
+								<td>${vo.cusNickname }</td>
+								<td><form method="post" name="tableForm">
+									<input id="titlebtn" type="button" value="${vo.title }" onclick="board_inquiry_view()">
+									<input type="hidden" name="inquiryNum" value="${vo.inquiryNum }">	
+									<input type="hidden" name="idx" value="${idx }">	
+									<input type="hidden" name="keyword" value="${keyword }">	
+								</form></td>
 								<td>${vo.itemNum }</td>
 								<td>${vo.regDate }</td>
 								<td>${vo.modDate }</td>

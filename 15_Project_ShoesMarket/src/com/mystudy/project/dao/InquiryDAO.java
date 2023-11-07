@@ -1,7 +1,5 @@
 package com.mystudy.project.dao;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,7 +7,6 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 
 import com.mystudy.project.mybatis.DBService;
-import com.mystudy.project.vo.CommentVO;
 import com.mystudy.project.vo.InquiryVO;
 
 /* 231024 박수진 */
@@ -19,15 +16,17 @@ public class InquiryDAO {
 	public static int getTotalCount() {
 		int totalCount = 0;
 		
-		SqlSession ss = DBService.getFactory().openSession();
+		SqlSession ss = null;
 		try {
+			ss = DBService.getFactory().openSession();
 			totalCount = ss.selectOne("Shoesmarket.totalCount");
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			ss.close();
+			if (ss != null) {
+				ss.close();
+			}
 		}
-		
 		return totalCount;
 	}
 
@@ -45,7 +44,9 @@ public class InquiryDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			ss.close();
+			if (ss != null) {
+				ss.close();
+			}
 		}
 		return list;
 	}
@@ -67,7 +68,9 @@ public class InquiryDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			ss.close();
+			if (ss != null) {
+				ss.close();
+			}
 		}
 		
 		return searchCount;
@@ -89,7 +92,9 @@ public class InquiryDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			ss.close();
+			if (ss != null) {
+				ss.close();
+			}
 		}
 		return list;
 	}
@@ -106,34 +111,91 @@ public class InquiryDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			ss.close();
+			if (ss != null) {
+				ss.close();
+			}
 		}
 		return vo;
 	}
 	
 	// 게시글 수정하기
-	public static int inquiryUpdate(String cusNickname, String title
-			, String contents, String inqImgName, String inqImgPath, int inquiryNum) {
-		InquiryVO vo = new InquiryVO();
-		vo.setCusNickname(cusNickname);
-		vo.setTitle(title);
-		vo.setContents(contents);
-		vo.setInqImgName(inqImgName);
-		vo.setInqImgPath(inqImgPath);
-		vo.setInquiryNum(inquiryNum);
-
+	public static int inquiryUpdate(String title, String contents, String inqImgName, String inqImgPath, int inquiryNum) {
+		InquiryVO vo = new InquiryVO(inquiryNum, title, contents, inqImgPath, inqImgName);
+		
+		System.out.println("inquiryUpdate vo : " + vo );
+		
 		SqlSession ss = null;
 		int voUp = -1;
 		
 		try {
-			ss = DBService.getFactory().openSession();
+			ss = DBService.getFactory().openSession(true);
 			voUp = ss.update("Shoesmarket.inquiry_update", vo);
+			System.out.println("voUp" + voUp);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			ss.close();
+			if (ss != null) {
+				ss.close();
+			}
 		}
 		return voUp;
 	}
+	
+	// 게시글 삭제하기
+	public static int inquiryDelete(int inquiryNum) {
+	
+		SqlSession ss = null;
+		int result = -1;
+		
+		try {
+			ss = DBService.getFactory().openSession(true);
+			result = ss.update("Shoesmarket.inquiry_delete", inquiryNum);
+			System.out.println("result" + result);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (ss != null) {
+				ss.close();
+			}
+		}
+		return result;
+	}
+	// 게시글 작성
+	public static int inquiryWrite(InquiryVO vo) {
+		SqlSession ss = null;
+		int result = -1;
+		
+		try {
+			ss = DBService.getFactory().openSession(true);
+			result = ss.insert("Shoesmarket.inquiry_write", vo);
+			System.out.println("result" + result);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (ss != null) {
+				ss.close();
+			}
+		}
+		return result;
+	}
+
+	public static int inquiryItemSearch(String itemName) {
+		SqlSession ss = null;
+		int itemNum = 0;
+		
+		try {
+			ss = DBService.getFactory().openSession();
+			itemNum = ss.selectOne("Shoesmarket.inquiry_item_search", itemName);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (ss != null) {
+				ss.close();
+			}
+		}
+		return itemNum;
+		
+	}
+	
 	
 }

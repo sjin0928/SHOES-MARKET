@@ -11,13 +11,35 @@ public class ItemVO {
 	private String itemDetail;
 	private Date regDate;
 	private Date modDate;
+	private String brand;
 
-	public ItemVO() {
+	public ItemVO() {}
+	
+	//상품 수정 시 필요
+	public ItemVO(int itemNum, String name, int price, int stock, String imagePath, String itemDetail, String brand) {
 		super();
+		this.itemNum = itemNum;
+		this.name = name;
+		this.price = price;
+		this.stock = stock;
+		this.imagePath = imagePath;
+		this.itemDetail = itemDetail;
+		this.brand = brand;
+	}
+	
+	// 상품 등록 시 필요
+	public ItemVO(String name, int price, int stock, String imagePath, String itemDetail, String brand) {
+		super();
+		this.name = name;
+		this.price = price;
+		this.stock = stock;
+		this.imagePath = imagePath;
+		this.itemDetail = itemDetail;
+		this.brand = brand;
 	}
 
 	public ItemVO(int itemNum, String name, int price, int stock, String imagePath,
-			String itemDetail, Date regDate, Date modDate) {
+			String itemDetail, Date regDate, Date modDate, String brand) {
 		super();
 		this.itemNum = itemNum;
 		this.name = name;
@@ -27,6 +49,16 @@ public class ItemVO {
 		this.itemDetail = itemDetail;
 		this.regDate = regDate;
 		this.modDate = modDate;
+		this.brand = brand;
+	}
+
+	
+	public String getBrand() {
+		return brand;
+	}
+
+	public void setBrand(String brand) {
+		this.brand = brand;
 	}
 
 	public int getItemNum() {
@@ -95,9 +127,11 @@ public class ItemVO {
 
 	@Override
 	public String toString() {
-		return "Item [itemNum=" + itemNum + ", name=" + name + ", price=" + price + ", stock=" + stock + ", imagePath="
-				+ imagePath + ", itemDetail=" + itemDetail + ", regDate=" + regDate
-				+ ", modDate=" + modDate + "]";
+		return "ItemVO [itemNum=" + itemNum + ", name=" + name + ", price=" + price + ", stock=" + stock
+				+ ", imagePath=" + imagePath + ", itemDetail=" + itemDetail + ", regDate=" + regDate + ", modDate="
+				+ modDate + ", brand=" + brand + "]";
 	}
+
+	
 
 }

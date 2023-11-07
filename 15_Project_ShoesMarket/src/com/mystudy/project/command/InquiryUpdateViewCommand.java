@@ -11,14 +11,29 @@ import com.mystudy.project.dao.InquiryCommentDAO;
 import com.mystudy.project.dao.InquiryDAO;
 import com.mystudy.project.vo.InquiryCommentVO;
 import com.mystudy.project.vo.InquiryVO;
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 public class InquiryUpdateViewCommand implements Command {
 	@Override
 	public String exec(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 파라미터 값 추출(확인)
+		// 파일을 저장할 경로 지정
+		//String path = "c:/upload/temp";
+		/*
+		 * String path = this.getServletContext().getRealPath("/upload");
+		 * System.out.println("> path : " + path);
+		 * 
+		 * MultipartRequest mr = new MultipartRequest( request, //요청객체 path, //실제 파일을
+		 * 저장할 경로 10 * 1024 * 1024, //업로드 파일의 최대크기(byte 단위) "UTF-8", //인코딩 형식 new
+		 * DefaultFileRenamePolicy() //동일파일명 있으면 이름 자동 변경저장 );
+		 */
 		System.out.println("InquiryUpdateViewCommand");
+		
+		String cPage = request.getParameter("cPage");
+		System.out.println(cPage);
 		int inquiryNum = Integer.parseInt(request.getParameter("inquiryNum"));
-		int cPage = Integer.parseInt(request.getParameter("cPage"));
+		
 		int idx = -1;
 		int keyword = -1;
 		System.out.println("inquiryNum : " + inquiryNum + ", cPage : " + cPage

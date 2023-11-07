@@ -9,6 +9,27 @@
 </head>
 <script type="text/javascript" src="popup.js"></script>
 <link href="css/style.css" rel="stylesheet" />
+<script>
+	function update_view() {
+		let form = document.myform;
+		
+		form.action="controller?type=updateView";
+		form.submit();
+	}
+	function delete_inquiry() {
+		let form = document.myform;
+		
+		form.action="controller?type=inquiryDelete";
+		form.submit();
+	}
+	
+	function list_go() {
+		let form = document.myform;
+		
+		form.action="controller?type=list";
+		form.submit();
+	}
+</script>
 <body>
 <%@ include file="header.jsp" %>
 <div id="contents_view">
@@ -43,13 +64,25 @@
 		<tfoot>
 			<tr>
 				<td colspan="2">
-					<a href="controller?type=updateView&inquiryNum=${vo.inquiryNum }&cPage=${cPage }&idx=${idx }&keyword=${keyword }">수정</a>
-					<a href="controller?type=delete">삭제</a>
-					<c:set var="idx" value="${idx }"/>
-					<c:choose>
-						<c:when test="${idx == -1 }"><a href="controller?type=list">목록보기</a></c:when>
-						<c:when test="${idx != -1 }"><a href="controller?type=search&idx=${idx }&keyword=${keyword }">목록보기</a></c:when>
-					</c:choose>
+					<form method="post" name="myform" ><!-- enctype="multipart/form-data" -->
+						<input type="button" value="수정" onclick="update_view()">
+						<input type="button" value="목록보기" onclick="list_go()">
+						<h4>비밀번호를 입력후 삭제를 누르시면 게시글이 삭제 됩니다.</h4>
+						<p>
+						비밀번호 <input type="text" name="passwordConfirm">
+						<input type="button" value="삭제" onclick="delete_inquiry()">
+						</p>
+						
+						
+						
+
+						<input type="hidden" name="inquiryNum" value="${vo.inquiryNum }">	
+						<input type="hidden" name="cusPassword" value="${vo.cusPassword }">	
+						<input type="hidden" name="idx" value="${idx }">	
+						<input type="hidden" name="keyword" value="${keyword }">	
+						<input type="hidden" name="cPage" value="${cPage }">	
+					</form>
+
 				</td>
 			</tr>
 		</tfoot>

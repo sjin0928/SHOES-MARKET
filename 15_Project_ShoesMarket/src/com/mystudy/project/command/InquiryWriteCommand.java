@@ -1,65 +1,61 @@
 package com.mystudy.project.command;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.mystudy.project.common.Paging;
 import com.mystudy.project.dao.InquiryDAO;
 import com.mystudy.project.vo.InquiryVO;
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
+//231024 박수진
 public class InquiryWriteCommand implements Command {
 
 	@Override
 	public String exec(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//1. 파라미터 값 X 전체조회
-		Paging p = new Paging();
+		System.out.println("--InquiryWriteCommand--");
 		
-		//1. 전체 게시물 수량 구하기
-		p.setTotalRecord(InquiryDAO.getTotalCount());
-		p.setTotalPage();
-		System.out.println(p.getNowPage());
-		//2. 현재 페이지 구하기
-		String cPage = request.getParameter("cPage");
-		if (cPage != null) {
-			p.setNowPage(Integer.parseInt(cPage));
-		}
+		String path = "C:\\temp";
+		System.out.println("> path : " + path);
 		
-		//3. 현재 페이지에 표시할 게시글 시작번호(begin), 끝번호 구하기
-		p.setEnd(p.getNowPage() * p.getNumPerPage());
-		p.setBegin(p.getEnd() - p.getNumPerPage() + 1);
+		MultipartRequest mr = new MultipartRequest(
+			request, //요청객체
+			path, //실제 파일을 저장할 경로
+			10 * 1024 * 1024, //업로드 파일의 최대크기(byte 단위)
+			"UTF-8", //인코딩 형식
+			new DefaultFileRenamePolicy() //동일파일명 있으면 이름 자동 변경저장
+		);
 		
-		//3-1. (선택적) 끝 번호가 데이터 건수보다 많아지면 데이터 건수와 동일하게 설정
-		if (p.getEnd() > p.getTotalRecord()) {
-			p.setEnd(p.getTotalRecord());
-		}
-		//4. 블록 시작페이지, 끝페이지 구하기
-		//4-1. 시작페이지 구하기
-		int beginPage = (p.getNowPage() - 1) / p.getPagePerBlock() * p.getPagePerBlock() + 1;
-		p.setBeginPage(beginPage);
-		p.setEndPage(beginPage + p.getPagePerBlock() - 1);
-		System.out.println(p);
+		InquiryVO vo = new InquiryVO();
+		vo.setTitle(mr.getParameter("title"));
+		vo.setCusNickname(mr.getParameter("cusNickname"));
+		vo.setContents(mr.getParameter("contents"));
+		vo.setSecretStatus(mr.getParameter("secretStatus"));
+		vo.setInqImgName(mr.getFilesystemName("inqImgPath"));
+		vo.setInqImgPath(path);
 		
-		//4-2. 끝페이지(endPage)가 전체 페이지 수 (totalPage) 보다 크면
-			// 끝페이지를 전체 페이지 수로 변경
-		if(p.getEndPage() > p.getTotalPage()) {
-			p.setEndPage(p.getTotalPage());
-		}
+		String itemName = mr.getParameter("itemName");
+		System.out.println(itemName);
 		
-		//4. DB에서 전체 게시글 조회(DAO사용)
-		List<InquiryVO> list = InquiryDAO.getList(p.getBegin(), p.getEnd());
+		int itemNum = InquiryDAO.inquiryItemSearch(itemName);
+		System.out.println("itemNum : " + itemNum);
+		vo.setItemNum(itemNum);
 		
-		//5. 조회된 데이터를 응답페이지(board_inquiry.jsp)에서 사용토록 scope에 저장
-		request.setAttribute("list", list);
-		request.setAttribute("pvo", p);
-
+		System.out.println("inqImgPath : " + mr.getFilesystemName("inqImgPath"));
 		
-		//64. 응답페이지(board_inquiry.jsp)로 위임 처리
-				
-		return "board_inquiry.jsp";
+		// 합친 후 session에서 고객번호 받아서 넣어주기
+		vo.setCusNum(1);
+		int result = InquiryDAO.inquiryWrite(vo);
+		
+		request.setAttribute("mr", mr);
+		request.setAttribute("vo", vo);
+		
+		System.out.println("result" + result);
+		
+		return "controller?type=list";
 	}
 
 }

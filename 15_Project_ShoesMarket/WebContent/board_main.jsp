@@ -8,15 +8,30 @@
 <meta charset="UTF-8">
 <title>문의게시글</title>
 <script>
-	function notice_list(){
-		location.href = "noticeList.jsp"
-	}
-	function board_inquiry() {
-		location.href = "controller?type=list"
-	}
-	function review_list() {
-		location.href = "reviewList.jsp"
-	}
+function board_main(){
+	let form = document.formButton;
+	form.action="board_main.jsp";
+	//form.action="controller?type=boardMain";
+	form.submit();
+}
+function notice_list(){
+	let form = document.formButton;
+	
+	form.action="controller?type=boardNotice";
+	form.submit();
+}
+function board_inquiry() {
+	let form = document.formButton;
+	
+	form.action="controller?type=list";
+	form.submit();
+}
+function review_list() {
+	let form = document.formButton;
+	
+	form.action="controller?type=reviewList";
+	form.submit();
+}
 </script>
 <script type="text/javascript" src="popup.js"></script>
 
@@ -32,11 +47,14 @@
 	<!-- 공지사항 내용 시작 -->
 	<div class="contents">
 		<div class="menu">
-  	    	<ul>
-    			<li><button onclick="notice_list()">공지사항</button></li>
-	    		<li><button onclick="board_inquiry()">문의게시판</button></li>
-	    		<li><button onclick="review_list()">리뷰게시판</button></li>
-	  		</ul>
+	    	<form method="post" name="formButton">
+	    	<ul>
+	    		<li><input class="inputbutton" type="button" value="메인게시판" onclick="board_main()"></li>
+	    		<li><input class="inputbutton" type="button" value="공지사항" onclick="notice_list()"></li>
+	    		<li><input class="inputbutton" type="button" value="문의게시판" onclick="board_inquiry()"></li>
+	    		<li><input class="inputbutton" type="button" value="리뷰게시판" onclick="review_list()"></li>
+	    	</ul>
+	    	</form>
 	  		<div class="menu_contents">
 	    		<div id="menu_top">
           			<div id="hello">
