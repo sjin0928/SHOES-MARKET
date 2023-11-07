@@ -7,10 +7,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.mystudy.project.common.NoticePaging;
 import com.mystudy.project.common.Paging;
 import com.mystudy.project.dao.InquiryDAO;
 import com.mystudy.project.dao.NoticeDAO;
 import com.mystudy.project.vo.InquiryVO;
+import com.mystudy.project.vo.NoticeVO;
 
 /* 231024 박수진 */
 public class NoticeSearchCommand implements Command{
@@ -23,12 +25,12 @@ public class NoticeSearchCommand implements Command{
 		String keyword = request.getParameter("keyword");
 		System.out.println(">>> SearchCommand idx, keyword : " + idx + ", " +  keyword);
 		
-		Paging p = new Paging();
+		NoticePaging p = new NoticePaging();
 		
 		//1. 검색 게시물 수량 구하기
 		int searchCount = NoticeDAO.getSearchCount(keyword);
 		p.setTotalRecord(searchCount);
-		System.out.println("InquiryDAO.getSearchCount" + searchCount);
+		System.out.println("NoticeDAO.getSearchCount" + searchCount);
 		p.setTotalPage();
 		System.out.println(p.getNowPage());
 		
@@ -61,12 +63,12 @@ public class NoticeSearchCommand implements Command{
 		}
 		
 		if (keyword == null || keyword.trim().equals("")) {
-			return "board_inquiry_search.jsp";
+			return "board_notice_list.jsp";
 		}
 		System.out.println(p);
 		
 		// DB연동 데이터 검색 처리
-		List<InquiryVO> list = InquiryDAO.getSearch(idx, keyword, p.getBegin(), p.getEnd());
+		List<NoticeVO> list = NoticeDAO.getSearch(keyword, p.getBegin(), p.getEnd());
 		request.setAttribute("list", list);
 		request.setAttribute("idx", idx);
 		request.setAttribute("keyword", keyword);
@@ -74,6 +76,6 @@ public class NoticeSearchCommand implements Command{
 		
 		System.out.println(list);
 		System.out.println(p);
-		return "board_inquiry_search.jsp";
+		return "board_notice_list.jsp";
 	}
 }

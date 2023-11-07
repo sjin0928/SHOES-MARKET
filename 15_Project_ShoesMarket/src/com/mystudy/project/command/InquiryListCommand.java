@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.mystudy.project.common.Paging;
+import com.mystudy.project.dao.AdminDAO;
 import com.mystudy.project.dao.InquiryDAO;
+import com.mystudy.project.vo.AdminVO;
 import com.mystudy.project.vo.CustomerVO;
 import com.mystudy.project.vo.InquiryVO;
 
@@ -20,6 +22,18 @@ public class InquiryListCommand implements Command {
 		//0. 파라미터 값 전체조회
 		System.out.println("InquiryListCommand");
 		Paging p = new Paging();
+		
+		// 세션에 저장된 로그인 정보
+		HttpSession session = request.getSession();
+		CustomerVO customer = null;
+		
+		if(session.getAttribute("customer") != null) {
+			customer = (CustomerVO)session.getAttribute("customer");
+		}
+		
+		request.setAttribute("customer", customer);
+		AdminVO adminVo = AdminDAO.getAdmin();
+		request.setAttribute("adminVo", adminVo);
 		
 		//1. 전체 게시물 수량 구하기
 		p.setTotalRecord(InquiryDAO.getTotalCount());

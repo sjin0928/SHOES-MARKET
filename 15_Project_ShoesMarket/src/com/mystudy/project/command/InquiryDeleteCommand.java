@@ -51,9 +51,9 @@ public class InquiryDeleteCommand implements Command {
 		System.out.println(result);
 
 		if(idx != -1) {
-			return "controller?type=inquiryList";
+			return "board_delete_ok.jsp";
 		}
-		return "controller?type=inquirySearch";
+		return "board_delete_ok.jsp";
 	}
 
 }

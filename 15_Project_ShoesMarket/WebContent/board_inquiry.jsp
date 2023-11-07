@@ -13,6 +13,17 @@
  <%@ include file="include/popup.js" %>
  <%@ include file="include/search.js" %>
  </script>
+ <script>
+ 	function inquiry_update() {
+		let form = document.myform;
+		if ("${empty customer.cusId }") {
+			alert("로그인 후 게시글 작성 가능합니다.");
+		}
+		
+		form.action="controller?type=inquiryUpdate";
+		form.submit();
+	}
+</script>
 <!-- 메뉴바 외 코드 -->
 <link href="css/style.css" rel="stylesheet" />
 <!-- 메뉴바 부트스트랩 템플릿 사용 -->
@@ -27,9 +38,10 @@
 	
   	
 	<!-- 게시판 내용 시작 -->
+	<br>
    	<%@ include file="include/boardBtn.jspf" %>
-   	
- 		<div class="class=col-10 menu_contents">
+	<br>
+ 		<div class="container">
 			
 			<!-- 키워드 검색 -->
 	    	<form action="controller?type=inquirySearch" method="post">
@@ -42,9 +54,11 @@
 				<input id="search_button" type="submit" value="검색">
 				<!-- <input type="hidden" name="type" value="search"> -->
 			</form>
+			
 			<!-- 리스트 출력 -->
-			<h3 id="board_title">문의게시글 리스트</h3>
-			<table id="menu_table">
+			<br>
+			<h4 id="board_title">&nbsp;문의게시글 리스트</h4>
+			<table class="table table-hover" id="menu_table">
 				<thead class="menu_table_head">
 					<tr>
 						<th id="menu_table_num">게시글 번호</th>
@@ -134,13 +148,18 @@
 					</c:if>		 
 					</ol>
 				</td>
+				<td>
+					<input type="button" value="글쓰기"
+						onclick="javascript:location.href='controller?type=inquiryWriteView'">
+					<input type="hidden" name="inquiryWrite" value="inquiryWrite">
+				</td>
 			</tr>
 			</tfoot>
 			</table>
 		</div>
 		
 	<br><br><br><br><br><br><br><br>
-  	<!-- 공지사항 내용 끝 -->
+  	<!-- 문의게시글 내용 끝 -->
 
   	<!-- info section -->
   	<!-- footer section -->

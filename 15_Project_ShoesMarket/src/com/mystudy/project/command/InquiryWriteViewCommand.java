@@ -22,7 +22,10 @@ public class InquiryWriteViewCommand implements Command {
 		if(session.getAttribute("customer") != null) {
 			customer = (CustomerVO)session.getAttribute("customer");
 		}
-		
+		System.out.println(customer);
+		if(session.getAttribute("customer") == null) {
+			return "not_login.jsp";
+		}
 		request.setAttribute("customer", customer);
 		
 		return "board_inquiry_write.jsp";

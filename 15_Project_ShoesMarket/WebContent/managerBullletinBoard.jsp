@@ -24,6 +24,7 @@
 	<input type="button" onclick="javascript:location.href='controller?type=itemBulletinBoard'" value="상품게시글목록">
 	<input type="button" onclick="" value="리뷰게시글목록">
 	<input type="button" onclick="javascript:location.href='controller?type=managerInquiry'" value="문의게시글목록">
+	<input type="button" onclick="javascript:location.href='controller?type=managerNoticeList'" value="공지사항목록">
 	</div>
 	<br>
 	

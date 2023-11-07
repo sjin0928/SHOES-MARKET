@@ -24,9 +24,9 @@
 
   	<!-- 문의게시판 내용 시작 -->
   	   	<%@ include file="include/boardBtn.jspf" %>
-  <div class="container" style="margin-top:30px">
- 	<div class="row">
-		<div class="col-sm-10 menu_contents" >	
+   	<br>
+		<div class="container">
+ 
 			<!-- 키워드 검색 -->
 	    	<form action="controller?type=inquirySearch" method="post">
 				<select name="idx">
@@ -40,7 +40,7 @@
 			</form>
 			<!-- 리스트 출력 -->
 			<h3 id="board_title">문의게시글 리스트</h3>
-			<table id="menu_table">
+			<table class="table table-hover">
 				<thead class="menu_table_head">
 					<tr>
 						<th id="menu_table_num">게시글 번호</th>

@@ -26,13 +26,12 @@
 	<!-- end hero area -->
 	
   	<!-- 문의게시판 내용 시작 -->
-  	
+  	<br>
 	<!-- 게시판 내용 시작 -->
    	<%@ include file="include/boardBtn.jspf" %>
-   	
-	<div class="class=col-10 menu_contents">
-    
-		<h3 id="board_title">공지사항</h3>
+   	<br>
+		<div class="container">
+ 
 			<!-- 키워드 검색 -->
 	    	<form action="controller?type=noticeSearch" method="post">
 	    		<i class="fa fa-search" style="font-size:14px"></i> 
@@ -40,8 +39,11 @@
 				<input id="search_button" type="submit" value="검색">
 				<!-- <input type="hidden" name="type" value="search"> -->
 			</form>
+		    <br>
+			<h4 id="board_title">&nbsp;공지사항</h4>
+			
 			<!-- 리스트 출력 -->
-			<table id="menu_table">
+			<table class="table table-hover">
 				<thead class="menu_table_head">
 					<tr>
 						<th id="menu_table_num">게시글 번호</th>
@@ -82,48 +84,47 @@
 				<tr>
 				<td colspan="6">
 					<ol class="paging">
-					<%--[이전으로]에 대한 사용여부 처리 --%>
+						<%--[이전으로]에 대한 사용여부 처리 --%>
 					
-					<c:if test="${pvo.beginPage == 1 }">
-						<li class="disable">
-							<i class="fa fa-angle-left" style="font-size:24px"></i>
-						</li>
-					</c:if>
-					<c:if test="${pvo.beginPage != 1 }">
-						<li>
-							<a href="controller?type=noticeList&cPage=${pvo.beginPage - 1 }">
-							<i class="fa fa-angle-left" style="font-size:24px"></i>
-							</a>
-						</li>
-					</c:if>	
+						<c:if test="${pvo.beginPage == 1 }">
+							<li class="disable">
+								<i class="fa fa-angle-left" style="font-size:24px"></i>
+							</li>
+						</c:if>
+						<c:if test="${pvo.beginPage != 1 }">
+							<li>
+								<a href="controller?type=noticeList&cPage=${pvo.beginPage - 1 }">
+								<i class="fa fa-angle-left" style="font-size:24px"></i>
+								</a>
+							</li>
+						</c:if>	
 					
-					<%--블록내에 표시할 페이지 태그 작성(시작페이지~끝페이지) --%>
-					<c:forEach var="pageNo" begin="${pvo.beginPage }" end="${pvo.endPage }">
-					<c:if test="${pageNo == pvo.nowPage }">
-						<li class="now">${pageNo }</li>
-					</c:if>	
-					<c:if test="${pageNo != pvo.nowPage }">
-						<li>
-							<a href="controller?type=noticeList&cPage=${pageNo }">${pageNo }</a>
-						</li>
-					</c:if>		
+						<%--블록내에 표시할 페이지 태그 작성(시작페이지~끝페이지) --%>
+						<c:forEach var="pageNo" begin="${pvo.beginPage }" end="${pvo.endPage }">
+						<c:if test="${pageNo == pvo.nowPage }">
+							<li class="now">${pageNo }</li>
+						</c:if>	
+						<c:if test="${pageNo != pvo.nowPage }">
+							<li>
+								<a href="controller?type=noticeList&cPage=${pageNo }">${pageNo }</a>
+							</li>
+						</c:if>		
+							
+						</c:forEach>
 						
-					</c:forEach>
-					
-					<%--[다음으로]에 대한 사용여부 처리 --%>
-					<c:if test="${pvo.endPage >= pvo.totalPage }">
-						<li class="disable"><i class="fa fa-angle-right" style="font-size:24px"></i></li>
-					</c:if>
-					<c:if test="${pvo.endPage < pvo.totalPage }">
-						<li>
-							<a href="controller?type=noticeList&cPage=${pvo.endPage + 1 }">
-								<i class="fa fa-angle-right" style="font-size:24px"></i>
-							</a>
-						</li>
-					</c:if>		 
+						<%--[다음으로]에 대한 사용여부 처리 --%>
+						<c:if test="${pvo.endPage >= pvo.totalPage }">
+							<li class="disable"><i class="fa fa-angle-right" style="font-size:24px"></i></li>
+						</c:if>
+						<c:if test="${pvo.endPage < pvo.totalPage }">
+							<li>
+								<a href="controller?type=noticeList&cPage=${pvo.endPage + 1 }">
+									<i class="fa fa-angle-right" style="font-size:24px"></i>
+								</a>
+							</li>
+						</c:if>		 
 					</ol>
 				</td>
-				
 			</tr>
 			</tfoot>
 			</table>

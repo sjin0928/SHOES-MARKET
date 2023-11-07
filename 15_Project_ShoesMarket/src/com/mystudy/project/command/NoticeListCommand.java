@@ -43,7 +43,7 @@ public class NoticeListCommand implements Command {
 		int beginPage = (p.getNowPage() - 1) / p.getPagePerBlock() * p.getPagePerBlock() + 1;
 		p.setBeginPage(beginPage);
 		p.setEndPage(beginPage + p.getPagePerBlock() - 1);
-		System.out.println(p);
+		System.out.println("p : " + p);
 		
 		//4-2. 끝페이지(endPage)가 전체 페이지 수 (totalPage) 보다 크면
 			// 끝페이지를 전체 페이지 수로 변경

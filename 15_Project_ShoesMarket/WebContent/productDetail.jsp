@@ -56,7 +56,7 @@ function order_go() {
 
     
     <!-- ------------------------------------------------------------------------ -->
-    <div id="cart" style="width:1000px; ">
+    <div id="cart" class="mx-auto" style="width:1000px; ">
     	<div class="th">
     	<img src="${itemVo.imagePath }" alt="상품 이미지" width="350">
     	</div>
@@ -69,11 +69,11 @@ function order_go() {
 	    		<div class="itemInfo">
 	    			<dl class="item1">
 						<dt class="tit"></dt>
-						<dd class="desc">${itemVo.itemDetail }</dd>
+						<dd class="desc-container">${itemVo.itemDetail }</dd>
 					</dl>
-					<dl class="item1">
+					<dl class="item1" >
 						<dd class="cart">
-							 수량 :  
+							 수량 
 				            <input type="button" class="amount" value=" - " onclick="del();">
 				            <input type="text" name="cartQuantity" value="1" size="3" readonly>
 				            <input type="button" class="amount" value=" + " onclick="add();">

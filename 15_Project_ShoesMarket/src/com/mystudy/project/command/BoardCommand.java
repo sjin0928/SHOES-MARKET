@@ -6,13 +6,7 @@ import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import com.mystudy.project.common.Paging;
-import com.mystudy.project.dao.InquiryDAO;
 import com.mystudy.project.dao.NoticeDAO;
-import com.mystudy.project.vo.CustomerVO;
-import com.mystudy.project.vo.InquiryVO;
 import com.mystudy.project.vo.NoticeVO;
 
 public class BoardCommand implements Command {

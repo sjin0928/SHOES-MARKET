@@ -27,11 +27,13 @@
 </head>
 <body>
 <%@ include file="include/header.jspf" %>
-<div id="contents_view">
+<div class="container">
 	<%-- 공지사항 내용 시작 --%>
-	<table>
-		<caption>상세보기</caption>
-		<tbody>
+	<br>
+	<h4>상세보기</h4>
+	<br>
+	<table class="table">
+		<tbody class="menu_table_content" id="tbody">
 			<tr>
 				<th>제목</th>
 				<td>${vo.noticeTitle }</td>
@@ -48,28 +50,6 @@
 				<th>수정일</th>
 				<td>${vo.modDate }</td>
 			</tr>
-			<%-- 
-			<tr>
-				<th>첨부파일</th>
-				<td>
-				<c:if test="${empty vo.inqImgPath }">
-					첨부파일없음
-				</c:if>
-				<c:if test="${not empty vo.inqImgPath }">
-					<form method="post" name="downloadForm" >
-						${vo.inqImgName }
-						<input type="button" value="다운로드" onclick="file_download()">
-						<input type="hidden" name="inqImgPath" value="${vo.inqImgPath}">
-						<input type="hidden" name="inqImgName" value="${vo.inqImgName}">
-						<input type="hidden" name="inquiryNum" value="${vo.inquiryNum }">
-						<input type="hidden" name="idx" value="${idx }">	
-						<input type="hidden" name="keyword" value="${keyword }">	
-						<input type="hidden" name="cPage" value="${cPage }">	
-					</form>
-				</c:if>
-				</td>
-			</tr>
-			 --%>
 			<tr>
 				<th>내용</th>
 				<td>${vo.contents }</td>
@@ -79,7 +59,7 @@
 			<tr>
 				<td colspan="2">
 					<form method="post" name="myform" ><!-- enctype="multipart/form-data" -->
-						<input type="button" value="목록보기" onclick="list_go()">		
+						<input class="btn btn-primary" type="button" value="목록보기" onclick="list_go()">		
 						<input type="hidden" name="idx" value="${idx }">	
 						<input type="hidden" name="keyword" value="${keyword }">	
 						<input type="hidden" name="cPage" value="${cPage }">	
@@ -90,26 +70,6 @@
 		</tfoot>
 	</table>
 	<hr>
-	
-	<%-- 게시글의 댓글 표시 영역
-	<h3>댓글</h3>
-	
-	<div class="inqComment">
-	<hr>
-		<c:forEach var="inqCommVO" items="${list }">
-	
-		<ul>
-			<li>작성자: admin &nbsp;&nbsp; </li>
-			<li>작성일: ${inqCommVO.regDate }</li>
-			<li>내용 : ${inqCommVO.contents }</li>
-		</ul>
-			<!-- 세션에 게시글데이터, 페이지번호가 없으면 명시적으로 데이터 넘기기 -->
-			<%-- <input type="hidden" name="bbsIdx" value="${commVO.bbsIdx }">
-			<input type="hidden" name="cPage" value="${cPage }"> 
-		<hr>
-		</c:forEach>
-	</div>
-	 --%>
 	
 </div>
 	<!-- 게시글 내용 끝 -->

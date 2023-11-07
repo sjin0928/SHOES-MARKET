@@ -49,79 +49,58 @@
 
   	<!-- 문의게시판 내용 시작 -->
   	   	<%@ include file="include/boardBtn.jspf" %>
-  	   	
-			<div class="menu_contents">
-				
-				<!-- 문의게시판 글쓰기 -->
-				<form method="post" name="myform" enctype="multipart/form-data" >
-					<table id="inquiry_write">
-						<caption>문의게시판 글쓰기</caption>
-						<tbody>
-							<tr>
-								<th class="inquiry_write_th_td">제목</th>
-								<td class="inquiry_write_th_td">
-									<input type="text" name="title" title="제목">
-								</td>
-							</tr>
-							<tr class="inquiry_write_tr_td">
-								<th>상품명</th>
-								<td>
-									<input type="text" name="itemName" title="상품명">
-								</td>
-							</tr>
-							<tr>
-							<th>작성자</th>
-								<td>
-									<input type="text" name="cusNickname" title="작성자" value="${customer.cusNickName }" readonly>
-								</td>
-							</tr>
-							<tr class="inquiry_write_tr_td">
-								<th>내용</th>
-								<td>
-									<textarea name="contents" rows="8" cols="50" title="내용"></textarea>
-								</td>
-							</tr>
-							<tr class="inquiry_write_tr_td">
-								<th>첨부파일</th>
-								<td>
-									<input type="file" name="inqImgPath">
-								</td>
-							</tr>
-							<tr class="inquiry_write_tr_td">
-								<th>비밀글</th>
-								<td>
-									<div style="font-size: 14px">
-									<input type="checkbox" name="secretStatus" >
-									체크하시면 다른 회원님들은 조회할 수 없습니다.
-									</div>
-								</td>
-							</tr>
-						</tbody>
-						<tfoot>
-							<tr class="inquiry_write_tr_td">
-								<td colspan="2">
-									<input type="button" value="저장" onclick="inquiry_write()">
-									<input type="reset" value="초기화">
-									<input type="button" value="목록보기" onclick="list_go()">
+  	   	<br>
+		<h4>&nbsp; Q & A 작성</h4>
+		<hr>
+		<div class="container" >
 			
-									<input type="hidden" name="inquiryNum" value="${vo.inquiryNum }">
-									<input type="hidden" name="idx" value="${idx }">	
-									<input type="hidden" name="keyword" value="${keyword }">	
-									<input type="hidden" name="cPage" value="${cPage }">	
-								</td>
-							</tr>
-						</tfoot>
-					</table>		
-				</form>
-			</div>
-	  	</div>
-  	</div>
+			<!-- 문의게시판 글쓰기 -->
+			<form method="post" name="myform" enctype="multipart/form-data" >
+				<div class="form-group">
+					<label for="title">제목</label>
+					<input class="form-control" type="text" name="title" title="제목" placeholder="title" aria-label="default input example">
+				</div>
+				<div class="form-group">
+					<label for="itemName">상품명</label>
+					<input class="form-control" type="text" name="itemName" title="상품명" placeholder="productName" aria-label="default input example">
+				</div>
+				<div class="form-group">
+					<label for="Nickname">작성자</label>
+					<input class="form-control" type="text" name="cusNickname" title="작성자" placeholder="nickname" value="${customer.cusNickName }">
+				</div>
+				<div class="form-group">
+					<label for="content">내용</label>
+								<textarea class="form-control" name="text" title="내용" id="exampleFormControlTextarea1" rows="5"></textarea>
+				</div>
+				<div class="mb-3">
+					<label for="imagePath" class="form-label">첨부파일</label>
+					<input class="form-control" type="file" title="첨부파일" name="inqImgPath" id="formFile">
+				</div>
+				<div class="form-group">
+					<label for="secret">비밀글</label><br>
+					<input type="checkbox" name="secretStatus" title="비밀글" placeholder="secret">
+					체크하시면 다른 회원님들은 조회할 수 없습니다.
+				</div>
 
+				<input class="btn btn-primary" type="button" value="저장" onclick="inquiry_write()">
+				<input class="btn btn-primary" type="reset" value="초기화">
+				<input class="btn btn-primary" type="button" value="목록보기" onclick="list_go()">
+
+				<input type="hidden" name="inquiryNum" value="${vo.inquiryNum }">
+				<input type="hidden" name="idx" value="${idx }">	
+				<input type="hidden" name="keyword" value="${keyword }">	
+				<input type="hidden" name="cPage" value="${cPage }">	
+
+			</form>
+		</div>
+	<br><br>
   	<!-- 공지사항 내용 끝 -->
 
   	<!-- info section -->
   	<!-- footer section -->
+  	<div>
   	<%@ include file="include/footer.jspf" %>
+  	</div>
 <!-- 부트스트랩 -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 </body>

@@ -33,7 +33,7 @@
 	
 	function file_download() {
 		let form = document.downloadForm;
-		alert(form);
+
 		form.action="controller?type=fileDownload";
 		form.submit();
 	}
@@ -46,11 +46,13 @@
 <body>
 	<%@ include file="include/managerHeader.jspf" %>
 	
-<div id="contents_view">
+<div class="container">
 	<%-- 게시글 내용 시작 --%>
-	<table>
-		<caption>상세보기</caption>
-		<tbody>
+	<br>
+	<h4>상세보기</h4>
+	<br>
+	<table class="table">
+		<tbody class="menu_table_content" id="tbody">
 			<tr>
 				<th>제목</th>
 				<td>${vo.title }</td>
@@ -88,7 +90,7 @@
 			<tr>
 				<td colspan="2">
 					<form method="post" name="myform" ><!-- enctype="multipart/form-data" -->
-						<input type="button" value="목록보기" onclick="list_go()">
+						<input class="btn btn-primary" type="button" value="목록보기" onclick="list_go()">
 						<input type="hidden" name="inquiryNum" value="${vo.inquiryNum }">		
 						<input type="hidden" name="idx" value="${idx }">	
 						<input type="hidden" name="keyword" value="${keyword }">	

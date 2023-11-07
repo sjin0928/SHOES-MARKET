@@ -2,16 +2,12 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
-	<div class="col-sm-2" id="board_menu">
-		<div class="board_menu_link"><a href="controller?type=board">메인게시판</a></div>
-		<div class="board_menu_link"><a href="controller?type=noticeList">공지사항</a></div>
-		<div class="board_menu_link"><a href="controller?type=inquiryList">문의게시판</a></div>
-		<div class="board_menu_link"><a href="controller?type=reviewList">리뷰게시판</a></div>
+	<div class="container" id="board_menu">
+		<ul class="list-group list-group-horizontal">
+			<li class="list-group-item list-group-item-primary"><a href="controller?type=board">MAIN BOARD</a></li>
+			<li class="list-group-item list-group-item-primary"><a href="controller?type=noticeList">NOTICE</a></li>
+			<li class="list-group-item list-group-item-primary"><a href="controller?type=inquiryList">Q & A</a></li>
+		</ul>
 	</div>
-	
-<!-- <ul>
-	<li class="inputbutton"><a href="controller?type=board">메인게시판</a></li><br>
-	<li class="inputbutton"><a href="controller?type=noticeList">공지사항</a></li><br>
-	<li class="inputbutton"><a href="controller?type=inquiryList">문의게시판</a></li><br>
-	<li class="inputbutton"><a href="controller?type=reviewList">리뷰게시판</a></li><br>
-</ul> -->
+
+      

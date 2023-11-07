@@ -157,7 +157,7 @@
 	
 	<!-- 관리자 아이디, 비번 확인 -->
 	<select id="loginAdmin" resultType="AdminVO">
-	SELECT ADMIN_ID, ADMIN_PASSWORD 
+	SELECT *
 	FROM ADMIN
 	</select>
 	
@@ -291,7 +291,7 @@
 	CART_NUM, ITEM_NUM, CUS_NUM, CART_QUANTITY, CART_REGDATE)
 	VALUES (CART_SEQ.NEXTVAL , #{itemNum}, #{cusNum}, #{cartQuantity}, SYSDATE)
 	</insert>
-	
+		
 	<!-- 231024 박수진 -->
 	<!-- 전체 게시글 건수 조회 -->
 	<select id="totalCount" resultType="int">
@@ -413,45 +413,53 @@
 	<!-- 공지사항 게시글 전체 검색 -->
 	<select id="noticeList" parameterType="map" resultType="NoticeVO">
 		SELECT *
-	 	  FROM (SELECT ROWNUM RNUM, N.*
-		          FROM NOTICE N
-		         ORDER BY NOTICE_NUM DESC)
-		 WHERE RNUM BETWEEN #{begin} AND #{end}
+		  FROM (SELECT ROWNUM RNUM, N.*
+    			  FROM (SELECT *
+            			  FROM NOTICE
+           				 ORDER BY NOTICE_NUM DESC) N)
+		WHERE RNUM BETWEEN #{begin} AND #{end}
 	</select>
 	
 	<!-- 공지사항 게시글 검색 건수 조회 -->
-	<select id="noticeSearchCount" parameterType="map" resultType="int">
+	<select id="noticeSearchCount" parameterType="String" resultType="int">
 		SELECT COUNT(*) AS CNT
-  		  FROM CUSTOMER CUS, INQUIRY INQ
- 		 WHERE CUS.CUS_NUM = INQ.CUS_NUM
-		<choose>
-			<when test="idx == 0">
-				AND CUS_NICK_NAME LIKE '%'|| #{keyword} ||'%'
-			</when>
-			<when test="idx == 1">
-				AND TITLE LIKE '%'|| #{keyword} ||'%'
-			</when>
-			<when test="idx == 2">
-				AND ITEM_NUM = #{keyword}
-			</when>
-		</choose>
+  		  FROM NOTICE
+ 		 WHERE NOTICE_TITLE LIKE '%'|| #{keyword} ||'%'
 	</select>
 	
 
-	<!-- 공지사항 문의게시글 동적검색 -->
+	<!-- 공지사항 검색 -->
 	<select id="noticeSearch" parameterType="map" resultType="NoticeVO">
-		SELECT ROWNUM AS RNUM, DATA.*
-       	  FROM (SELECT INQ.INQUIRY_NUM, INQ.SECRET_STATUS, CUS.CUS_NICK_NAME, 
-            		   INQ.TITLE, INQ.ITEM_NUM, INQ.REG_DATE, INQ.MOD_DATE
-               		  FROM CUSTOMER CUS, INQUIRY INQ
-                 		 WHERE CUS.CUS_NUM = INQ.CUS_NUM
-							AND TITLE LIKE '%'|| #{keyword} ||'%'
-
-                 		 ORDER BY INQUIRY_NUM DESC) DATA)
-         WHERE RNUM BETWEEN #{begin} AND #{end}
-		 ORDER BY INQUIRY_NUM DESC
+		SELECT ROWNUM, N.*
+		  FROM (SELECT *
+		          FROM NOTICE
+		         WHERE NOTICE_TITLE LIKE '%'|| #{keyword} ||'%'
+		         ORDER BY NOTICE_NUM DESC) N
+		 WHERE ROWNUM BETWEEN #{begin} AND #{end}
 	</select>
 	
+		
+	<!-- 공지사항 쓰기 -->
+	<insert id="noticeWrite" parameterType="NoticeVO">
+		INSERT INTO NOTICE
+    			(NOTICE_NUM, ADMIN_NUM, NOTICE_TITLE, CONTENTS, REG_DATE, MOD_DATE)
+		VALUES (NOTICE_SEQ.NEXTVAL, #{adminNum}, #{noticeTitle}, #{contents} , SYSDATE, SYSDATE)
+	</insert>
+	
+	<!-- 공지사항 수정 -->
+	<update id="noticeUpdate" parameterType="NoticeVO">
+		UPDATE NOTICE
+		   SET NOTICE_TITLE = #{noticeTitle},
+    		   CONTENTS = #{contents},
+    		   MOD_DATE = SYSDATE
+		 WHERE NOTICE_NUM = #{noticeNum}
+	</update>
+	
+	<!-- 공지사항 댓글 삭제 -->
+	<delete id="noticeDelete" parameterType="int">
+		DELETE FROM NOTICE
+		 WHERE NOTICE_NUM = #{noticeNum}
+	</delete>
 	
 	<!-- 게시글의 내용 -->
 	<select id="noticeView" parameterType="int" resultType="NoticeVO">

@@ -46,11 +46,13 @@
 </head>
 <body>
 <%@ include file="include/header.jspf" %>
-<div id="contents_view">
+<div class="container">
 	<%-- 게시글 내용 시작 --%>
-	<table>
-		<caption>상세보기</caption>
-		<tbody>
+	<br>
+	<h4>문의게시글 상세보기</h4>
+	<br>
+	<table class="table">
+		<tbody class="menu_table_content" id="tbody">
 			<tr>
 				<th>제목</th>
 				<td>${vo.title }</td>
@@ -88,21 +90,21 @@
 			<tr>
 				<td colspan="2">
 					<form method="post" name="myform" ><!-- enctype="multipart/form-data" -->
-						<input type="button" value="수정" onclick="update_view()">
-						<input type="button" value="목록보기" onclick="list_go()">
-						
-						<h4>비밀번호 입력 후 삭제를 누르시면 게시글이 삭제 됩니다.</h4>
+
+						<h5>비밀번호 입력 후 삭제를 누르시면 게시글이 삭제 됩니다.</h5>
 						<p>
 						비밀번호 <input type="text" name="passwordConfirm">
-						<input type="button" value="삭제" onclick="delete_inquiry()">
 						</p>
+						<input class="btn btn-primary" type="button" value="수정" onclick="update_view()">
+						<input class="btn btn-primary" type="button" value="목록보기" onclick="list_go()">
+						<input class="btn btn-primary" type="button" value="삭제" onclick="delete_inquiry()">
 						<input type="hidden" name="inquiryNum" value="${vo.inquiryNum }">	
 						<input type="hidden" name="cusPassword" value="${vo.cusPassword }">	
 						<input type="hidden" name="idx" value="${idx }">	
 						<input type="hidden" name="keyword" value="${keyword }">	
 						<input type="hidden" name="cPage" value="${cPage }">	
 					</form>
-
+						
 				</td>
 			</tr>
 		</tfoot>
@@ -122,9 +124,6 @@
 			<li>수정일: ${inqCommVO.modDate }</li>
 			<li>내용 : ${inqCommVO.contents }</li>
 		</ul>
-			<!-- 세션에 게시글데이터, 페이지번호가 없으면 명시적으로 데이터 넘기기 -->
-			<%-- <input type="hidden" name="bbsIdx" value="${commVO.bbsIdx }">
-			<input type="hidden" name="cPage" value="${cPage }"> --%>
 		<hr>
 		</c:forEach>
 	</div>

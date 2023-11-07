@@ -22,58 +22,67 @@
 	<%@ include file="include/header.jspf" %>
 	<!-- end header section -->
 	<!-- end hero area -->
-  	
+  	<br>
 	<!-- 게시판 내용 시작 -->
    	<%@ include file="include/boardBtn.jspf" %>
-   	
- 		<div class="class=col-10 menu_contents">
-   			<div id="menu_top">
-        		<div id="hello">
+   	<br>
+ 		<div class="container">
+   			<div class="row" id="menu_top">
+        		<div class="col-5" id="hello">
           			<i class="fa fa-comment" style="font-size:24px"></i>
 	       			<p>
 	        			안녕하세요! 고객님!<br>
 	        			빠르고 친절한 답변을 위해 노력하겠습니다.
 	       			</p>
-	       			   			
-      			<div class="inquiry_icon">
-        			<i class="fa fa-truck" style="font-size:24px"></i><br>
-        			주문/배송(조회)<br>
-	   			</div>
-	   			<div class="inquiry_icon">
-        			<i class="fa fa-shopping-bag" style="font-size:24px"></i><br>
-        			취소, 반품교환<br>
-	   			</div>
-      			<div class="inquiry_icon">
-        			<i class="fa fa-id-card" style="font-size:24px"></i><br>
-        			회원정보수정<br>
-     			</div>
-   			
+	       			<br>
+		       		<div id="icon"> 	   			
+		      			<div class="inquiry_icon">
+		        			<i class="fa fa-truck" style="font-size:24px"></i><br>
+		        			주문/배송(조회)<br>
+			   			</div>
+			   			<div class="inquiry_icon">
+		        			<i class="fa fa-shopping-bag" style="font-size:24px"></i><br>
+		        			취소, 반품교환<br>
+			   			</div>
+		      			<div class="inquiry_icon">
+		        			<i class="fa fa-id-card" style="font-size:24px"></i><br>
+		        			회원정보수정<br>
+		     			</div>
+	   				</div>
        				<!-- <button id="inner-button" onclick="inquiry_list()">자주 묻는 질문 바로가기</button> -->
      			</div>
-     			<div id="consult">
+     			<div class="col-5" id="consult">
           			<i class="fa fa-phone" style="font-size:24px"></i>
-	        			<p>
- 	        			고객상담실<br>
-        				1588-8282<br>
-        				상담시간 : 오전 10:00 ~ 오후 17:00<br>
-        				(주말/공휴일 휴무, 점심시간 제외)<br>
-        				점심시간 : 오전 11:30 ~ 오후 12:30
-       					</p>
+        			<p>
+	        		고객상담실<br>
+       				1588-8282<br>
+       				상담시간 : 오전 10:00 ~ 오후 17:00<br>
+       				(주말/공휴일 휴무, 점심시간 제외)<br>
+       				점심시간 : 오전 11:30 ~ 오후 12:30
+      				</p>
      			</div>
    			</div>
-   		<div id="menu_bottom">
+   			<br><br>
+   		<div class="row" id="menu_bottom">
 
-  			<div id="notice">
+  			<div class="col-12" id="notice">
+  				
+  				<div id="main_board_notice">
   				<i class="fa fa-bell" style="font-size:24px"></i>
-      			<h4>공지사항</h4>
+      			<h4>&nbsp;공지사항</h4>
+      			<a href="controller?type=noticeList">&nbsp;+ 더보기</a>
+      			</div>
       			<div>
-      			<table>
+      			<table class="table table-hover">
+      				<thead class="menu_table_head">
 	      			<tr>
 		      			<th>글번호</th>
 		      			<th>제목</th>
 		      			<th>내용</th>
 		      			<th>작성일</th>
 	      			</tr>
+	      			</thead >
+	      			<tbody class="menu_table_content" id="tbody">
 	      			<c:forEach var="vo" items="${list }">   
 	      				<tr>
 	      					<td id="notice_num">${vo.noticeNum }</td>
@@ -82,9 +91,9 @@
 	      					<td id="notice_regdate">${vo.regDate }</td>
 	      				</tr>
       				</c:forEach>
+      				</tbody>
       			</table>
-      			<br>
-      			<a href="controller?type=noticeList" style="text-align: right">+ 더보기</a>
+      			
       			</div>
    			</div>
    		</div>

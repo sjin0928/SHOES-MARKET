@@ -22,9 +22,12 @@
 	<%@ include file="include/managerHeader.jspf" %>
 	
 	<!-- 게시판 내용 시작 -->
-   	
- 		<div class="class=col-10 menu_contents">
-			
+   	<br>
+ 		<div class="container">
+ 		<%@ include file="include/managerBoardBtn.jspf" %>
+ 		<br>
+ 		<h4 id="board_title">문의게시글 리스트</h4>
+
 			<!-- 키워드 검색 -->
 	    	<form action="controller?type=managerInquirySearch" method="post">
 				<select name="idx">
@@ -35,10 +38,10 @@
 				<input type="text" name="keyword">
 				<input id="search_button" type="submit" value="검색">
 				<!-- <input type="hidden" name="type" value="search"> -->
-			</form>
+			</form><br>
 			<!-- 리스트 출력 -->
-			<h3 id="board_title">문의게시글 리스트</h3>
-			<table id="menu_table">
+			
+			<table class="table table-hover">
 				<thead class="menu_table_head">
 					<tr>
 						<th id="menu_table_num">게시글 번호</th>

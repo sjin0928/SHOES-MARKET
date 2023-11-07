@@ -42,11 +42,17 @@ import com.mystudy.project.command.LoginCommand;
 import com.mystudy.project.command.LogoutCommand;
 import com.mystudy.project.command.MainCommand;
 import com.mystudy.project.command.ManagerCommentDeleteCommand;
-import com.mystudy.project.command.ManagerCommentUpdateCommand;
 import com.mystudy.project.command.ManagerCommentWriteCommand;
 import com.mystudy.project.command.ManagerInquiryCommand;
 import com.mystudy.project.command.ManagerInquirySearchCommand;
 import com.mystudy.project.command.ManagerInquiryViewCommand;
+import com.mystudy.project.command.ManagerNociteViewCommand;
+import com.mystudy.project.command.ManagerNociteWriteCommand;
+import com.mystudy.project.command.ManagerNoticeDeleteCommand;
+import com.mystudy.project.command.ManagerNoticeListCommand;
+import com.mystudy.project.command.ManagerNoticeSearchCommand;
+import com.mystudy.project.command.ManagerNoticeUpdateCommand;
+import com.mystudy.project.command.ManagerNoticeUpdateViewCommand;
 import com.mystudy.project.command.MypageCommand;
 import com.mystudy.project.command.NewBalCommand;
 import com.mystudy.project.command.NewCommand;
@@ -91,7 +97,6 @@ public class FrontControllerCommand extends HttpServlet {
 			command = new ProductWriteCommand();
 		}
 		if("itemBulletinBoard".equals(type)) {
-			System.out.println("this : " + this);
 			command = new ItemBulletinBoardCommand();
 		}
 		if("itemDetail".equals(type)) {
@@ -226,16 +231,33 @@ public class FrontControllerCommand extends HttpServlet {
 		if ("managerCommentWrite".equals(type)) {
 			command = new ManagerCommentWriteCommand();
 		}
-		if ("managerCommentUpdate".equals(type)) {
-			command = new ManagerCommentUpdateCommand();
-		}
 		if ("managerCommentDelete".equals(type)) {
 			command = new ManagerCommentDeleteCommand();
 		}
 		if ("managerInquirySearch".equals(type)) {
 			command = new ManagerInquirySearchCommand();
 		}
-		
+		if ("managerNoticeList".equals(type)) {
+			command = new ManagerNoticeListCommand();
+		}
+		if ("managerNoticeSearch".equals(type)) {
+			command = new ManagerNoticeSearchCommand();
+		}
+		if ("managerNociteWrite".equals(type)) {
+			command = new ManagerNociteWriteCommand();
+		}
+		if ("managerNoticeView".equals(type)) {
+			command = new ManagerNociteViewCommand();
+		}
+		if ("managerNoticeUpdateView".equals(type)) {
+			command = new ManagerNoticeUpdateViewCommand();
+		}
+		if ("managerNoticeUpdate".equals(type)) {
+			command = new ManagerNoticeUpdateCommand();
+		}
+		if ("managerNoticeDelete".equals(type)) {
+			command = new ManagerNoticeDeleteCommand();
+		}
 		String path = command.exec(request, response); 
 		request.getRequestDispatcher(path).forward(request, response);
 	}

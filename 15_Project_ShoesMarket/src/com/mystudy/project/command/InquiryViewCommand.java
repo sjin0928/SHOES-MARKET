@@ -31,11 +31,12 @@ public class InquiryViewCommand implements Command {
 		System.out.println("customer : " + customer);
 		
 		if(session.getAttribute("customer") == null && "on".equals(vo.getSecretStatus())) {
-			return "notCustomer.jsp";
+			return "not_customer.jsp";
 		}
 		if("on".equals(vo.getSecretStatus()) && customer.getCusNum() != vo.getCusNum()) {
-			return "notCustomer.jsp";
+			return "not_customer.jsp";
 		}
+
 		
 		// 파라미터 값 추출(확인)
 		request.setCharacterEncoding("UTF-8");

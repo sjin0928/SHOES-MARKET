@@ -32,8 +32,6 @@ public class ManagerCommentWriteCommand implements Command {
 		int result = InquiryCommentDAO.commentWrite(commVO);
 		System.out.println("result : " + result);
 		
-		// 합친 후 session에서 고객번호 받아서 넣어주기
-		
 		List<InquiryCommentVO> list = null;
 		
 		if(InquiryCommentDAO.getCommList(inquiryNum) != null) {

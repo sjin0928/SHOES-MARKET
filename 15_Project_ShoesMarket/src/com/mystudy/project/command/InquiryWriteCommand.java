@@ -5,8 +5,10 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.mystudy.project.dao.InquiryDAO;
+import com.mystudy.project.vo.CustomerVO;
 import com.mystudy.project.vo.InquiryVO;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
@@ -17,6 +19,15 @@ public class InquiryWriteCommand implements Command {
 	@Override
 	public String exec(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("--InquiryWriteCommand--");
+		
+		// 세션에 저장된 로그인 정보
+		HttpSession session = request.getSession();
+		CustomerVO customer = null;
+		
+		if(session.getAttribute("customer") != null) {
+			customer = (CustomerVO)session.getAttribute("customer");
+		}
+
 		
 		String path = "C:\\temp";
 		System.out.println("> path : " + path);
@@ -47,7 +58,7 @@ public class InquiryWriteCommand implements Command {
 		System.out.println("inqImgName : " + mr.getFilesystemName("inqImgPath"));
 		
 		// 합친 후 session에서 고객번호 받아서 넣어주기
-		vo.setCusNum(1);
+		vo.setCusNum(Integer.parseInt(customer.getCusName()));
 		int result = InquiryDAO.inquiryWrite(vo);
 		
 		request.setAttribute("mr", mr);
