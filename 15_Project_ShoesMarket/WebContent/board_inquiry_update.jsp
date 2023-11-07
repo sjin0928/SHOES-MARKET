@@ -9,7 +9,6 @@
 <meta charset="UTF-8">
 <title>문의게시글</title>
 
-<script type="text/javascript" src="popup.js"></script>
 <link href="css/style.css" rel="stylesheet" />
 <script>
 	function inquiry_update() {
@@ -25,10 +24,14 @@
 		form.submit();
 	}
 </script>
+ <script>
+ <%@ include file="include/popup.js" %>
+ <%@ include file="include/search.js" %>
+ </script>
 </head>
 <body>
 	<!-- start header section -->
-		<%@ include file="header.jsp" %>
+		<%@ include file="include/header.jspf" %>
 	
   	<!-- 게시글 수정 내용 시작 -->
   	
@@ -53,7 +56,7 @@
 				</tr>
 				<tr>
 					<th>파일</th>
-					<td><input type="file" name="inqImgName" value="${vo.inqImgName }"></td>
+					<td><input type="file" name="inqImgPath" value="${vo.inqImgPath }"></td>
 				</tr>
 				<tr>
 					<th>비밀번호확인</th>
@@ -86,7 +89,7 @@
   	<!-- 게시글 수정 내용 끝 -->
 
   	<!-- footer section -->
-  	<%@ include file="footer.jsp" %>
+  	<%@ include file="include/footer.jspf" %>
 
 </body>
 </html>

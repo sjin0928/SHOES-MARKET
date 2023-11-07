@@ -44,7 +44,7 @@ public class InquiryWriteCommand implements Command {
 		System.out.println("itemNum : " + itemNum);
 		vo.setItemNum(itemNum);
 		
-		System.out.println("inqImgPath : " + mr.getFilesystemName("inqImgPath"));
+		System.out.println("inqImgName : " + mr.getFilesystemName("inqImgPath"));
 		
 		// 합친 후 session에서 고객번호 받아서 넣어주기
 		vo.setCusNum(1);

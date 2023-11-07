@@ -19,7 +19,7 @@ public class InquiryDAO {
 		SqlSession ss = null;
 		try {
 			ss = DBService.getFactory().openSession();
-			totalCount = ss.selectOne("Shoesmarket.totalCount");
+			totalCount = ss.selectOne("shoesmarket.totalCount");
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -40,7 +40,7 @@ public class InquiryDAO {
 		List<InquiryVO> list = null;
 		try {
 			ss = DBService.getFactory().openSession();
-			list = ss.selectList("Shoesmarket.inquiry", map);
+			list = ss.selectList("shoesmarket.inquiry", map);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -52,17 +52,15 @@ public class InquiryDAO {
 	}
 	
 	//게시글 키워드 검색 수 조회
-	public static int getSearchCount(String idx, String keyword) {
-		Map<String, String> map = new HashMap<>();
-		map.put("idx", idx);
-		map.put("keyword", keyword);
-		System.out.println(">>> getSearchCount idx, keyword : " + idx + ", " +  keyword);
+	public static int getNoticeSearchCount(String keyword) {
+		
+		System.out.println(">>> getSearchCount keyword : " +  keyword);
 		SqlSession ss = null;
 		int searchCount = 0;
 		
 		try {
 			ss = DBService.getFactory().openSession();
-			searchCount = ss.selectOne("Shoesmarket.searchCount", map);
+			searchCount = ss.selectOne("shoesmarket.noticeSearchCount", keyword);
 			
 			System.out.println(searchCount);
 		} catch (Exception e) {
@@ -88,7 +86,7 @@ public class InquiryDAO {
 		
 		try {
 			ss = DBService.getFactory().openSession();
-			list = ss.selectList("Shoesmarket.inquiry_search", map);
+			list = ss.selectList("shoesmarket.inquiry_search", map);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -107,7 +105,7 @@ public class InquiryDAO {
 		
 		try {
 			ss = DBService.getFactory().openSession();
-			vo = ss.selectOne("Shoesmarket.inquiry_view", inquiryNum);
+			vo = ss.selectOne("shoesmarket.inquiry_view", inquiryNum);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -118,8 +116,8 @@ public class InquiryDAO {
 		return vo;
 	}
 	
-	// 게시글 수정하기
-	public static int inquiryUpdate(String title, String contents, String inqImgName, String inqImgPath, int inquiryNum) {
+	// 게시글 수정하기(파일)
+	public static int inquiryUpdateFile(String title, String contents, String inqImgName, String inqImgPath, int inquiryNum) {
 		InquiryVO vo = new InquiryVO(inquiryNum, title, contents, inqImgPath, inqImgName);
 		
 		System.out.println("inquiryUpdate vo : " + vo );
@@ -129,7 +127,29 @@ public class InquiryDAO {
 		
 		try {
 			ss = DBService.getFactory().openSession(true);
-			voUp = ss.update("Shoesmarket.inquiry_update", vo);
+			voUp = ss.update("shoesmarket.inquiry_update", vo);
+			System.out.println("voUp" + voUp);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (ss != null) {
+				ss.close();
+			}
+		}
+		return voUp;
+	}
+	// 게시글 수정하기(파일x)
+	public static int inquiryUpdate(String title, String contents, int inquiryNum) {
+		InquiryVO vo = new InquiryVO(inquiryNum, title, contents);
+		
+		System.out.println("inquiryUpdate vo : " + vo );
+		
+		SqlSession ss = null;
+		int voUp = -1;
+		
+		try {
+			ss = DBService.getFactory().openSession(true);
+			voUp = ss.update("shoesmarket.inquiry_update", vo);
 			System.out.println("voUp" + voUp);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -149,7 +169,7 @@ public class InquiryDAO {
 		
 		try {
 			ss = DBService.getFactory().openSession(true);
-			result = ss.update("Shoesmarket.inquiry_delete", inquiryNum);
+			result = ss.update("shoesmarket.inquiry_delete", inquiryNum);
 			System.out.println("result" + result);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -167,7 +187,7 @@ public class InquiryDAO {
 		
 		try {
 			ss = DBService.getFactory().openSession(true);
-			result = ss.insert("Shoesmarket.inquiry_write", vo);
+			result = ss.insert("shoesmarket.inquiry_write", vo);
 			System.out.println("result" + result);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -185,7 +205,7 @@ public class InquiryDAO {
 		
 		try {
 			ss = DBService.getFactory().openSession();
-			itemNum = ss.selectOne("Shoesmarket.inquiry_item_search", itemName);
+			itemNum = ss.selectOne("shoesmarket.inquiry_item_search", itemName);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

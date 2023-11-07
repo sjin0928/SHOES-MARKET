@@ -23,12 +23,15 @@ function review_list() {
 	location.href = "reviewList.jsp"
 }
 </script>
-<script type="text/javascript" src="popup.js"></script>
+ <script>
+ <%@ include file="include/popup.js" %>
+ <%@ include file="include/search.js" %>
+ </script>
 <link href="css/style.css" rel="stylesheet" />
 </head>
 <body>
 	<!-- start header section -->
-		<%@ include file="header.jsp" %>
+		<%@ include file="include/header.jspf" %>
 	
   	<!-- 문의게시판 내용 시작 -->
   	
@@ -155,7 +158,7 @@ function review_list() {
   	<!-- 공지사항 내용 끝 -->
 
   	<!-- footer section -->
-  	<%@ include file="footer.jsp" %>
+  	<%@ include file="include/footer.jspf" %>
 
 </body>
 </html>

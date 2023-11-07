@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.mystudy.project.dao.ItemDAO;
+import com.mystudy.project.vo.CustomerVO;
 import com.mystudy.project.vo.ItemVO;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
@@ -24,8 +25,10 @@ public class ToCartCommand implements Command {
 		// ProductDetailCommand 클래스에서 세션에 저장한 해당 제품의 vo 불러오기
 		HttpSession session = req.getSession();
 		ItemVO itemVo = (ItemVO)session.getAttribute("itemVo");
+		CustomerVO customer = (CustomerVO)session.getAttribute("customer");
 		
 		System.out.println(">> 장바구니에 들어갈 상품 : " + itemVo);
+		System.out.println(">> 현재 로그인 고객 : " + customer);
 		
 		return "";
 	}

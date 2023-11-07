@@ -10,14 +10,13 @@
 <script>
 function board_main(){
 	let form = document.formButton;
-	form.action="board_main.jsp";
-	//form.action="controller?type=boardMain";
+	form.action="controller?type=board";
 	form.submit();
 }
 function notice_list(){
 	let form = document.formButton;
 	
-	form.action="controller?type=boardNotice";
+	form.action="controller?type=noticeList";
 	form.submit();
 }
 function board_inquiry() {
@@ -33,14 +32,16 @@ function review_list() {
 	form.submit();
 }
 </script>
-<script type="text/javascript" src="popup.js"></script>
-
+ <script>
+ <%@ include file="include/popup.js" %>
+ <%@ include file="include/search.js" %>
+ </script>
 <link href="css/style.css" rel="stylesheet" />
 </head>
 <body>
 	<!-- start hero area -->
 	<!-- start header section -->
-		<%@ include file="header.jsp" %>
+	<%@ include file="include/header.jspf" %>
 	<!-- end header section -->
 	<!-- end hero area -->
   	
@@ -58,15 +59,15 @@ function review_list() {
 	  		<div class="menu_contents">
 	    		<div id="menu_top">
           			<div id="hello">
-            			<i class="fa fa-comment" style="font-size:24px"></i><br>
+            			<i class="fa fa-comment" style="font-size:24px"></i>
 	        			<p>
 		        			안녕하세요! 고객님!<br>
-		        			빠르고 친절한 답변을 위해 노력하겠습니다.<br>
+		        			빠르고 친절한 답변을 위해 노력하겠습니다.
 	        			</p>
-	        			<button id="inner-button" onclick="inquiry_list()">자주 묻는 질문 바로가기</button>
+	        			<!-- <button id="inner-button" onclick="inquiry_list()">자주 묻는 질문 바로가기</button> -->
 	      			</div>
 	      			<div id="consult">
-            			<i class="fa fa-phone" style="font-size:24px"></i><br>
+            			<i class="fa fa-phone" style="font-size:24px"></i>
   	        			<p>
 	  	        			고객상담실<br>
 		        			1588-8282<br>
@@ -94,7 +95,9 @@ function review_list() {
 		  			<div id="notice">
             			<h4>공지사항</h4>
             			<ul>
-            				<li></li>
+            				<li>
+            				
+            				</li>
             			</ul>
             			<a href="board_notice.jsp">+ 더보기</a><br> 
 	      			</div>
@@ -106,7 +109,7 @@ function review_list() {
 
   	<!-- info section -->
   	<!-- footer section -->
-  	<%@ include file="footer.jsp" %>
+  	<%@ include file="include/footer.jspf" %>
 
 </body>
 </html>

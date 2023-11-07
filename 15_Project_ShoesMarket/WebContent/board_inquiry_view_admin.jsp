@@ -7,10 +7,10 @@
 <meta charset="UTF-8">
 <title>게시글 내용</title>
 </head>
-<script type="text/javascript" src="popup.js"></script>
+<%@ include file="include/popup.js" %>
 <link href="css/style.css" rel="stylesheet" />
 <body>
-<%@ include file="header.jsp" %>
+<%@ include file="include/header.jspf" %>
 <div id="contents_view">
 	<%-- 게시글 내용 시작 --%>
 	<table>
@@ -86,6 +86,6 @@
 	<!-- 게시글 내용 끝 -->
 	
 	<!-- footer section -->
-  	<%@ include file="footer.jsp" %>
+  	<%@ include file="include/footer.jspf" %>
 </body>
 </html>

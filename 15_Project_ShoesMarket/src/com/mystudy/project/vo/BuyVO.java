@@ -16,9 +16,9 @@ public class BuyVO {
 	private String cancelStatus;
 	private int totalPrice;
 
-	public BuyVO() {
-		super();
-	}
+	
+	
+	public BuyVO() {}
 
 	public BuyVO(int buyNum, int cusNum, String payStatus, Date buyDate, String zipCode, String address,
 			String detailAddress, String phone, String deliveryRequest, String payment, String cancelStatus,

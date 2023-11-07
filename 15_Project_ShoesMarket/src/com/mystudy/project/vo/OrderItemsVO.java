@@ -10,9 +10,7 @@ public class OrderItemsVO {
 	private int price;
 	private Date regDate;
 
-	public OrderItemsVO() {
-		super();
-	}
+	public OrderItemsVO() {}
 
 	public OrderItemsVO(int orderItemNum, int itemNum, int buyNum, int quantity, int price, Date regDate) {
 		super();

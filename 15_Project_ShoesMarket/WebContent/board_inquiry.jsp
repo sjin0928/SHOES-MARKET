@@ -17,39 +17,48 @@ function board_main(){
 	form.submit();
 }
 function notice_list(){
-	let form = document.forms["formButton"];
+	let form = document.formButton;
 	
-	form.action="controller?type=boardNotice";
+	form.action="controller?type=noticeList";
 	form.submit();
 }
 function board_inquiry() {
-	let form = document.forms["formButton"];
+	let form = document.formButton;
 	
 	form.action="controller?type=list";
 	form.submit();
 }
 function review_list() {
-	let form = document.forms["formButton"];
+	let form = document.formButton;
 	
 	form.action="controller?type=reviewList";
 	form.submit();
 }
 
 //board_inquiry_view 이동
-function board_inquiry_view() {
-	let form = document.forms["tableForm"];
+/* function board_inquiry_view() {
+	let form = document.tableForm;
 	
 	form.action="controller?type=view";
 	form.submit();
-}
+} */
+/* function passwordConfirm () {
+	let form = document.passwordForm;
+	
+	form.action="controller?type=passwordConfirm";
+	form.submit();
+} */
 </script>
-<script type="text/javascript" src="popup.js"></script>
+ <script>
+ <%@ include file="include/popup.js" %>
+ <%@ include file="include/search.js" %>
+ </script>
 <link href="css/style.css" rel="stylesheet" />
 </head>
 <body>
 	<!-- start hero area -->
 	<!-- start header section -->
-		<%@ include file="header.jsp" %>
+		<%@ include file="include/header.jspf" %>
 	<!-- end header section -->	
 	<!-- end hero area -->
 	
@@ -80,6 +89,7 @@ function board_inquiry_view() {
 			</form>
 			<!-- 리스트 출력 -->
 			<h3 id="board_title">문의게시글 리스트</h3>
+			<h4>※ 비밀글은 비밀번호 입력 부탁드립니다.</h4>
 			<table id="menu_table">
 				<thead class="menu_table_head">
 					<tr>
@@ -87,6 +97,7 @@ function board_inquiry_view() {
 						<th id="menu_table_secret">비밀글</th>
 						<th id="menu_table_nickName">작성자</th>
 						<th id="menu_table_title">제목</th>
+						<!-- <th id="menu_table_password">비밀번호</th> -->
 						<th id="menu_table_pnum">상품번호</th>
 						<th id="menu_table_regdate">작성일</th>
 						<th id="menu_table_moddate">수정일</th>
@@ -106,40 +117,23 @@ function board_inquiry_view() {
 							<tr>
 								<td>${vo.inquiryNum }</td>
 								<td>
-									<c:if test="${vo.secretStatus == 'on'}">
-									<i class="fa fa-lock" style="font-size:14px"></i>
-									</c:if>
-									<c:if test="${vo.secretStatus == 'off'}">
-									<i class="fa fa-unlock-alt" style="font-size:14px"></i>
-									</c:if>
+								<c:if test="${vo.secretStatus == 'on'}">
+								<i class="fa fa-lock" style="font-size:24px"></i>
+								</c:if>
+								<c:if test="${vo.secretStatus == 'off'}">
+								<i class="fa fa-unlock-alt" style="font-size:24px"></i>
+								</c:if>
 								</td>
 								<td>${vo.cusNickname }</td>
-								<td><form method="post" name="tableForm">
-									<c:choose>
-										<c:when test="${vo.secretStatus == 'on' }">
-											<td class="dropdown-content">${vo.title }</td>
-												<div></div>
-											<h4>※ 비밀글은 비밀번호 입력 부탁드립니다.</h4>
-												<input type="text" name="paswordConfirm" title="비밀번호">
-												<input type="button" value="확인" onclick="board_inquiry_view()">
-												<input type="hidden" name="inquiryNum" value="${vo.inquiryNum }">	
-												<input type="hidden" name="idx" value="${idx }">	
-												<input type="hidden" name="keyword" value="${keyword }">
-												<input type="hidden" name="secretStatus" value="${vo.secretStatus }">
-										</c:when>
-										<c:when test="${vo.secretStatus == 'off' }">
-											<input id="titlebtn" type="button" value="${vo.title }" onclick="board_inquiry_view()">
-												<input type="hidden" name="inquiryNum" value="${vo.inquiryNum }">	
-												<input type="hidden" name="idx" value="${idx }">	
-												<input type="hidden" name="keyword" value="${keyword }">
-												<input type="hidden" name="secretStatus" value="${vo.secretStatus }">
-										</c:when>
-									</c:choose>
-								</form></td>
+								<td>
+								<a href="controller?type=view&
+									title=${vo.title }&inquiryNum=${vo.inquiryNum}&idx=${idx}&keyword=${keyword}">${vo.title }</a>
+								</td>
 								<td>${vo.itemNum }</td>
 								<td>${vo.regDate }</td>
 								<td>${vo.modDate }</td>
 							</tr>
+						
 						</c:forEach>
 					</c:otherwise>
 					</c:choose>
@@ -195,17 +189,18 @@ function board_inquiry_view() {
 						onclick="javascript:location.href='board_inquiry_write.jsp'">
 				</td>
 			</tr>
-		</tfoot>
+			</tfoot>
 			</table>
 		</div>
 		</div>
   	</div>
-
+	<br><br><br><br><br><br><br><br>
   	<!-- 공지사항 내용 끝 -->
 
   	<!-- info section -->
   	<!-- footer section -->
-  	<%@ include file="footer.jsp" %>
-
+  	<div>
+  	<%@ include file="include/footer.jspf" %>
+	</div>
 </body>
 </html>

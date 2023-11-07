@@ -1,6 +1,6 @@
 package com.mystudy.project.common;
 
-//게시판 페이징 처리를 위한 값을 저장 관리
+//게시판의 페이징 처리를 위한 값을 저장 관리
 public class Paging {
 	private int nowPage = 1; //현재페이지
 	private int nowBlock = 1; //현재 블록(페이지 담는 단위)
@@ -21,6 +21,7 @@ public class Paging {
 	//전체 페이지 갯수 구하기
 	//totalRecord 값을 페이지당 표시할 글의 개수 값을 나누고,
 	//나머지가 있으면 페이지 하나 더 추가
+	
 	public void setTotalPage() {
 		totalPage = totalRecord / numPerPage;
 		if (totalRecord % numPerPage > 0) totalPage++;
@@ -104,4 +105,21 @@ public class Paging {
 				+ ", totalBlock=" + totalBlock + ", begin=" + begin + ", end=" + end + ", beginPage=" + beginPage
 				+ ", endPage=" + endPage + "]";
 	}
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -10,9 +10,8 @@ public class ReviewCommentVO {
 	private Date modDate;
 	private int cusNum;
 
-	public ReviewCommentVO() {
-		super();
-	}
+	
+	public ReviewCommentVO() {}
 
 	public ReviewCommentVO(String reviewCommentNum, int reviewNum, String reviewCommentContents, Date regDate,
 			Date modDate, int cusNum) {

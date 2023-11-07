@@ -7,7 +7,10 @@
 <meta charset="UTF-8">
 <title>게시글 내용</title>
 </head>
-<script type="text/javascript" src="popup.js"></script>
+ <script>
+ <%@ include file="include/popup.js" %>
+ <%@ include file="include/search.js" %>
+ </script>
 <link href="css/style.css" rel="stylesheet" />
 <script>
 	function update_view() {
@@ -29,9 +32,16 @@
 		form.action="controller?type=list";
 		form.submit();
 	}
+	
+	function file_download() {
+		let form = document.downloadForm;
+		alert(form);
+		form.action="controller?type=fileDownload";
+		form.submit();
+	}
 </script>
 <body>
-<%@ include file="header.jsp" %>
+<%@ include file="include/header.jspf" %>
 <div id="contents_view">
 	<%-- 게시글 내용 시작 --%>
 	<table>
@@ -52,7 +62,16 @@
 					첨부파일없음
 				</c:if>
 				<c:if test="${not empty vo.inqImgPath }">
-					<a href="controller?type=fileDownload&inqImgPath=upload&inqImgName=${vo.inqImgName }">${vo.inqImgName }</a>
+					<form method="post" name="downloadForm" >
+						${vo.inqImgName }
+						<input type="button" value="다운로드" onclick="file_download()">
+						<input type="hidden" name="inqImgPath" value="${vo.inqImgPath}">
+						<input type="hidden" name="inqImgName" value="${vo.inqImgName}">
+						<input type="hidden" name="inquiryNum" value="${vo.inquiryNum }">
+						<input type="hidden" name="idx" value="${idx }">	
+						<input type="hidden" name="keyword" value="${keyword }">	
+						<input type="hidden" name="cPage" value="${cPage }">	
+					</form>
 				</c:if>
 				</td>
 			</tr>
@@ -67,15 +86,11 @@
 					<form method="post" name="myform" ><!-- enctype="multipart/form-data" -->
 						<input type="button" value="수정" onclick="update_view()">
 						<input type="button" value="목록보기" onclick="list_go()">
-						<h4>비밀번호를 입력후 삭제를 누르시면 게시글이 삭제 됩니다.</h4>
+						<h4>비밀번호 입력 후 삭제를 누르시면 게시글이 삭제 됩니다.</h4>
 						<p>
 						비밀번호 <input type="text" name="passwordConfirm">
 						<input type="button" value="삭제" onclick="delete_inquiry()">
 						</p>
-						
-						
-						
-
 						<input type="hidden" name="inquiryNum" value="${vo.inquiryNum }">	
 						<input type="hidden" name="cusPassword" value="${vo.cusPassword }">	
 						<input type="hidden" name="idx" value="${idx }">	
@@ -113,6 +128,6 @@
 	<!-- 게시글 내용 끝 -->
 	
 	<!-- footer section -->
-  	<%@ include file="footer.jsp" %>
+  	<%@ include file="include/footer.jspf" %>
 </body>
 </html>

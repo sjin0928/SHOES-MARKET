@@ -16,10 +16,13 @@ public class InquiryViewCommand implements Command {
 	@Override
 	public String exec(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 파라미터 값 추출(확인)
+		request.setCharacterEncoding("UTF-8");
 		
+		String inqImgPath = request.getParameter("inqImgPath");
+		System.out.println("inqImgPath : " + inqImgPath);
 		String secretStatus = request.getParameter("secretStatus");
-		System.out.println("secretStatus" + secretStatus);
-		
+		System.out.println("secretStatus : " + secretStatus);
+
 		System.out.println("InquiryViewCommand");
 		int cPage = 1;
 		if(request.getParameter("cPage")!=null) {

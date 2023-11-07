@@ -186,7 +186,7 @@ public class ItemDAO {
 		
 		try {
 			ss = DBService.getFactory().openSession();
-			list = ss.selectList("shoesmarket.search", map);
+			list = ss.selectList("shoesmarket.itemSearch", map);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

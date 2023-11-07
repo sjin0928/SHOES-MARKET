@@ -5,9 +5,9 @@ public class AdminVO {
 	private String adminId;
 	private String adminPassword;
 
-	public AdminVO() {
-		super();
-	}
+	
+	
+	public AdminVO() {}
 
 	public AdminVO(String adminId, String adminPassword) {
 		super();

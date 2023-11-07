@@ -11,10 +11,8 @@ public class ReviewVO {
 	private String imagePath;
 	private Date regDate;
 	private Date modDate;
-
-	public ReviewVO() {
-		super();
-	}
+	
+	public ReviewVO() {}
 
 	public ReviewVO(int reviewNum, int cusNum, int itemNum, String title, String reviewContents, String imagePath,
 			Date regDate, Date modDate) {

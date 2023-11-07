@@ -53,6 +53,7 @@ public class ItemVO {
 	}
 
 	
+	
 	public String getBrand() {
 		return brand;
 	}

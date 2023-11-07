@@ -9,9 +9,7 @@ public class CartVO {
 	private int cartQuantity;
 	private Date cartRegDate;
 
-	public CartVO() {
-		super();
-	}
+	public CartVO() {}
 
 	public CartVO(int cartNum, int itemNum, int cusNum, int cartQuantity, Date cartRegDate) {
 		super();

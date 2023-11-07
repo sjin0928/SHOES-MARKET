@@ -2,126 +2,12 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
-
-  
-<mapper namespace="Shoesmarket">
-  <!-- 231024 박수진 -->
-	<!-- 전체 게시글 건수 조회 -->
-	<select id="totalCount" resultType="int">
-		SELECT COUNT(*) AS CNT FROM INQUIRY
-	</select>
-	
-	<!-- 문의게시글 전체 검색 -->
-	<select id="inquiry" parameterType="map" resultType="InquiryVO">
-		SELECT *
-		  FROM (SELECT ROWNUM AS RNUM, DATA.*
-		          FROM (SELECT INQ.INQUIRY_NUM, INQ.SECRET_STATUS, CUS.CUS_NICK_NAME, 
-		                       INQ.TITLE, INQ.ITEM_NUM, INQ.REG_DATE, INQ.MOD_DATE
-		                  FROM CUSTOMER CUS, INQUIRY INQ
-		                 WHERE CUS.CUS_NUM = INQ.CUS_NUM
-		                 ORDER BY INQUIRY_NUM DESC) DATA
-		       )
-		 WHERE RNUM BETWEEN #{begin} AND #{end}
-		 ORDER BY INQUIRY_NUM DESC
-	</select>
-	
-	<!-- 게시글 검색 건수 조회 -->
-	<select id="searchCount" parameterType="map" resultType="int">
-		SELECT COUNT(*) AS CNT
-  		  FROM CUSTOMER CUS, INQUIRY INQ
- 		 WHERE CUS.CUS_NUM = INQ.CUS_NUM
-		<choose>
-			<when test="idx == 0">
-				AND CUS_NICK_NAME LIKE '%'|| #{keyword} ||'%'
-			</when>
-			<when test="idx == 1">
-				AND TITLE LIKE '%'|| #{keyword} ||'%'
-			</when>
-			<when test="idx == 2">
-				AND ITEM_NUM = #{keyword}
-			</when>
-		</choose>
-	</select>
-	
-
-	<!-- 문의게시글 동적검색 -->
-	<select id="inquiry_search" parameterType="map" resultType="InquiryVO">
-		SELECT *
-  		  FROM (SELECT ROWNUM AS RNUM, DATA.*
-          		  FROM (SELECT INQ.INQUIRY_NUM, INQ.SECRET_STATUS, CUS.CUS_NICK_NAME, 
-                      		   INQ.TITLE, INQ.ITEM_NUM, INQ.REG_DATE, INQ.MOD_DATE
-                  		  FROM CUSTOMER CUS, INQUIRY INQ
-                 		 WHERE CUS.CUS_NUM = INQ.CUS_NUM
-					<choose>
-						<when test="idx == 0">
-							AND CUS_NICK_NAME LIKE '%'|| #{keyword} ||'%'
-						</when>
-						<when test="idx == 1">
-							AND TITLE LIKE '%'|| #{keyword} ||'%'
-						</when>
-						<when test="idx == 2">
-							AND ITEM_NUM = #{keyword}
-						</when>
-					</choose>
-                 		 ORDER BY INQUIRY_NUM DESC) DATA)
-         WHERE RNUM BETWEEN #{begin} AND #{end}
-		 ORDER BY INQUIRY_NUM DESC
-	</select>
-	
-	<!-- 게시글의 내용 -->
-	<select id="inquiry_view" parameterType="int" resultType="InquiryVO">
-		SELECT *
- 		  FROM CUSTOMER CUS, INQUIRY INQ
- 		 WHERE CUS.CUS_NUM = INQ.CUS_NUM
-   		   AND INQUIRY_NUM = #{inquiryNum}
-	</select>
-	
-	<!-- 게시글의 댓글 리스트 -->
-	<select id="inquiry_comment_all" parameterType="int" resultType="InquiryCommentVO">
- 		SELECT *
- 		  FROM INQUIRY_COMMENT
- 		 WHERE INQUIRY_NUM = #{inquiryNum}
- 		 ORDER BY IQ_COMMENT_NUM DESC
-	</select>
-	
-	<!-- 게시글의 내용 수정 -->
-	<update id="inquiry_update" parameterType="InquiryVO">
-		UPDATE INQUIRY
-		   SET TITLE = #{title}, 
-		       CONTENTS = #{contents}, 
-		       MOD_DATE = SYSDATE, 
-		       INQ_IMG_PATH = #{inqImgPath}, 
-		       INQ_IMG_NAME = #{inqImgName}
-		 WHERE INQUIRY_NUM = #{inquiryNum}
-	</update>
-	
-	<!-- 게시글 삭제 -->
-	<delete id="inquiry_delete" parameterType="InquiryVO">
-		DELETE FROM INQUIRY
-		 WHERE INQUIRY_NUM = #{inquiryNum}
-	</delete>
-	
-	
-	<!-- 문의게시글 입력 -->
-	<insert id="inquiry_write" parameterType="InquiryVO">
-		INSERT INTO INQUIRY
-    		   (INQUIRY_NUM, CUS_NUM, SECRET_STATUS, TITLE, CONTENTS, 
-    		   REG_DATE, MOD_DATE, ITEM_NUM, INQ_IMG_PATH, INQ_IMG_NAME)
-		VALUES (INQUIRY_SEQ.NEXTVAL, #{cusNum}, #{secretStatus}, #{title}, #{contents},
-			   SYSDATE, SYSDATE, #{itemNum}, #{inqImgPath}, #{inqImgName})
-	</insert>
-	
-	<!-- 상품번호 조회 -->
-	<select id="inquiry_item_search" parameterType="String" resultType="int">
-		SELECT ITEM_NUM
-		FROM ITEM
-		WHERE NAME = #{itemName}
-	</select>
-	
-	
-	<!-- 231026 김서영 -->
-	
+<mapper namespace="shoesmarket">
+	<!-- select 태그 3개 속성 id, resultType, parameterType
+	id : 사용할 명칭(필수항목), 현재 매퍼파일에서 유일한 이름 사용
+	resultType : 조회 결과값 저장하기 위한 데이터 타입(1개 데이터에 대한 타입지정)
+	parameterType : 전달 받은 파라미터 데이터의 타입 지정(선택적)
+	-->
 	<!-- 전체 상품 조회(신상품순) -->
 	<select id="allNew" resultType="ItemVO">
 		SELECT ITEM_NUM, NAME, PRICE, STOCK, IMAGE_PATH, 
@@ -247,6 +133,243 @@
 	<select id="loginAdmin" resultType="AdminVO">
 	SELECT ADMIN_ID, ADMIN_PASSWORD 
 	FROM ADMIN
+	</select>
+	
+	
+	<!-- 효정 -->
+	<select id="customer" resultType="CustomerVO">
+		SELECT * FROM CUSTOMER ORDER BY CUS_NUM
+	</select>
+
+	<select id="login" parameterType="map" resultType="CustomerVO">
+		SELECT * FROM CUSTOMER WHERE CUS_ID = #{cusId} AND CUS_PASSWORD = #{cusPassword}
+	</select>
+
+	<select id="getNextCusNum" resultType="int">
+		SELECT CUSTOMER_SEQ.NEXTVAL FROM DUAL
+	</select>
+
+	<insert id="insertCustomer" parameterType="CustomerVO">
+		INSERT INTO CUSTOMER
+		(CUS_NUM, CUS_ID, CUS_PASSWORD, CUS_NAME, CUS_NICK_NAME, CUS_EMAIL,
+		CUS_PHONE_NUM, CUS_REGDATE, CUS_MODDATE)
+		VALUES (CUSTOMER_SEQ.NEXTVAL,
+		#{cusId}, #{cusPassword}, #{cusName}, #{cusNickName}, #{cusEmail},
+		#{cusPhoneNum}, #{cusRegDate}, #{cusModDate})
+	</insert>
+
+	<select id="checkDuplicateId" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM CUSTOMER WHERE CUS_ID = #{cusId}
+	</select>
+
+	<select id="checkDuplicateNickName" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM CUSTOMER WHERE CUS_NICK_NAME = #{cusNickName}
+	</select>
+	
+	<select id="checkDuplicateEmail" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM CUSTOMER WHERE CUS_EMAIL = #{cusEmail}
+	</select>
+	
+	<select id="checkDuplicatePhoneNum" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM CUSTOMER WHERE CUS_PHONE_NUM = #{cusPhoneNum}
+	</select>
+	
+	<update id="updateCustomerInfo" parameterType="CustomerVO">
+		UPDATE CUSTOMER
+		SET
+		CUS_PASSWORD = #{cusPassword},
+		CUS_NAME = #{cusName},
+		CUS_NICK_NAME =#{cusNickName},
+		CUS_PHONE_NUM = #{cusPhoneNum},
+		CUS_MODDATE = #{cusModDate}
+		WHERE CUS_NUM = #{cusNum} AND CUS_ID = #{cusId} AND CUS_EMAIL = #{cusEmail}
+	</update>
+
+	<delete id="deleteCustomer" parameterType="map">
+		DELETE FROM CUSTOMER
+		WHERE CUS_NUM = #{cusNum} AND CUS_ID = #{cusId}
+	</delete>
+
+	<select id="findIdByPhone" parameterType="map"
+		resultType="String">
+		SELECT CUS_ID FROM CUSTOMER
+		WHERE CUS_NAME = #{cusName} AND CUS_PHONE_NUM = #{cusPhoneNum}
+	</select>
+
+	<select id="findIdByEmail" parameterType="map"
+		resultType="String">
+		SELECT CUS_ID FROM CUSTOMER
+		WHERE CUS_NAME = #{cusName} AND CUS_EMAIL = #{cusEmail}
+	</select>
+
+	<select id="findPassword" parameterType="map"
+		resultType="String">
+		SELECT CUS_PASSWORD FROM CUSTOMER
+		WHERE CUS_ID = #{cusId} AND CUS_NAME = #{cusName} AND CUS_PHONE_NUM = #{cusPhoneNum}
+	</select>
+
+	<select id="findPasswordByEmail" parameterType="map"
+		resultType="String">
+		SELECT CUS_PASSWORD FROM CUSTOMER
+		WHERE CUS_ID = #{cusId} AND CUS_NAME = #{cusName} AND CUS_EMAIL = #{cusEmail}
+	</select>
+	
+	<!-- 231024 박수진 -->
+	<!-- 전체 게시글 건수 조회 -->
+	<select id="totalCount" resultType="int">
+		SELECT COUNT(*) AS CNT FROM INQUIRY
+	</select>
+	
+	<!-- 문의게시글 전체 검색 -->
+	<select id="inquiry" parameterType="map" resultType="InquiryVO">
+		SELECT *
+		  FROM (SELECT ROWNUM AS RNUM, DATA.*
+		          FROM (SELECT INQ.INQUIRY_NUM, INQ.SECRET_STATUS, CUS.CUS_NICK_NAME, 
+		                       INQ.TITLE, INQ.ITEM_NUM, INQ.REG_DATE, INQ.MOD_DATE
+		                  FROM CUSTOMER CUS, INQUIRY INQ
+		                 WHERE CUS.CUS_NUM = INQ.CUS_NUM
+		                 ORDER BY INQUIRY_NUM DESC) DATA
+		       )
+		 WHERE RNUM BETWEEN #{begin} AND #{end}
+		 ORDER BY INQUIRY_NUM DESC
+	</select>
+	
+	<!-- 게시글 검색 건수 조회 -->
+	<select id="searchCount" parameterType="map" resultType="int">
+		SELECT COUNT(*) AS CNT
+  		  FROM CUSTOMER CUS, INQUIRY INQ
+ 		 WHERE CUS.CUS_NUM = INQ.CUS_NUM
+		<choose>
+			<when test="idx == 0">
+				AND CUS_NICK_NAME LIKE '%'|| #{keyword} ||'%'
+			</when>
+			<when test="idx == 1">
+				AND TITLE LIKE '%'|| #{keyword} ||'%'
+			</when>
+			<when test="idx == 2">
+				AND ITEM_NUM = #{keyword}
+			</when>
+		</choose>
+	</select>
+	
+
+	<!-- 문의게시글 동적검색 -->
+	<select id="inquiry_search" parameterType="map" resultType="InquiryVO">
+		SELECT *
+  		  FROM (SELECT ROWNUM AS RNUM, DATA.*
+          		  FROM (SELECT INQ.INQUIRY_NUM, INQ.SECRET_STATUS, CUS.CUS_NICK_NAME, 
+                      		   INQ.TITLE, INQ.ITEM_NUM, INQ.REG_DATE, INQ.MOD_DATE
+                  		  FROM CUSTOMER CUS, INQUIRY INQ
+                 		 WHERE CUS.CUS_NUM = INQ.CUS_NUM
+					<choose>
+						<when test="idx == 0">
+							AND CUS_NICK_NAME LIKE '%'|| #{keyword} ||'%'
+						</when>
+						<when test="idx == 1">
+							AND TITLE LIKE '%'|| #{keyword} ||'%'
+						</when>
+						<when test="idx == 2">
+							AND ITEM_NUM = #{keyword}
+						</when>
+					</choose>
+                 		 ORDER BY INQUIRY_NUM DESC) DATA)
+         WHERE RNUM BETWEEN #{begin} AND #{end}
+		 ORDER BY INQUIRY_NUM DESC
+	</select>
+	
+	<!-- 게시글의 내용 -->
+	<select id="inquiry_view" parameterType="int" resultType="InquiryVO">
+		SELECT *
+ 		  FROM CUSTOMER CUS, INQUIRY INQ
+ 		 WHERE CUS.CUS_NUM = INQ.CUS_NUM
+   		   AND INQUIRY_NUM = #{inquiryNum}
+	</select>
+	
+	<!-- 게시글의 댓글 리스트 -->
+	<select id="inquiry_comment_all" parameterType="int" resultType="InquiryCommentVO">
+ 		SELECT *
+ 		  FROM INQUIRY_COMMENT
+ 		 WHERE INQUIRY_NUM = #{inquiryNum}
+ 		 ORDER BY IQ_COMMENT_NUM DESC
+	</select>
+	
+	<!-- 게시글의 내용 수정 -->
+	<update id="inquiry_update" parameterType="InquiryVO">
+		UPDATE INQUIRY
+		   SET TITLE = #{title}, 
+		       CONTENTS = #{contents}, 
+		       MOD_DATE = SYSDATE, 
+		       INQ_IMG_PATH = #{inqImgPath}, 
+		       INQ_IMG_NAME = #{inqImgName}
+		 WHERE INQUIRY_NUM = #{inquiryNum}
+	</update>
+	
+	<!-- 게시글 삭제 -->
+	<delete id="inquiry_delete" parameterType="InquiryVO">
+		DELETE FROM INQUIRY
+		 WHERE INQUIRY_NUM = #{inquiryNum}
+	</delete>
+	
+	
+	<!-- 문의게시글 입력 -->
+	<insert id="inquiry_write" parameterType="InquiryVO">
+		INSERT INTO INQUIRY
+    		   (INQUIRY_NUM, CUS_NUM, SECRET_STATUS, TITLE, CONTENTS, 
+    		   REG_DATE, MOD_DATE, ITEM_NUM, INQ_IMG_PATH, INQ_IMG_NAME)
+		VALUES (INQUIRY_SEQ.NEXTVAL, #{cusNum}, #{secretStatus}, #{title}, #{contents},
+			   SYSDATE, SYSDATE, #{itemNum}, #{inqImgPath}, #{inqImgName})
+	</insert>
+	
+	<!-- 상품번호 조회 -->
+	<select id="inquiry_item_search" parameterType="String" resultType="int">
+		SELECT ITEM_NUM
+		FROM ITEM
+		WHERE NAME = #{itemName}
+	</select>
+	
+	<!-- 공지사항 전체 게시글 건수 조회 -->
+	<select id="noticeTotalCount" resultType="int">
+		SELECT COUNT(*) AS CNT FROM NOTICE
+	</select>
+	
+	<!-- 공지사항 게시글 전체 검색 -->
+	<select id="noticeList" parameterType="map" resultType="InquiryVO">
+		SELECT ROWNUM AS RNUM, *
+          FROM NOTICE
+		 WHERE RNUM BETWEEN #{begin} AND #{end}
+		 ORDER BY NOTICE_NUM DESC
+	</select>
+		<!-- 게시글 검색 건수 조회 -->
+	<select id="noticeSearchCount" parameterType="map" resultType="int">
+		SELECT COUNT(*) AS CNT
+  		  FROM CUSTOMER CUS, INQUIRY INQ
+ 		 WHERE CUS.CUS_NUM = INQ.CUS_NUM
+		<choose>
+			<when test="idx == 0">
+				AND CUS_NICK_NAME LIKE '%'|| #{keyword} ||'%'
+			</when>
+			<when test="idx == 1">
+				AND TITLE LIKE '%'|| #{keyword} ||'%'
+			</when>
+			<when test="idx == 2">
+				AND ITEM_NUM = #{keyword}
+			</when>
+		</choose>
+	</select>
+	
+
+	<!-- 문의게시글 동적검색 -->
+	<select id="notice_search" parameterType="map" resultType="InquiryVO">
+		SELECT ROWNUM AS RNUM, DATA.*
+       	  FROM (SELECT INQ.INQUIRY_NUM, INQ.SECRET_STATUS, CUS.CUS_NICK_NAME, 
+            		   INQ.TITLE, INQ.ITEM_NUM, INQ.REG_DATE, INQ.MOD_DATE
+               		  FROM CUSTOMER CUS, INQUIRY INQ
+                 		 WHERE CUS.CUS_NUM = INQ.CUS_NUM
+							AND TITLE LIKE '%'|| #{keyword} ||'%'
+
+                 		 ORDER BY INQUIRY_NUM DESC) DATA)
+         WHERE RNUM BETWEEN #{begin} AND #{end}
+		 ORDER BY INQUIRY_NUM DESC
 	</select>
 	
 	

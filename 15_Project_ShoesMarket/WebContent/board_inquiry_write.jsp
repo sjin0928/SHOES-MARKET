@@ -22,9 +22,7 @@
 		form.action = "controller?type=inquiryWrite";
 		form.submit();
 	}
-	function search() {
-		
-	}
+
 	function board_main(){
 		location.href = "board_main.jsp"
 	}
@@ -35,12 +33,15 @@
 		location.href = "reviewList.jsp"
 	}
 </script>
-<script type="text/javascript" src="popup.js"></script>
+ <script>
+ <%@ include file="include/popup.js" %>
+ <%@ include file="include/search.js" %>
+ </script>
 <link href="css/style.css" rel="stylesheet" />
 </head>
 <body>
 
-		<%@ include file="header.jsp" %>
+	<%@ include file="include/header.jspf" %>
 	
   	<!-- 문의게시판 내용 시작 -->
   	
@@ -127,7 +128,7 @@
 
   	<!-- info section -->
   	<!-- footer section -->
-  	<%@ include file="footer.jsp" %>
+  	<%@ include file="include/footer.jspf" %>
 
 </body>
 </html>

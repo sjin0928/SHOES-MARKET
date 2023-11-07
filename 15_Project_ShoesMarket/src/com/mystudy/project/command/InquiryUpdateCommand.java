@@ -5,7 +5,6 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.websocket.SendResult;
 
 import com.mystudy.project.dao.InquiryDAO;
 import com.mystudy.project.vo.InquiryVO;
@@ -35,7 +34,7 @@ public class InquiryUpdateCommand implements Command {
 		String password = mr.getParameter("password");
 		String contents = mr.getParameter("contents");
 		String cPage = mr.getParameter("cPage");
-		if(inqImgName.equals("")) {
+		if("".equals(inqImgName)) {
 			inqImgName=null;
 		}
 		int idx = -1;
@@ -44,18 +43,18 @@ public class InquiryUpdateCommand implements Command {
 				 + ", path : " + path + ", password : " + password
 				 + ", contents : " + contents + ", cPage : " + cPage
 				 + ", idx : " + idx+ ", keyword : " + keyword);
-		
-		int inquiryNum = Integer.parseInt(request.getParameter("vo"));
+		System.out.println("request.getParameter(\"inquiryNum\") : " + mr.getParameter("inquiryNum"));
+		int inquiryNum = Integer.parseInt(mr.getParameter("inquiryNum"));
 		
 		if(request.getParameter("idx") == null) {
 			idx = -1;
 		} else if(request.getParameter("idx") != null) {
-			idx = Integer.parseInt(request.getParameter("idx"));
+			idx = Integer.parseInt(mr.getParameter("idx"));
 		}
 		if(request.getParameter("keyword") == null) {
 			keyword = -1;
 		} else if(request.getParameter("keyword") != null) {
-			keyword = Integer.parseInt(request.getParameter("keyword"));
+			keyword = Integer.parseInt(mr.getParameter("keyword"));
 		}
 
 		System.out.println(", cPage : " + cPage
@@ -74,13 +73,32 @@ public class InquiryUpdateCommand implements Command {
 			return "password_error.jsp";
 		}
 		// 업데이트
-		int voUp = InquiryDAO.inquiryUpdate(title, contents, inqImgName, path, inquiryNum);
+		if(mr.getFilesystemName("inqImgPath") == null) {
+			int Up = InquiryDAO.inquiryUpdate(title, contents, inquiryNum);
+			request.setAttribute("inquiryNum", inquiryNum);
+			request.setAttribute("cPage", cPage);
+			request.setAttribute("idx", idx);
+			request.setAttribute("keyword", keyword);
+			InquiryVO upVO = InquiryDAO.getView(inquiryNum);
+			request.setAttribute("vo", upVO);
+			
+			System.out.println("upVO" + upVO);
+			System.out.println("Up" + Up);
+			
+			return "board_inquiry_view.jsp";
+		} 
+		int Up = InquiryDAO.inquiryUpdateFile(title, contents, inqImgName, path, inquiryNum);
+		request.setAttribute("inquiryNum", inquiryNum);
 		request.setAttribute("cPage", cPage);
 		request.setAttribute("idx", idx);
 		request.setAttribute("keyword", keyword);
-		System.out.println("voUp" + voUp);
+		InquiryVO upVO = InquiryDAO.getView(inquiryNum);
+		request.setAttribute("vo", upVO);
 		
-		return "controller?type=view";
+		System.out.println("upVO" + upVO);
+		System.out.println("Up" + Up);
+		
+		return "board_inquiry_view.jsp";
 		
 	}
 

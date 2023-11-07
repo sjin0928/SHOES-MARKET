@@ -10,19 +10,34 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.mystudy.project.vo.InquiryVO;
+
 
 public class FileDownloadCommand implements Command {
 	
 		@Override
 		public String exec(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			request.setCharacterEncoding("UTF-8");
 			
+			System.out.println("--FileDownloadComman--");		
+
+			System.out.println(request.getAttribute("vo")); 
 			String inqImgPath = request.getParameter("inqImgPath");
 			String inqImgName = request.getParameter("inqImgName");
-			
+			String inquiryNum = request.getParameter("inquiryNum");
+			String idx = request.getParameter("idx");
+			String keyword = request.getParameter("keyword");
+			String cPage = request.getParameter("cPage");
+
 			System.out.println("inqImgPath : " + inqImgPath);
 			System.out.println("inqImgName : " + inqImgName);
-			File file = new File(inqImgPath);
+			System.out.println("inquiryNum : " + inquiryNum);
+			System.out.println("idx : " + idx);
+			System.out.println("keyword : " + keyword);
+			System.out.println("cPage : " + cPage);
+			
+			String filePath = inqImgPath + "\\" + inqImgName;
+			File file = new File(filePath);
+			
 			System.out.println("file : " + file);
 		    if (file.exists()) {
 		        String fileName = file.getName();

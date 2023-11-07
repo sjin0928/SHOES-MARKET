@@ -1,18 +1,13 @@
 package com.mystudy.project.command;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.mystudy.project.dao.InquiryCommentDAO;
 import com.mystudy.project.dao.InquiryDAO;
-import com.mystudy.project.vo.InquiryCommentVO;
 import com.mystudy.project.vo.InquiryVO;
-import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 public class InquiryUpdateViewCommand implements Command {
 	@Override
