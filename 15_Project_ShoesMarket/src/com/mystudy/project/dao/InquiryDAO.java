@@ -1,5 +1,7 @@
 package com.mystudy.project.dao;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -93,7 +95,7 @@ public class InquiryDAO {
 	}
 	
 	// 게시글 상세 보기	
-	public static InquiryVO getView(int inquiryNum, int cPage) {
+	public static InquiryVO getView(int inquiryNum) {
 		
 		SqlSession ss = null;
 		InquiryVO vo = null;
@@ -107,6 +109,31 @@ public class InquiryDAO {
 			ss.close();
 		}
 		return vo;
+	}
+	
+	// 게시글 수정하기
+	public static int inquiryUpdate(String cusNickname, String title
+			, String contents, String inqImgName, String inqImgPath, int inquiryNum) {
+		InquiryVO vo = new InquiryVO();
+		vo.setCusNickname(cusNickname);
+		vo.setTitle(title);
+		vo.setContents(contents);
+		vo.setInqImgName(inqImgName);
+		vo.setInqImgPath(inqImgPath);
+		vo.setInquiryNum(inquiryNum);
+
+		SqlSession ss = null;
+		int voUp = -1;
+		
+		try {
+			ss = DBService.getFactory().openSession();
+			voUp = ss.update("Shoesmarket.inquiry_update", vo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			ss.close();
+		}
+		return voUp;
 	}
 	
 }

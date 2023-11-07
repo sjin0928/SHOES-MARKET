@@ -85,7 +85,10 @@ function review_list() {
 								<td>${vo.inquiryNum }</td>
 								<td>${vo.secretStatus }</td>
 								<td>${vo.cusNickname }</td>
-								<td>${vo.title }</td>
+								<td>
+									<a href="controller?type=view&
+										inquiryNum=${vo.inquiryNum }&cPage=${pvo.nowPage }&idx=${idx }&keyword=${keyword }">${vo.title }</a>
+								</td>
 								<td>${vo.itemNum }</td>
 								<td>${vo.regDate }</td>
 								<td>${vo.modDate }</td>

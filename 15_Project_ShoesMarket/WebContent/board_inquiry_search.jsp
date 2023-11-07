@@ -27,11 +27,8 @@ function review_list() {
 <link href="css/style.css" rel="stylesheet" />
 </head>
 <body>
-	<!-- start hero area -->
 	<!-- start header section -->
 		<%@ include file="header.jsp" %>
-	<!-- end header section -->	
-	<!-- end hero area -->
 	
   	<!-- 문의게시판 내용 시작 -->
   	
@@ -85,7 +82,10 @@ function review_list() {
 								<td>${vo.inquiryNum }</td>
 								<td>${vo.secretStatus }</td>
 								<td>${vo.cusNickname }</td>
-								<td>${vo.title }</td>
+								<td>
+									<a href="controller?type=view&
+										inquiryNum=${vo.inquiryNum }&cPage=${pvo.nowPage }&idx=${idx }&keyword=${keyword }">${vo.title }</a>
+								</td>
 								<td>${vo.itemNum }</td>
 								<td>${vo.regDate }</td>
 								<td>${vo.modDate }</td>
@@ -121,7 +121,7 @@ function review_list() {
 					</c:if>	
 					<c:if test="${pageNo != pvo.nowPage }">
 						<li>
-							<a href="controller?type=search&cPage=${pageNo }">${pageNo }</a>
+							<a href="controller?type=search&cPage=${pageNo }&idx=${idx }&keyword=${keyword }">${pageNo }</a>
 						</li>
 					</c:if>		
 						
@@ -133,7 +133,7 @@ function review_list() {
 					</c:if>
 					<c:if test="${pvo.endPage < pvo.totalPage }">
 						<li>
-							<a href="controller?type=search&cPage=${pvo.endPage + 1 }">
+							<a href="controller?type=search&cPage=${pvo.endPage + 1 }&">
 								<i class="fa fa-angle-right" style="font-size:24px"></i>
 							</a>
 						</li>
@@ -154,7 +154,6 @@ function review_list() {
 
   	<!-- 공지사항 내용 끝 -->
 
-  	<!-- info section -->
   	<!-- footer section -->
   	<%@ include file="footer.jsp" %>
 

@@ -12,6 +12,8 @@ public class InquiryVO {
 	private Date modDate;
 	private int itemNum;
 	private String cusNickname;
+	private String cusEmail;
+	private String cusPassword;
 	private int rNum;
 	private String inqImgPath;
 	private String inqImgName;
@@ -21,7 +23,7 @@ public class InquiryVO {
 	}
 
 	public InquiryVO(int inquiryNum, int cusNum, String secretStatus, String title, String contents, Date regDate,
-			Date modDate, int itemNum, String cusNickname, int rNum, String inqImgPath, String inqImgName) {
+			Date modDate, int itemNum, String cusNickname, String cusEmail, String cusPassword, int rNum, String inqImgPath, String inqImgName) {
 		super();
 		this.inquiryNum = inquiryNum;
 		this.cusNum = cusNum;
@@ -32,6 +34,8 @@ public class InquiryVO {
 		this.modDate = modDate;
 		this.itemNum = itemNum;
 		this.cusNickname = cusNickname;
+		this.cusEmail = cusEmail;
+		this.cusPassword = cusPassword;
 		this.rNum = rNum;
 		this.inqImgPath = inqImgPath;
 		this.inqImgName = inqImgName;
@@ -133,13 +137,30 @@ public class InquiryVO {
 		this.cusNickname = cusNickname;
 	}
 
+	public String getCusEmail() {
+		return cusEmail;
+	}
+
+	public void setCusEmail(String cusEmail) {
+		this.cusEmail = cusEmail;
+	}
+
+	public String getCusPassword() {
+		return cusPassword;
+	}
+
+	public void setCusPassword(String cusPassword) {
+		this.cusPassword = cusPassword;
+	}
+
 	@Override
 	public String toString() {
 		return "InquiryVO [inquiryNum=" + inquiryNum + ", cusNum=" + cusNum + ", secretStatus=" + secretStatus
 				+ ", title=" + title + ", contents=" + contents + ", regDate=" + regDate + ", modDate=" + modDate
-				+ ", itemNum=" + itemNum + ", cusNickname=" + cusNickname + ", rNum=" + rNum + ", inqImgPath="
-				+ inqImgPath + ", inqImgName=" + inqImgName + "]";
+				+ ", itemNum=" + itemNum + ", cusNickname=" + cusNickname + ", cusEmail=" + cusEmail + ", cusPassword="
+				+ cusPassword + ", rNum=" + rNum + ", inqImgPath=" + inqImgPath + ", inqImgName=" + inqImgName + "]";
 	}
+
 
 
 }

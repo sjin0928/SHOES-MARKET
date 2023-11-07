@@ -56,25 +56,26 @@
 
 	<!-- 문의게시글 동적검색 -->
 	<select id="inquiry_search" parameterType="map" resultType="InquiryVO">
-		SELECT DATA.*
-      	  FROM (SELECT ROWNUM AS RNUM, INQ.INQUIRY_NUM, INQ.SECRET_STATUS, CUS.CUS_NICK_NAME, 
-                       INQ.TITLE, INQ.ITEM_NUM, INQ.REG_DATE, INQ.MOD_DATE
-                  FROM CUSTOMER CUS, INQUIRY INQ
-	             WHERE CUS.CUS_NUM = INQ.CUS_NUM
-			<choose>
-				<when test="idx == 0">
-					AND CUS_NICK_NAME LIKE '%'|| #{keyword} ||'%'
-				</when>
-				<when test="idx == 1">
-					AND TITLE LIKE '%'|| #{keyword} ||'%'
-				</when>
-				<when test="idx == 2">
-					AND ITEM_NUM = #{keyword}
-				</when>
-			</choose>
-                 ORDER BY INQUIRY_NUM DESC) DATA
-		WHERE RNUM BETWEEN #{begin} AND #{end}
-		ORDER BY INQUIRY_NUM DESC
+		SELECT *
+  		  FROM (SELECT ROWNUM AS RNUM, DATA.*
+          		  FROM (SELECT INQ.INQUIRY_NUM, INQ.SECRET_STATUS, CUS.CUS_NICK_NAME, 
+                      		   INQ.TITLE, INQ.ITEM_NUM, INQ.REG_DATE, INQ.MOD_DATE
+                  		  FROM CUSTOMER CUS, INQUIRY INQ
+                 		 WHERE CUS.CUS_NUM = INQ.CUS_NUM
+					<choose>
+						<when test="idx == 0">
+							AND CUS_NICK_NAME LIKE '%'|| #{keyword} ||'%'
+						</when>
+						<when test="idx == 1">
+							AND TITLE LIKE '%'|| #{keyword} ||'%'
+						</when>
+						<when test="idx == 2">
+							AND ITEM_NUM = #{keyword}
+						</when>
+					</choose>
+                 		 ORDER BY INQUIRY_NUM DESC) DATA)
+         WHERE RNUM BETWEEN #{begin} AND #{end}
+		 ORDER BY INQUIRY_NUM DESC
 	</select>
 	
 	<!-- 게시글의 내용 -->
@@ -92,5 +93,14 @@
  		 WHERE INQUIRY_NUM = #{inquiryNum}
  		 ORDER BY IQ_COMMENT_NUM DESC
 	</select>
-	
+	<!-- 게시글의 내용 수정 -->
+	<update id="inquiry_update" parameterType="InquiryVO">
+		UPDATE INQUIRY
+		SET TITLE = #{title}, 
+		     CONTENTS = #{contents}, 
+		     MOD_DATE = SYSDATE, 
+		     INQ_IMG_PATH = #{inqImgPath}, 
+		     INQ_IMG_NAME = #{inqImgName}
+		WHERE INQUIRY_NUM = #{inquiryNum}
+	</update>
 </mapper>

@@ -12,15 +12,17 @@ import com.mystudy.project.dao.InquiryDAO;
 import com.mystudy.project.vo.InquiryCommentVO;
 import com.mystudy.project.vo.InquiryVO;
 
-public class InquiryViewCommand implements Command {
+public class InquiryUpdateViewCommand implements Command {
 	@Override
 	public String exec(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 파라미터 값 추출(확인)
-		System.out.println("InquiryViewCommand");
+		System.out.println("InquiryUpdateViewCommand");
 		int inquiryNum = Integer.parseInt(request.getParameter("inquiryNum"));
 		int cPage = Integer.parseInt(request.getParameter("cPage"));
 		int idx = -1;
 		int keyword = -1;
+		System.out.println("inquiryNum : " + inquiryNum + ", cPage : " + cPage
+				 + ", idx : " + idx+ ", keyword : " + keyword);
 		if(request.getParameter("idx") == null) {
 			idx = -1;
 		} else if(request.getParameter("idx") != null) {
@@ -45,13 +47,7 @@ public class InquiryViewCommand implements Command {
 		request.setAttribute("keyword", keyword);
 		System.out.println(vo);
 		
-		//게시글의 댓글 
-		List<InquiryCommentVO> list = InquiryCommentDAO.getCommList(inquiryNum);
-		request.setAttribute("list", list);
-
-		System.out.println(list);
-		
-		return "board_inquiry_view.jsp";
+		return "board_inquiry_update.jsp";
 	}
 
 	

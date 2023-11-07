@@ -13,6 +13,7 @@ import com.mystudy.project.command.InquiryCommand;
 import com.mystudy.project.command.InquiryDeleteCommand;
 import com.mystudy.project.command.InquirySearchCommand;
 import com.mystudy.project.command.InquiryUpdateCommand;
+import com.mystudy.project.command.InquiryUpdateViewCommand;
 import com.mystudy.project.command.InquiryViewCommand;
 
 
@@ -36,6 +37,9 @@ public class FrontControllerCommand extends HttpServlet {
 		}
 		if ("view".equals(type)) {
 			command = new InquiryViewCommand();
+		}
+		if ("updateView".equals(type)) {
+			command = new InquiryUpdateViewCommand();
 		}
 		if ("update".equals(type)) {
 			command = new InquiryUpdateCommand();

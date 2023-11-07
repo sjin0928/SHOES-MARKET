@@ -10,7 +10,7 @@ public class InquiryDeleteCommand implements Command {
 
 	@Override
 	public String exec(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
