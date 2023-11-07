@@ -52,7 +52,7 @@
 					첨부파일없음
 				</c:if>
 				<c:if test="${not empty vo.inqImgPath }">
-					<a href="download.jsp?inqImgPath=${vo.inqImgPath }">${vo.inqImgName }</a>
+					<a href="controller?type=fileDownload&inqImgPath=upload&inqImgName=${vo.inqImgName }">${vo.inqImgName }</a>
 				</c:if>
 				</td>
 			</tr>

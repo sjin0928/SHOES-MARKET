@@ -9,25 +9,39 @@ import javax.websocket.SendResult;
 
 import com.mystudy.project.dao.InquiryDAO;
 import com.mystudy.project.vo.InquiryVO;
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 public class InquiryUpdateCommand implements Command {
 
 	@Override
 	public String exec(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("--InquiryUpdateCommand--");
-		String title = request.getParameter("title");
-		String inqImgName = request.getParameter("inqImgName");
-		String inqImgPath = request.getParameter("inqImgPath");
-		String password = request.getParameter("password");
-		String contents = request.getParameter("contents");
-		String cPage = request.getParameter("cPage");
+		
+		String path = "C:\\temp";
+		System.out.println("> path : " + path);
+		
+		MultipartRequest mr = new MultipartRequest(
+			request, //요청객체
+			path, //실제 파일을 저장할 경로
+			10 * 1024 * 1024, //업로드 파일의 최대크기(byte 단위)
+			"UTF-8", //인코딩 형식
+			new DefaultFileRenamePolicy() //동일파일명 있으면 이름 자동 변경저장
+		);
+		System.out.println("inqImgName : " + mr.getFilesystemName("inqImgPath"));
+		
+		String title = mr.getParameter("title");
+		String inqImgName = mr.getFilesystemName("inqImgPath");
+		String password = mr.getParameter("password");
+		String contents = mr.getParameter("contents");
+		String cPage = mr.getParameter("cPage");
 		if(inqImgName.equals("")) {
 			inqImgName=null;
 		}
 		int idx = -1;
 		int keyword = -1;
 		System.out.println("title : " + title + ", inqImgName : " + inqImgName
-				 + ", inqImgPath : " + inqImgPath + ", password : " + password
+				 + ", path : " + path + ", password : " + password
 				 + ", contents : " + contents + ", cPage : " + cPage
 				 + ", idx : " + idx+ ", keyword : " + keyword);
 		
@@ -60,7 +74,7 @@ public class InquiryUpdateCommand implements Command {
 			return "password_error.jsp";
 		}
 		// 업데이트
-		int voUp = InquiryDAO.inquiryUpdate(title, contents, inqImgName, inqImgPath, inquiryNum);
+		int voUp = InquiryDAO.inquiryUpdate(title, contents, inqImgName, path, inquiryNum);
 		request.setAttribute("cPage", cPage);
 		request.setAttribute("idx", idx);
 		request.setAttribute("keyword", keyword);

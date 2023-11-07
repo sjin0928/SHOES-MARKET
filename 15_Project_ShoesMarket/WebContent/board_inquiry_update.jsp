@@ -36,7 +36,7 @@
 		<h2>방명록 : 수정화면</h2>
 		<hr>
 		
-		<form method="post" name="myform">
+		<form method="post" name="myform" enctype="multipart/form-data" >
 		<table>
 			<tbody>
 				<tr>

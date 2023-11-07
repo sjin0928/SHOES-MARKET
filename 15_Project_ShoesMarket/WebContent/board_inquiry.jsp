@@ -34,12 +34,13 @@ function review_list() {
 	form.action="controller?type=reviewList";
 	form.submit();
 }
+
+//board_inquiry_view 이동
 function board_inquiry_view() {
 	let form = document.forms["tableForm"];
 	
 	form.action="controller?type=view";
 	form.submit();
-	alert(form);
 }
 </script>
 <script type="text/javascript" src="popup.js"></script>
@@ -105,19 +106,35 @@ function board_inquiry_view() {
 							<tr>
 								<td>${vo.inquiryNum }</td>
 								<td>
-								<c:if test="${vo.secretStatus == 'on'}">
-								<i class="fa fa-lock" style="font-size:24px"></i>
-								</c:if>
-								<c:if test="${vo.secretStatus == 'off'}">
-								<i class="fa fa-unlock-alt" style="font-size:24px"></i>
-								</c:if>
+									<c:if test="${vo.secretStatus == 'on'}">
+									<i class="fa fa-lock" style="font-size:14px"></i>
+									</c:if>
+									<c:if test="${vo.secretStatus == 'off'}">
+									<i class="fa fa-unlock-alt" style="font-size:14px"></i>
+									</c:if>
 								</td>
 								<td>${vo.cusNickname }</td>
 								<td><form method="post" name="tableForm">
-									<input id="titlebtn" type="button" value="${vo.title }" onclick="board_inquiry_view()">
-									<input type="hidden" name="inquiryNum" value="${vo.inquiryNum }">	
-									<input type="hidden" name="idx" value="${idx }">	
-									<input type="hidden" name="keyword" value="${keyword }">	
+									<c:choose>
+										<c:when test="${vo.secretStatus == 'on' }">
+											<td class="dropdown-content">${vo.title }</td>
+												<div></div>
+											<h4>※ 비밀글은 비밀번호 입력 부탁드립니다.</h4>
+												<input type="text" name="paswordConfirm" title="비밀번호">
+												<input type="button" value="확인" onclick="board_inquiry_view()">
+												<input type="hidden" name="inquiryNum" value="${vo.inquiryNum }">	
+												<input type="hidden" name="idx" value="${idx }">	
+												<input type="hidden" name="keyword" value="${keyword }">
+												<input type="hidden" name="secretStatus" value="${vo.secretStatus }">
+										</c:when>
+										<c:when test="${vo.secretStatus == 'off' }">
+											<input id="titlebtn" type="button" value="${vo.title }" onclick="board_inquiry_view()">
+												<input type="hidden" name="inquiryNum" value="${vo.inquiryNum }">	
+												<input type="hidden" name="idx" value="${idx }">	
+												<input type="hidden" name="keyword" value="${keyword }">
+												<input type="hidden" name="secretStatus" value="${vo.secretStatus }">
+										</c:when>
+									</c:choose>
 								</form></td>
 								<td>${vo.itemNum }</td>
 								<td>${vo.regDate }</td>
@@ -172,7 +189,6 @@ function board_inquiry_view() {
 						</li>
 					</c:if>		 
 					</ol>
-				
 				</td>
 				<td>
 					<input type="button" value="글쓰기"

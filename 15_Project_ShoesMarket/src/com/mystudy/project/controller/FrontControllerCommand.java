@@ -13,6 +13,7 @@ import com.mystudy.project.command.BestCommand;
 import com.mystudy.project.command.BrandCommand;
 import com.mystudy.project.command.Command;
 import com.mystudy.project.command.ConverseCommand;
+import com.mystudy.project.command.FileDownloadCommand;
 import com.mystudy.project.command.InquiryCommand;
 import com.mystudy.project.command.InquiryDeleteCommand;
 import com.mystudy.project.command.InquirySearchCommand;
@@ -68,6 +69,10 @@ public class FrontControllerCommand extends HttpServlet {
 		if ("inquiryWrite".equals(type)) {
 			command = new InquiryWriteCommand();
 		}
+		if ("fileDownload".equals(type)) {
+			command = new FileDownloadCommand();
+		}
+		
 		// 231026-김서영
 		
 		if ("main".equals(type)) {

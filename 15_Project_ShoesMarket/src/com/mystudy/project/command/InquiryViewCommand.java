@@ -16,6 +16,10 @@ public class InquiryViewCommand implements Command {
 	@Override
 	public String exec(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 파라미터 값 추출(확인)
+		
+		String secretStatus = request.getParameter("secretStatus");
+		System.out.println("secretStatus" + secretStatus);
+		
 		System.out.println("InquiryViewCommand");
 		int cPage = 1;
 		if(request.getParameter("cPage")!=null) {
@@ -44,6 +48,19 @@ public class InquiryViewCommand implements Command {
 		// DB연동 데이터 검색 처리
 		// 게시글 
 		InquiryVO vo = InquiryDAO.getView(inquiryNum);
+		// 비밀글 비번 확인
+		if("on".equals(secretStatus)) {
+			if(request.getParameter("paswordConfirm").equals(vo.getCusPassword())) {
+				String paswordConfirm = request.getParameter("paswordConfirm");
+				paswordConfirm.equals(vo.getCusPassword());
+				return "board_inquiry.jsp";
+			}
+			else {
+				
+				return "secretStatus_password_error.jsp";
+			}
+		}
+		
 		request.setAttribute("vo", vo);
 		request.setAttribute("cPage", cPage);
 		request.setAttribute("idx", idx);
