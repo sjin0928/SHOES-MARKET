@@ -77,7 +77,7 @@
 					</c:if>
 					<c:if test="${pvo.beginPage != 1 }">
 						<li>
-							<a href="controller?type=itemBulletinBoard&cPage=${pvo.beginPage - 1 }">이전으로</a>
+							<a href="controller?type=manageCoustomer&cPage=${pvo.beginPage - 1 }">이전으로</a>
 						</li>
 					</c:if>
 					
@@ -88,7 +88,7 @@
 					</c:if>
 					<c:if test="${pageNo != pvo.nowPage }">
 						<li>
-							<a href="controller?type=itemBulletinBoard&cPage=${pageNo }">${pageNo }</a>
+							<a href="controller?type=manageCoustomer&cPage=${pageNo }">${pageNo }</a>
 						</li>
 					</c:if>
 					
@@ -100,7 +100,7 @@
 					</c:if>
 					<c:if test="${pvo.endPage < pvo.totalPage }">
 						<li>
-							<a href="controller?type=itemBulletinBoard&cPage=${pvo.endPage + 1 }">다음으로</a>
+							<a href="controller?type=manageCoustomer&cPage=${pvo.endPage + 1 }">다음으로</a>
 						</li>
 					</c:if>
 					</ol>
@@ -115,7 +115,7 @@
 	
 	<!-- ------------------------------------------------------------------------ -->
       
-      <%@ include file="include/footer.jspf" %>
+      <%@ include file="include/managerFooter.jspf" %>
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 </body>
 </html>

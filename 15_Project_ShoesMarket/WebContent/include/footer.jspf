@@ -6,7 +6,7 @@
       		<div class="container">
         		<div class="row">
           			<div class="col-3">
-            			<h4>CS CENTER</h4>
+            			<h4 style="color: white;">CS CENTER</h4>
             			<p>080-0000-0000</p>
           			</div>
           			<div class="col-3">
@@ -19,7 +19,7 @@
             			</div>
           			</div>
           			<div class="col-3">
-              			<h2>SHOES<br>MARKET</h2>
+              			<h2 style="color: white;">SHOES<br>MARKET</h2>
           			</div>
           			<div class="col-3">
             			<p class="info_link-box">

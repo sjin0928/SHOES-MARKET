@@ -26,7 +26,7 @@ public class itemUpdateCommand implements Command{
 		String path = "c:/Mystudy/60_web/temp_project/img";
 		MultipartRequest mr = new MultipartRequest(req, path, (10 * 1024 * 1024),
 								"UTF-8", new DefaultFileRenamePolicy());
-		String imagePath = path + "\\" + mr.getFilesystemName("imagePath");
+		String imagePath = "img/" + mr.getFilesystemName("imagePath");
 		ItemVO vo = new ItemVO();
 		
 		

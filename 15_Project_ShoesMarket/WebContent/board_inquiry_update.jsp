@@ -40,9 +40,10 @@
 
 <!-- 문의게시판 수정 시작 -->
 <br>
-<h4>&nbsp; Q & A 수정</h4>
-<hr>
+
 <div class="container" style="margin-top:30px">
+	<h4>&nbsp; 문의게시글 수정</h4>
+	<hr>
 	<form method="post" name="myform" enctype="multipart/form-data" >
 		<div class="form-group">
 			<label for="title">제목</label>

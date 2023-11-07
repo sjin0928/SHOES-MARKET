@@ -23,16 +23,17 @@ public class ManagerNociteWriteCommand implements Command {
 		
 		// 세션에 저장된 로그인 정보
 		HttpSession session = request.getSession();
-		AdminVO AdminVo = null;
+		AdminVO adminVo = null;
 						
-		if(session.getAttribute("AdminVo") != null) {
-			AdminVo = (AdminVO)session.getAttribute("AdminVo");
+		if(session.getAttribute("adminVo") != null) {
+			adminVo = (AdminVO)session.getAttribute("adminVo");
 		}
-
+		System.out.println("adminVo : " + adminVo);
+		
 		NoticeVO vo = new NoticeVO();
 		vo.setNoticeTitle(request.getParameter("noticeTitle"));
 		vo.setContents(request.getParameter("contents"));
-		vo.setAdminNum(AdminVo.getAdminNum());
+		vo.setAdminNum(999999999);
 		System.out.println(vo);
 		// 공지사항 입력
 		

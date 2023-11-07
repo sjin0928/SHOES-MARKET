@@ -13,6 +13,25 @@ import com.mystudy.project.vo.ItemVO;
 
 public class ItemDAO {
 	
+	// 구매 시 해당 아이템 재고 업데이트 : itemNum , stock
+	public static int updateItemStock(int stock, int itemNum) {
+		int result = -1;
+		SqlSession ss = null;
+		Map<String, Integer> map = new HashMap<>();
+		map.put("stock", stock);
+		map.put("itemNum", itemNum);
+		
+		try {
+			ss = DBService.getFactory().openSession(true);
+			result = ss.update("shoesmarket.updateItemStock", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			ss.close();
+		}
+		return result;
+	}
+	
 	// 상품 등록 게시글 전체 조회
 	public static int getItemTotalCount() {
 		SqlSession ss = null;
@@ -233,6 +252,9 @@ public class ItemDAO {
 		return list;
 	}
 	
+	
+	
+	
 	// 브랜드별 리스트 -------------------------
 	public static List<ItemVO> getAdidas(){
 		SqlSession ss = null;
@@ -273,6 +295,37 @@ public class ItemDAO {
 		try {
 			ss = DBService.getFactory().openSession();
 			list = ss.selectList("shoesmarket.allConverse");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			ss.close();
+		}
+		
+		return list;
+	}
+	public static List<ItemVO> getPuma(){
+		SqlSession ss = null;
+		List<ItemVO> list = null;
+		
+		try {
+			ss = DBService.getFactory().openSession();
+			list = ss.selectList("shoesmarket.allPuma");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			ss.close();
+		}
+		
+		return list;
+	}
+	
+	public static List<ItemVO> getVans(){
+		SqlSession ss = null;
+		List<ItemVO> list = null;
+		
+		try {
+			ss = DBService.getFactory().openSession();
+			list = ss.selectList("shoesmarket.allVans");
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

@@ -19,9 +19,12 @@ public class BuyCommand implements Command {
 
 	@Override
 	public String exec(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 결제하는 페이지에 보여줄 데이터를 저장하는 클래스 
+		
 		// 1. 장바구니(cart.jsp)에서 선택한 아이템 목록을 가져옴
-		// 필요한 데이터 - 상품 관련 정보(상품명,가격) / 수량
+		// 필요한 데이터 - 상품 관련 정보(상품명,가격) / 수량 
 		// 총 결제 금액 계산 
+		HttpSession session = request.getSession();
 		
 		System.out.println(">> BuyCommand 실행");
 		// 선택된 cartVO 추출 - 수량 필요 
@@ -40,8 +43,6 @@ public class BuyCommand implements Command {
 		System.out.println(">> BuyCommand 선택된 아이템들 : " + selectedItemList);
 		System.out.println(">> 총 가격 확인 : " + totalCount);
 		
-		HttpSession session = request.getSession();
-		
 		
 		// 선택된 아이템 리스트
 		session.setAttribute("selectedItemList", selectedItemList);
@@ -49,6 +50,9 @@ public class BuyCommand implements Command {
 		session.setAttribute("selectedCart", selectedCart);
 		// 총 결제 금액 계산 
 		session.setAttribute("totalCount", totalCount);
+		
+		
+		
 		
 		
 		return "buy.jsp";

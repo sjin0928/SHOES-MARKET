@@ -16,9 +16,24 @@ public class BuyVO {
 	private String cancelStatus;
 	private int totalPrice;
 	
-	public BuyVO() {
-		
+	public BuyVO() {}
+	
+	
+	// 주문 insert할 때 필요 : cusNum, zipCode, address, detailAddress, PHONE, PAYMENT, TOTAL_PRICE, deliveryRequest
+	public BuyVO(int cusNum, String zipCode, String address, String detailAddress, String phone, String deliveryRequest,
+			String payment, int totalPrice) {
+		super();
+		this.cusNum = cusNum;
+		this.zipCode = zipCode;
+		this.address = address;
+		this.detailAddress = detailAddress;
+		this.phone = phone;
+		this.deliveryRequest = deliveryRequest;
+		this.payment = payment;
+		this.totalPrice = totalPrice;
 	}
+
+
 
 	public BuyVO(int buyNum, int cusNum, String payStatus, Date buyDate, String zipCode, String address,
 			String detailAddress, String phone, String deliveryRequest, String payment, String cancelStatus,
@@ -37,6 +52,11 @@ public class BuyVO {
 		this.cancelStatus = cancelStatus;
 		this.totalPrice = totalPrice;
 	}
+
+	
+
+
+
 
 	public int getBuyNum() {
 		return buyNum;

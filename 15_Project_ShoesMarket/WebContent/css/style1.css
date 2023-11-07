@@ -1,0 +1,438 @@
+/* 버튼 스타일 */
+button {
+    margin-bottom: 10px;
+}
+
+input[type="submit"] {
+    background-color: #808080;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+input[type="submit"]:hover {
+    background-color: #626262;
+}
+
+button[type="button"] {
+    background-color: #6c757d;
+    color: #fff;
+    width: 100px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button[type="button"]:hover {
+    background-color: #5a6268;
+}
+
+/* 회원가입 폼 스타일 */
+.register-signup {
+    max-width: 500px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.register-signup h1 {
+	padding: 30px;
+    text-align: center;
+}
+
+.register-signup input[type="text"],
+.register-signup input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* 텍스트 박스에 빨간색 에러 메시지 스타일 */
+span[id$="Message"] {
+    color: red;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* 새로운 버튼 스타일 */
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.button-group button {
+    flex: 1;
+}
+
+/* 로그인 폼 스타일 */
+.login-form {
+    max-width: 500px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+	h1 {
+    padding: 10px;
+    text-align: center;
+}
+
+.login-form input[type="text"],
+.login-form input[type="password"] {
+      width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* 텍스트 박스에 빨간색 에러 메시지 스타일 */
+span[id$="Message"] {
+    color: red;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* 새로운 버튼 스타일 */
+.form-button-group {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+
+.form-button-group button {
+    flex: 1;
+}
+
+.links {
+    text-align: center;
+    margin-top: 20px; 
+}
+
+.links a {
+    border: 1px solid #000; 
+    padding: 5px 10px; 
+    margin: 0 10px; 
+}
+
+/* */
+button, input[type="submit"], input[type="button"] {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover, input[type="submit"]:hover, input[type="button"]:hover {
+    background-color: #0056b3;
+}
+
+.find-id-form {
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    text-align: center; 
+}
+
+.find-id-form input[type="text"], 
+.find-id-form input[type="password"] {
+    width: calc(100% - 20px); /* 전체 너비에서 padding값을 빼서 입력 필드의 너비를 조정합니다. */
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+	.find-id-form h1 {
+    padding: 10px;
+    text-align: center;
+}
+
+/* 에러 메시지 스타일 */
+span[id$="Message"] {
+    color: red;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+
+/* 고유한 스타일 (아이디 찾기 페이지) */
+
+/* 링크 스타일 */
+.links a {
+    border: 1px solid #000; 
+    padding: 5px 10px; 
+    margin: 0 10px 30px; 
+}
+
+.links {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 30px; 
+}
+
+.result-page {
+    max-width: 500px;
+    margin: auto;
+    text-align: center;
+}
+
+.result-page h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.result-page p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.result-page .links a {
+    border: 1px solid #007bff;
+    padding: 10px 20px;
+    margin: 0 10px;
+    text-decoration: none;
+    font-size: 16px;
+    color: #007bff;
+    transition: background-color 0.3s;
+}
+
+.result-page .links a:hover {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.update-form {
+    max-width: 500px;
+    margin: auto;
+    text-align: center;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.update-form h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.update-form input[type="text"],
+.update-form input[type="password"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.update-form p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.update-form input[type="button"],
+.update-form input[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.update-form input[type="button"]:hover,
+.update-form input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+.container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.container h1, .container h3 {
+    margin-bottom: 10px;
+}
+
+.container a {
+    display: block;
+    font-size: 18px;
+    margin-bottom: 20px;
+    text-decoration: none;
+    color: #007bff;
+}
+
+.container a:hover {
+    text-decoration: underline;
+}
+
+/* 주문 내역 및 게시글 내역 스타일 */
+.container div {
+    margin-bottom: 40px;
+}
+
+.container p {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #343a40;
+}
+
+.container p:last-child {
+    margin-bottom: 0;
+}
+
+.container p:first-child {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* 페이지 전체 스타일 */
+.myinfo {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    color: #343a40;
+    margin: 0;
+}
+
+.myinfo .container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.myinfo .container h1 {
+    margin-bottom: 20px;
+}
+
+.myinfo .container h3 {
+	max-width: 500px;
+	margin: 10px auto;
+	border: none;
+    border-radius: 100px;
+    background-color: #8080c0;
+    color: #ffffff;
+    text-align: center;
+}
+
+.myinfo .container a {
+    display: block;
+    font-size: 18px;
+    margin-bottom: 20px;
+    text-decoration: none;
+    color: #000000;
+    font-weight: bold; 
+}
+
+.myinfo .container a:hover {
+    text-decoration: underline;
+}
+
+/* 주문 내역 및 게시글 내역 스타일 */
+.myinfo .container div {
+    margin-bottom: 40px;
+}
+
+.myinfo .container p {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #343a40;
+}
+
+.myinfo .container p:last-child {
+    margin-bottom: 0;
+}
+
+.myinfo .container p:first-child {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* 버튼 스타일 */
+.myinfo button, .myinfo input[type="submit"], .myinfo input[type="button"] {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.myinfo button:hover, .myinfo input[type="submit"]:hover, .myinfo input[type="button"]:hover {
+    background-color: #0056b3;
+}
+
+.post-section {
+    background-color: #f5f5f5; /* Set your desired background color */
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.post-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.post-content {
+    max-width: 600px; /* Adjust this value to your preference */
+    width: 100%;
+}
+
+.inquiry-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.inquiry-table th, .inquiry-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+.inquiry-table th {
+    background-color: #f2f2f2;
+}
+
+.inquiry-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.inquiry-table td:nth-child(4) {
+    max-width: 400px; /* 최대 너비 설정 */
+    overflow: hidden; /* 넘치는 부분 감추기 */
+    text-overflow: ellipsis; /* 넘치는 부분에 ... 표시 */
+    white-space: nowrap; /* 줄바꿈 방지 */
+}

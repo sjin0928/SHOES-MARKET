@@ -11,13 +11,41 @@ import com.mystudy.project.vo.CartVO;
 
 public class BuyDAO {
 		
-//	// 주문결제 조회
-//		public static List<BuyVO> getList() {
-//			SqlSession ss = DBService.getFactory().openSession();
-//			List<BuyVO> buy = ss.selectList("shoesmarket.buy");
-//			ss.close();
-//			return buy;
-//		}
+	// 주문 insert 
+	public static int buyItem(BuyVO buyVo) {
+		SqlSession ss = null;
+		int result = -1;
+		
+		try {
+			ss = DBService.getFactory().openSession(true);
+			result = ss.insert("shoesmarket.buyItem", buyVo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			ss.close();
+		}
+		
+		return result;
+	}
+	
+	public static int getBuyNum() {
+		SqlSession ss = null;
+		int result = -1;
+		
+		try {
+			ss = DBService.getFactory().openSession(true);
+			result = ss.selectOne("shoesmarket.getBuySeq");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			ss.close();
+		}
+		
+		return result;
+		
+	}
+	
+	
 	
 	// 주문 내역 조회
 	public static List<BuyVO> getOrderedList(int cusNum){

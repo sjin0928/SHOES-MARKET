@@ -5,10 +5,22 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<!-- 메뉴바 외 코드 -->
+	<link href="css/style.css" rel="stylesheet" />
+	<!-- 부트스트랩 -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/lux/bootstrap.min.css" integrity="sha384-9+PGKSqjRdkeAU7Eu4nkJU8RFaH8ace8HGXnkiKMP9I9Te0GJ4/km3L1Z8tXigpG" crossorigin="anonymous">
 <meta charset="UTF-8">
+<!-- CSS 파일을 추가 -->
+<link rel="stylesheet" type="text/css" href="css/cart.css">  
+
 <title>장바구니</title>
+
+
 <!-- 이거 -->
+
 <script>
+<%@ include file="include/popup.js" %>
+<%@ include file="include/search.js" %>
 	function go_before() {
 	    window.history.back(); // 이전 페이지로 이동
 	}
@@ -19,11 +31,13 @@
     function buySelectedItems() {
         var selectedItems = []; // 체크된 체크박스의 값을 저장할 배열 
         var checkboxes = document.getElementsByName("selectedItems");
-		alert(checkboxes);
-     	//존재 여부 확인
+		//alert(checkboxes);
+        
      	
+		//존재 여부 확인
      	// 체크가 될 때 실행 
         if (checkboxes && checkboxes.length > 0) {
+        	
             for (var i = 0; i < checkboxes.length; i++) {
                 if (checkboxes[i].checked) {
                     selectedItems.push(checkboxes[i].value); // value = cartNum
@@ -202,145 +216,75 @@
 
 </script>
 <style>
-	
-	table {
-        width: 100%;
-        border-collapse: collapse;
-        text-align: center;
-    }
-    
-    th, td {
-        padding: 10px;
-        border: 1px solid #ddd;
-    }
-    
-    th {
-        background-color: #f2f2f2;
-    }
-    
-    .quantity-controls {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    
-    button {
-        background-color: #eda1ad; /* 버튼 색상 변경 */
-        color: #fff;
-        border: none;
-        padding: 5px 10px;
-        cursor: pointer;
-        border-radius: 5px;
-    }
-    
-    button:hover {
-        background-color: #0056b3;
-    }
-    
-    #cart {
-        text-align: right;
-        margin-top: 10px;
-    }
-    
-    #cartListContainer {
-        width: 100%;
-        overflow-x: auto;
-    }
-    
-    button#cart-action-button {
-        display: inline-block;
-        background-color: #007BFF;
-        color: #fff;
-        border: none;
-        padding: 10px 20px;
-        cursor: pointer;
-        border-radius: 5px;
-    }
-    
-    button#cart-action-button:hover {
-        background-color: #0056b3;
-    }
+
 </style>
 </head>
-<body>
-	<h2>cart.jsp</h2>
-	<!-- 10/28 합치기 전에 가지고 있던 상단 버튼 제거 -->
-      <button onclick="go_main()">HOME</button>
-    <button onclick="go_login()">로그인</button>
+<body class="bg-grey-lighter">
+	
+<%@ include file="include/header.jspf" %>
+<!-- ------------------------------------------------------------------------ -->
+<!-- ------------------------------------------------------------------------ -->
+<br><br><br><br><br>
+	<!-- title area -->
+	<h3>CART</h3>
+	<div class="basket_txt-container">신규 회원 가입 시, 즉시 사용 가능한 1만원 프모션 코드를 발급해드립니다! 
+	(일부 상품 할인 제외, 장바구니 5만원 이상 적용 가능)</div>
+	<div class="container"> <!-- 컨테이너 추가 -->
+	    
+	    <form id="cart" method="post">
+	        <div class="row justify-content-center"> <!-- 가운데 정렬을 위한 row와 justify-content-center 추가 -->
+	                
+            <div id="cartListContainer">
+                <table class="tables table-borderless" style="width: 100%; max-width: 100%; font-size: 16px;"> <!-- 부트스트랩 테이블 스타일 적용 -->
+                    <thead>
+                        <tr>   <!-- 10/28 테이블 데이터 정보 잘 나오게끔 수정함! + 전체 선택 토글 추가! -->
+                      <th width="50">
+                      <input type="checkbox" id="selectAll" onclick="toggleAllSelection()">
+                  	</th>
+                      <th width="200">상품명</th>
+                      <th width="100">가격</th>
+                      <th width="95">수량</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <c:forEach var="vo" items="${cartList}" varStatus="cartStatus">
+                      <tr>
+                      	<!-- 체크박스 -->
+                          <td>
+                              <input type="checkbox" name="selectedItems" value="${vo.cartNum}">
+                          </td>
+                          <!-- 상품명, 가격 -->
+                          <td>${itemList[cartStatus.index].name }</td>
+                          <!-- 가격 -->
+                          <td>${itemList[cartStatus.index].price }</td>
+                          <!-- 수량 -->
+                          <td>
+                              <div class="quantity-controls">
+                                  <button type="button" style="font-size: 12px; padding: 3px;" onclick="decreaseQuantity(${vo.cartNum})">-</button>
+                                  <input type="number" id="cartCount_${vo.cartNum}" value="${vo.cartQuantity}" style="width: 35px; margin-left:6px; margin-right:6px"; inputmode="numeric">
+                                  <button type="button" style="font-size: 12px; padding: 3px;" onclick="increaseQuantity(${vo.cartNum})">+</button>
+                              </div>
+                          </td>
+                      </tr>
+                  </c:forEach>
 
-    <form id="cart" method="post">
-        <div id="cartListContainer">
-            <table border=bold>
-                <thead>
-                    <tr>   <!-- 10/28 테이블 데이터 정보 잘 나오게끔 수정함! + 전체 선택 토글 추가! -->
-                       <th width="50">
-                        <input type="checkbox" id="selectAll" onclick="toggleAllSelection()">
-                    </th>
-                        <th width="200">상품명</th>
-                        <th width="100">가격</th>
-                        <th width="95">수량</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <c:forEach var="vo" items="${cartList}" varStatus="cartStatus">
-                        <tr>
-                        	<!-- 체크박스 -->
-                            <td>
-                                <input type="checkbox" name="selectedItems" value="${vo.cartNum}">
-                            </td>
-                            <!-- 상품명 -->
-                            <td>${itemList[cartStatus.index].price }</td>
-                            <!-- 가격 -->
-                            <td>${itemList[cartStatus.index].name }</td>
-                            <!-- 수량 -->
-                            <td>
-                                <div class="quantity-controls">
-                                    <button type="button" style="font-size: 12px; padding: 3px;" onclick="decreaseQuantity(${vo.cartNum})">-</button>
-                                    <input type="number" id="cartCount_${vo.cartNum}" value="${vo.cartQuantity}" style="width: 35px; margin-left:6px; margin-right:6px"; inputmode="numeric">
-                                    <button type="button" style="font-size: 12px; padding: 3px;" onclick="increaseQuantity(${vo.cartNum})">+</button>
-                                </div>
-                            </td>
-                        </tr>
-                    </c:forEach>
- 
-                </tbody>
-            </table>
-        </div>
-        
-        
-        <!-- 샘플 테이블 -->
-      <%--   <br><br>
-        <table>
-        	<thead>
-        		<tr>
-        			<th>상품명</th>
-        			<th>가격</th>
-        			<th>수량</th>
-        		</tr>
-        	</thead>
-        	<tbody>
-        		<c:forEach var="vo" items="${cartList}"  >
-        		<tr>
-        			<td>
-        				<input type="checkbox" name="selectedItems" value="${vo.cartNum}">
-        			</td>
-        			<td>${itemList[cartStatus.index].name }</td>
-        			<td>${itemList[cartStatus.index].price }</td>
-        			<td>${vo.cartQuantity }</td>
-        		</tr>
-        		</c:forEach>
-        	
-        	</tbody>
-        </table> --%>
-
-        <div style="height: 10px; background-color: white;"></div>
-        <button type="button" onclick="deleteSelectedItems()" style="margin-right: 5px;">선택한 아이템 삭제</button>
-        <div style="height: 10px; background-color: white;"></div>
-        <div style="display: flex; justify-content: flex-left; align-items: center;">
-            <button type="button" onclick="go_before()" style="margin-right: 5px;">계속 쇼핑하기</button>
-            <button type="button" onclick="buySelectedItems()" style="margin-right: 5px;">구매하기</button>
-        </div>
+              </tbody>
+          </table>
+      </div>
+      <div style="height: 10px; background-color: white;"></div>
+      <button type="button" onclick="deleteSelectedItems()" style="margin-right: 5px;">선택한 아이템 삭제</button>
+      <div style="height: 10px; background-color: white;"></div>
+      <div style="display: flex; justify-content: flex-left; align-items: center;">
+          <button type="button" onclick="go_before()" style="margin-right: 5px;">계속 쇼핑하기</button>
+          <button type="button" onclick="buySelectedItems()" style="margin-right: 5px;">구매하기</button>
+       </div>
+            </div>
     </form>
+    </div>
+    <br><br><br><br><br><br><br><br>
+    <!-- ------------------------------------------------------------------------ -->
     
+    <%@ include file="include/footer.jspf" %>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -34,7 +34,6 @@
 		            <a class="dropdown-item" href="controller?type=new">New</a>
 		            <a class="dropdown-item" href="controller?type=best">Best</a>
 		            <a class="dropdown-item" href="controller?type=board">board</a>
-		            <a class="dropdown-item" href="#">BulletinBoard 2</a>
 		            
 		            <div class="dropdown-divider"></div>
 		            <!-- 마이 페이지 -->
@@ -67,8 +66,8 @@
             <a class="dropdown-item" href="controller?type=adidas">Adidas</a>
             <a class="dropdown-item" href="controller?type=converse">Converse</a>
             <a class="dropdown-item" href="controller?type=newBal">New Balance</a>
-            <a class="dropdown-item" href="#">Vans</a>
-            <a class="dropdown-item" href="#">Puma</a>
+            <a class="dropdown-item" href="controller?type=vans">Vans</a>
+            <a class="dropdown-item" href="controller?type=puma">Puma</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="controller?type=brand">브랜드 모아보기</a>
           </div>
@@ -82,8 +81,6 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" href="controller?type=board">board</a>
-        </li> <li class="nav-item">
-          <a class="nav-link" href="#">BulletinBoard 2</a>
         </li>
         
       </ul>

@@ -16,7 +16,7 @@
 
 function write_go(){
 	console.log(document.forms["myItemForm"]);
-	alert("write_go() 시작");
+	//alert("write_go() 시작");
 	let form = document.forms["myItemForm"];
 	// 앞단에서 요소들 모두 작성되었는지 확인
 	// form.elements[0] ~ form.elements[5] : 상품명,가격,이미지,재고,상품설명,브랜드
@@ -38,8 +38,9 @@ function write_go(){
 <body>
 	<%@ include file="include/managerHeader.jspf" %>
 	<!-- ------------------------------------------------------------------------ -->
-	<br>
+	<br><br><br>
 	<div class="container" style=" max-width: 700px;margin: 0 auto;">
+	<h3>상품등록</h3>
 	<form action="controller?type=productWrite" method="post" name="myItemForm" enctype="multipart/form-data">
 		<!-- 상품명 : text -->
 		<div class="form-group">

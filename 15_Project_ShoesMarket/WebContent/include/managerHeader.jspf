@@ -8,7 +8,7 @@
       		
       		<!-- 최상단 오른쪽  -->
       		<div class="text-right">
-      		<a class="col-10 navbar-brand" href="managerMain.jsp" style="font-weight: bold; font-size: 40px;">
+      		<a class="col-10 navbar-brand" href="controller?type=itemBulletinBoard" style="font-weight: bold; font-size: 40px;">
         			<span style="display: block; text-align: center; margin-left: 130px; color: black;">
           		SHOES MARKET
         			</span>
@@ -22,23 +22,12 @@
 	            
        		<i class="fa fa-bars"  style="font-size:36px;  display: inline-block;" data-bs-toggle="dropdown" href="controller?type=brand" role="button" aria-haspopup="true" aria-expanded="false"></i>
       			<div class="dropdown-menu">
-		            <a class="dropdown-item" href="#">Home</a>
-		            <a class="dropdown-item" href="#">상품현황</a>
-		            <a class="dropdown-item" href="#">판매량</a>
-		            <a class="dropdown-item" href="#">배송현황</a>
-		            <a class="dropdown-item" href="#">게시판 관리</a>
-		            <a class="dropdown-item" href="#">BulletinBoard 2</a>
+		            <a class="dropdown-item" href="controller?type=itemBulletinBoard">Home</a>
+		            <a class="dropdown-item" href="controller?type=itemBulletinBoard">상품관리</a>
+		            <a class="dropdown-item" href="controller?type=manageCoustomer">회원관리</a>
+		            <a class="dropdown-item" href="controller?type=managerInquiry">문의게시판</a>
+		            <a class="dropdown-item" href="controller?type=managerNoticeList">공지사항</a>
 		            
-		            <div class="dropdown-divider"></div>
-		            <!-- 마이 페이지 -->
-		            <a href="login.jsp" style="display: block; text-align: center;">
-	              			<i class="fa fa-user" style="font-size: 18px; margin: 0 auto;"></i>
-	            	</a>
-	            	<!-- 장바구니 -->
-	            	<div class="dropdown-divider"></div>
-	            	<a href="sign_in.jsp" style="display: block; text-align: center;">
-	              			<i class="fa fa-shopping-bag" style="font-size: 18px; margin: 0 auto;"></i>
-	            	</a>
 	          </div>
 	          </div>
 	  
@@ -54,23 +43,21 @@
     <div class="collapse navbar-collapse" id="navbarColor03">
       <ul class="navbar-nav me-auto">
         <li class="nav-item">
-          <a class="nav-link" href="#">상품현황</a>
+          <a class="nav-link" href="controller?type=itemBulletinBoard">상품관리</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">판매량</a>
+          <a class="nav-link" href="controller?type=manageCoustomer">회원관리</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">배송현황</a>
+          <a class="nav-link" href="controller?type=managerInquiry">문의게시판</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="managerBullletinBoard.jsp">게시판 관리</a>
-        </li> <li class="nav-item">
-          <a class="nav-link" href="controller?type=manageCoustomer">회원 관리</a>
+          <a class="nav-link" href="controller?type=managerNoticeList">공지사항</a>
         </li>
         
       </ul>
-      
-      <!-- 서치바 -->
+     <!--  
+      서치바
       <form class="d-flex ml-auto" action="controller?type=search" method="post" name="myForm">
         <select name="idx" style="width:100px; height:30px ">
   				<option value="1" style="font-size: 12px">상품명</option>
@@ -86,7 +73,7 @@
         </li>
          </ul>
         <button class="btn btn-secondary my-2 my-sm-0" value="search" type="submit">Search</button>
-      </form>
+      </form> -->
     </div>
   </div>
 </nav>

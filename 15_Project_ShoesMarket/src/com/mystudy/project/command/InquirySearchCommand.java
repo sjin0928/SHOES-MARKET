@@ -24,6 +24,10 @@ public class InquirySearchCommand implements Command{
 		
 		Paging p = new Paging();
 		
+		if (keyword == null) {
+	         return "controller?type=inquiryList";
+	      }
+		
 		//1. 검색 게시물 수량 구하기
 		int searchCount = InquiryDAO.getSearchCount(idx, keyword);
 		p.setTotalRecord(searchCount);

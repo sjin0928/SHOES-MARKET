@@ -23,7 +23,7 @@
 	<!-- ------------------------------------------------------------------------ -->
 	<br><br>
 	<div  class="container">
-	<h3>회원 관리 게시판</h3>
+	<h3>상품 관리 게시판</h3>
 	<table class="table table-hover">
 		  <thead>
 		    <tr class="table-active">

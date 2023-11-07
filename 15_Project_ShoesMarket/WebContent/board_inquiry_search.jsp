@@ -75,7 +75,7 @@
 								</td>
 								<td>${vo.cusNickname }</td>
 								<td>
-									<a href="controller?type=InquiryView&
+									<a href="controller?type=inquiryView&
 										inquiryNum=${vo.inquiryNum }&cPage=${pvo.nowPage }&idx=${idx }&keyword=${keyword }">${vo.title }</a>
 								</td>
 								<td>${vo.itemNum }</td>

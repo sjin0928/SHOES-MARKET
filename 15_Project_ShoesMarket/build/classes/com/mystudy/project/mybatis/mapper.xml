@@ -17,14 +17,35 @@
 		ORDER BY ITEM_NUM DESC
 	</select>
 	
-	<!-- 전체 상품 조회(판매수량순 / 판매 내역 없는 것 포함 / 판매 내역 없는 건 신상품 순 -->
+	<!-- 전체 상품 조회(판매수량순 / 판매 내역 없는 것 포함 / 판매 내역 없는 건 신상품 순) -->
 	<select id="allBest" resultType="ItemVO">
 		SELECT I.ITEM_NUM, I.NAME, I.PRICE, I.STOCK, I.IMAGE_PATH,
-	       I.ITEM_DETAIL, I.REG_DATE, I.MOD_DATE, I.BRAND , I.ITEM_STATUS
+		       I.ITEM_DETAIL, I.REG_DATE, I.MOD_DATE, I.BRAND, I.ITEM_STATUS, SUM(O.QUANTITY) AS QUANTITY
 		FROM ITEM I
 		LEFT OUTER JOIN ORDERITEMS O ON I.ITEM_NUM = O.ITEM_NUM
 		WHERE I.ITEM_STATUS = 'Y'
-		ORDER BY O.QUANTITY DESC NULLS LAST, I.ITEM_NUM DESC
+		GROUP BY I.ITEM_NUM, I.NAME, I.PRICE, I.STOCK, I.IMAGE_PATH,
+		         I.ITEM_DETAIL, I.REG_DATE, I.MOD_DATE, I.BRAND, I.ITEM_STATUS
+		ORDER BY MAX(O.QUANTITY) DESC NULLS LAST, I.ITEM_NUM DESC
+	</select>
+	
+	<!-- 상품 목록 페이징 처리(베스트순) -->
+	<select id="itemBestList" resultType="ItemVO" parameterType="map">
+	SELECT *
+		FROM (
+		  SELECT ROWNUM AS RNUM, T.*
+		  FROM (
+			    SELECT I.ITEM_NUM, I.NAME, I.PRICE, I.STOCK, I.IMAGE_PATH,
+			       I.ITEM_DETAIL, I.REG_DATE, I.MOD_DATE, I.BRAND, I.ITEM_STATUS, SUM(O.QUANTITY) AS QUANTITY
+			FROM ITEM I
+			LEFT OUTER JOIN ORDERITEMS O ON I.ITEM_NUM = O.ITEM_NUM
+			WHERE I.ITEM_STATUS = 'Y'
+			GROUP BY I.ITEM_NUM, I.NAME, I.PRICE, I.STOCK, I.IMAGE_PATH,
+			         I.ITEM_DETAIL, I.REG_DATE, I.MOD_DATE, I.BRAND, I.ITEM_STATUS
+			ORDER BY MAX(O.QUANTITY) DESC NULLS LAST, I.ITEM_NUM DESC
+		  ) T
+		)
+		WHERE RNUM BETWEEN #{begin} AND #{end}
 	</select>
 	
 	<!-- 상품 번호로 상품 상세 조회 -->
@@ -122,6 +143,22 @@
 		AND BRAND = '컨버스'
 	</select>
 	
+	<select id="allPuma" resultType="ItemVO">
+		SELECT ITEM_NUM, NAME, PRICE, STOCK, IMAGE_PATH, 
+				ITEM_DETAIL, REG_DATE, MOD_DATE, BRAND, ITEM_STATUS
+		FROM ITEM
+		WHERE ITEM_STATUS = 'Y'
+		AND BRAND = '푸마'
+	</select>
+	
+	<select id="allVans" resultType="ItemVO">
+		SELECT ITEM_NUM, NAME, PRICE, STOCK, IMAGE_PATH, 
+				ITEM_DETAIL, REG_DATE, MOD_DATE, BRAND, ITEM_STATUS
+		FROM ITEM
+		WHERE ITEM_STATUS = 'Y'
+		AND BRAND = '반스'
+	</select>
+	
 	<!-- 전체 게시글 건수 조회 -->
 	<select id="itemTotalCount" resultType="int">
 		SELECT COUNT(*) AS CNT FROM ITEM
@@ -142,18 +179,6 @@
 	</select>
 	
 	<!-- 상품 목록 페이징 처리 -->
-	<!-- 상품 목록 페이징 처리(베스트순) -->
-	<select id="itemBestList" resultType="ItemVO" parameterType="map">
-	SELECT *
-		FROM (SELECT ROWNUM AS RNUM, T.*
-              FROM (SELECT I.*
-                    FROM ITEM I
-                    	LEFT OUTER JOIN ORDERITEMS O ON I.ITEM_NUM = O.ITEM_NUM
-                    	WHERE I.ITEM_STATUS = 'Y'
-                    	ORDER BY O.QUANTITY DESC NULLS LAST, I.ITEM_NUM DESC) T
-                    ) 
-                    WHERE RNUM BETWEEN #{begin} AND #{end}
-	</select>
 	
 	<!-- 고객 목록 페이징 처리 -->
 	<select id="customerList" resultType="CustomerVO" parameterType="map">
@@ -193,6 +218,17 @@
     WHERE CUS_NUM = #{cusNum}
 	</select>
 	
+	<!-- 주문 시, 해당 제품 장바구니 리스트에서 삭제 -->
+	<delete id="deleteCartItem" parameterType="int">
+	 DELETE FROM CART WHERE CART_NUM =#{cartNum}
+	</delete>
+	
+	<!-- 구매 시 해당 아이템 재고 업데이트 : itemNum , stock --> 
+	<update id="updateItemStock" parameterType="map">
+	UPDATE ITEM 
+	SET STOCK = #{stock}
+	WHERE ITEM_NUM = #{itemNum}
+	</update>
 	
 	<!-- 효정 -->
 	<!-- 관리자 : 회원 전체 조회 -->
@@ -326,6 +362,32 @@
 	CART_NUM, ITEM_NUM, CUS_NUM, CART_QUANTITY, CART_REGDATE)
 	VALUES (CART_SEQ.NEXTVAL , #{itemNum}, #{cusNum}, #{cartQuantity}, SYSDATE)
 	</insert>
+	
+	<!-- 주문할 때 사용  -->
+	<insert id="buyItem" parameterType="BuyVO">
+	INSERT INTO BUY (
+		BUY_NUM, CUS_NUM, PAY_STATUS, BUY_DATE, ZIP_CODE,
+	    ADDRESS, DETAIL_ADDRESS, PHONE, DELIVERY_REQUEST, PAYMENT,
+	    CANCEL_STATUS, TOTAL_PRICE)
+	VALUES (BUY_SEQ.NEXTVAL, #{cusNum}, '결제완료', SYSDATE, #{zipCode},
+		 #{address}, #{detailAddress}, #{phone}, #{deliveryRequest}, #{payment},
+		 '주문완료', #{totalPrice})
+	</insert>
+	
+	<!-- 주문할 때 사용  -->
+	<insert id="buyOrderItem" parameterType="OrderItemsVO">
+	INSERT INTO ORDERITEMS(
+	    ORDERITEM_NUM, ITEM_NUM, BUY_NUM, 
+	    QUANTITY, PRICE, REG_DATE
+	)
+	VALUES (ORDERITEMS_SEQ.NEXTVAL , #{itemNum}, #{buyNum}, 
+	        #{quantity}, #{price}, SYSDATE)
+	</insert>
+	
+	<!-- 방금 buy insert한 번호 가져오기  -->
+	<select id="getBuySeq" resultType="int">
+	SELECT BUY_SEQ.CURRVAL FROM dual
+	</select>
 	
 	<!-- 231024 박수진 -->
 	<!-- 전체 게시글 건수 조회 -->

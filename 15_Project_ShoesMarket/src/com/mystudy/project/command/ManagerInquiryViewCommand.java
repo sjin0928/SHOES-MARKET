@@ -30,7 +30,7 @@ public class ManagerInquiryViewCommand implements Command {
 		InquiryVO vo = InquiryDAO.getView(inquiryNum);
 		System.out.println("vo : " + vo);
 		int idx = -1;
-		int keyword = -1;
+		String keyword = null;
 
 		if(null != request.getParameter("idx") && request.getParameter("idx") != "") {
 			idx = Integer.parseInt(request.getParameter("idx"));
@@ -38,7 +38,7 @@ public class ManagerInquiryViewCommand implements Command {
 		System.out.println("idx : " + idx);
 		
 		if(request.getParameter("keyword") != null && request.getParameter("keyword") != "") {
-			keyword = Integer.parseInt(request.getParameter("keyword"));
+			keyword = request.getParameter("keyword");
 		}
 		System.out.println("keyword : " + keyword);
 		

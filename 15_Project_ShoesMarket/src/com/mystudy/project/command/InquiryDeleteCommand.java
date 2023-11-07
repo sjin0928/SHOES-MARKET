@@ -25,7 +25,7 @@ public class InquiryDeleteCommand implements Command {
 		System.out.println(passwordConfirm);
 		int cPage = 1;
 		int idx = -1;
-		int keyword = -1;
+		String keyword = null;
 		if(request.getParameter("cPage")!="") {
 			cPage = Integer.parseInt(request.getParameter("cPage"));
 		}		
@@ -36,7 +36,7 @@ public class InquiryDeleteCommand implements Command {
 		}
 		System.out.println(idx);
 		if(request.getParameter("keyword") != "") {
-			keyword = Integer.parseInt(request.getParameter("keyword"));
+			keyword = request.getParameter("keyword");
 		}
 		System.out.println(keyword);
 		int inquiryNum = Integer.parseInt(request.getParameter("inquiryNum"));
@@ -57,7 +57,7 @@ public class InquiryDeleteCommand implements Command {
 		
 		System.out.println("inquiryDelete vo : " + vo );
 		
-		int result = InquiryDAO.inquiryDelete(inquiryNum);
+		int result = InquiryDAO.inquiryDelete(vo.getInquiryNum());
 		request.setAttribute("result", result);
 		
 		System.out.println(result);

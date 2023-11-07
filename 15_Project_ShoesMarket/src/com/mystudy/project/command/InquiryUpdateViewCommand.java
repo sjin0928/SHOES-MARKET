@@ -30,7 +30,7 @@ public class InquiryUpdateViewCommand implements Command {
 		int inquiryNum = Integer.parseInt(request.getParameter("inquiryNum"));
 		
 		int idx = -1;
-		int keyword = -1;
+		String keyword = null;
 		System.out.println("inquiryNum : " + inquiryNum + ", cPage : " + cPage
 				 + ", idx : " + idx+ ", keyword : " + keyword);
 		if(request.getParameter("idx") == null) {
@@ -39,9 +39,9 @@ public class InquiryUpdateViewCommand implements Command {
 			idx = Integer.parseInt(request.getParameter("idx"));
 		}
 		if(request.getParameter("keyword") == null) {
-			keyword = -1;
+			keyword = null;
 		} else if(request.getParameter("keyword") != null) {
-			keyword = Integer.parseInt(request.getParameter("keyword"));
+			keyword = request.getParameter("keyword");
 		}
 
 		

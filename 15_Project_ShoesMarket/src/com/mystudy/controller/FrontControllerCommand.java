@@ -63,10 +63,12 @@ import com.mystudy.project.command.NoticeSearchCommand;
 import com.mystudy.project.command.NoticeViewCommand;
 import com.mystudy.project.command.ProductDetailCommand;
 import com.mystudy.project.command.ProductWriteCommand;
+import com.mystudy.project.command.PumaCommand;
 import com.mystudy.project.command.PurchaseCommand;
 import com.mystudy.project.command.RegisterCommand;
 import com.mystudy.project.command.SearchCommand;
 import com.mystudy.project.command.ToCartCommand;
+import com.mystudy.project.command.VansCommand;
 import com.mystudy.project.command.itemUpdateCommand;
 
 
@@ -123,6 +125,12 @@ public class FrontControllerCommand extends HttpServlet {
 		}
 		if("converse".equals(type)) {
 			command = new ConverseCommand();
+		}
+		if("vans".equals(type)) {
+			command = new VansCommand();
+		}
+		if("puma".equals(type)) {
+			command = new PumaCommand();
 		}
 		if ("myInfo".equals(type)) { // 주문 내역 , 고객이 작성한 게시물 내역 조회하는 곳 , 여기서 개인정보 수정하러 가는 곳 있음
 			command = new MyInfoCommand();

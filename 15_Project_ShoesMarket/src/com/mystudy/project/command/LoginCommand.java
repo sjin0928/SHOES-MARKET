@@ -30,8 +30,9 @@ public class LoginCommand implements Command {
 		if(cusId.equals(adminVo.getAdminId()) && cusPassword.equals(adminVo.getAdminPassword())) {
 			System.out.println(">> 관리자 로그인 완료");
 			session.setAttribute("adminVo", adminVo);
-			return "managerMain.jsp";
-		}
+			
+			return "controller?type=itemBulletinBoard";
+		} 
         
 		// 아이디랑 , 비번 둘 중 하나라도 입력 안 했을 시 로그인 페이지로 이동 
         if (cusId != null && !cusId.trim().isEmpty()) {

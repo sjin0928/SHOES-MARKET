@@ -1,0 +1,742 @@
+@charset "UTF-8";
+
+
+
+h1 {
+	text-align: center;
+	color: #333;
+}
+
+.order-summary, .payment-details {
+	margin: 20px 0;
+}
+
+
+.table-container {
+    border: 1px solid #ddd; 
+    border-radius: 10px; 
+    background-color: transparent; 
+    padding: 10px; 
+}
+
+
+.table-container table {
+    width: 100%; 
+    border-collapse: collapse; 
+    background-color: transparent; 
+}
+
+/* 테이블 셀 스타일 */
+.table-container th, .table-container td {
+    border: 1px solid #ddd; /* 셀 테두리 설정 */
+    padding: 10px;
+    text-align: left;
+}
+
+.table-container th {
+    background-color: #f2f2f2; /* 테이블 헤더 배경색 설정 */
+}
+
+<!-- -->
+
+
+input, label, select, button, textarea {
+  display: inline-block;
+  margin: 0;
+  border: 0;
+  padding: 0;
+  width: auto;
+  vertical-align: middle;
+  white-space: normal;
+  line-height: inherit;
+  background: none;
+  /* Browsers have different default form fonts */
+  color: inherit;
+  font-size: inherit;
+  font-family: inherit;
+}
+
+input[type="reset"], input[type="button"], input[type="submit"], input[type="checkbox"], input[type="radio"], select {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+input {
+  /* Make webkit render the search input like a normal text field */
+  /* Turn off the recent search for webkit. It adds about 15px padding on the left */
+  /* Fix IE7 display bug */
+  /* These elements are usually rendered a certain way by the browser */
+}
+input:focus {
+  outline: 0;
+}
+input[type="checkbox"], input[type="radio"] {
+  width: 13px;
+  height: 13px;
+}
+input[type="search"] {
+  -webkit-appearance: textfield;
+  -webkit-box-sizing: content-box;
+}
+::-webkit-search-decoration {
+  display: none;
+}
+input[type="reset"], input[type="button"], input[type="submit"] {
+  overflow: visible;
+}
+
+select[multiple] {
+  vertical-align: top;
+}
+
+button {
+  background: none;
+  border: 0;
+  outline: none;
+  /* IE8 and FF freak out if this rule is within another selector */
+}
+button::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+button:hover, button:active, button:focus {
+  outline: 0;
+}
+::-webkit-file-upload-button {
+  padding: 0;
+  border: 0;
+  background: none;
+}
+
+textarea {
+  /* Move the label to the top */
+  vertical-align: top;
+  /* Turn off scroll bars in IE unless needed */
+  overflow: auto;
+}
+
+fieldset {
+  border: none;
+  padding: 0;
+}
+
+fieldset h3 {
+  text-align: center;
+}
+fieldset ul {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  max-width: 200px;
+  padding: 0;
+  margin: 20px auto;
+}
+fieldset ul li.card-info {
+  width: 40px;
+}
+
+body {
+  color: #4d4d58;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 1rem;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+.slash::after {
+  content: "";
+  background-color: #85868b;
+  width: 1px;
+  height: 16px;
+  position: absolute;
+  transform: rotate(16deg);
+  bottom: 0px;
+  left: 50%;
+}
+
+.paymentpage-wrapper {
+  max-width: 450px;
+  border: 1px solid #f3f3f3;
+  border-radius: 3px;
+  margin: 0 auto;
+  padding: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.wrapper {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+}
+@media only screen and (max-width: 479px) {
+  .wrapper {
+    flex-flow: column;
+  }
+}
+
+label {
+  color: #85868b;
+  margin: 0 0 15px 0;
+  font-size: 14px;
+}
+
+.control {
+  margin-bottom: 1.2rem;
+  display: block;
+  position: relative;
+  width: 100%;
+}
+.control--inline {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+}
+.control--inline label {
+  width: 100%;
+  display: block;
+}
+.control--inline.expiry {
+  width: 92%;
+}
+@media only screen and (max-width: 479px) {
+  .control--inline.expiry {
+    width: 100%;
+  }
+}
+.control--inline.expiry input {
+  width: 45%;
+}
+.control input {
+  border-bottom: 1px solid #dbdbdb;
+  width: 100%;
+}
+
+.field {
+  display: flex;
+  flex-flow: column;
+  margin-bottom: 0.325em;
+  position: relative;
+  width: 100%;
+  justify-content: space-around;
+}
+.field--inline {
+  flex-flow: row;
+}
+.field--inline label {
+  flex-basis: 100%;
+}
+.field--wrapper {
+  display: flex;
+}
+
+.card-info {
+  width: 56px;
+  height: 28px;
+  display: block;
+  text-align: center;
+}
+.card-info.default {
+  background: url("../images/ic-card-default.png") no-repeat center;
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: 35px auto;
+}
+.card-info.amex {
+  background: url("../images/ic-card-amex.png") no-repeat center;
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: 35px auto;
+}
+.card-info.diners-club {
+  background: url("../images/ic-card-diners-club.png") no-repeat center;
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: 35px auto;
+}
+.card-info.discover {
+  background: url("../images/ic-card-discover.png") no-repeat center;
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: 35px auto;
+}
+.card-info.mastercard {
+  background: url("../images/ic-card-mastercard.png") no-repeat center;
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: 35px auto;
+}
+.card-info.visa {
+  background: url("../images/ic-card-visa.png") no-repeat center;
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: 35px auto;
+}
+
+input[type="button"],
+input[type="submit"],
+button[type="submit"] {
+  display: block;
+  width: 70%;
+  margin: 0 auto;
+  background: #4d4d58;
+  color: white;
+  padding: 10px 5px;
+  font-size: 16px;
+  font-weight: 700;
+  opacity: 1;
+  height: auto;
+  text-align: center;
+  cursor: pointer;
+  display: block;
+  border-radius: 4px;
+}
+
+button.disabled {
+  opacity: 0.5;
+}
+
+.secure-transaction {
+  color: #85868b;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 14px;
+  max-width: 230px;
+  margin: 20px auto 0 auto;
+  justify-content: space-around;
+}
+
+.lock {
+  border-radius: 3px;
+  width: 17px;
+  height: 13px;
+  border: 3px solid #514d58;
+  position: relative;
+  transform: scale(0.75);
+}
+.lock:before {
+  content: "";
+  display: block;
+  position: absolute;
+  border: 3px solid #514d58;
+  top: -14px;
+  left: 1.3px;
+  width: 9px;
+  height: 8px;
+  border-radius: 35px 35px 0 0;
+}
+
+small.error {
+  position: relative;
+  color: #ef476f;
+  margin-top: 6px;
+}
+
+#expiryMM-error, #expiryYY-error {
+  top: -16px;
+}
+
+#securityCode-error {
+  top: -20px;
+}
+
+.loading {
+  position: relative;
+  z-index: 0;
+  max-width: 450px;
+  min-height: 400px;
+}
+@media screen and (max-width: 767px) {
+  .loading {
+    min-height: 500px;
+  }
+}
+.loading:before {
+  display: flex;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: center;
+  background-image: url("../images/three-dots.svg");
+  background-size: 40px auto;
+  background-repeat: no-repeat;
+  background-position: center center;
+  content: 'Please wait...';
+  text-align: center;
+  padding-top: 40px;
+  z-index: 10;
+}
+@media screen and (max-width: 767px) {
+  .loading:before {
+    background-position: center center;
+  }
+}
+@media screen and (max-width: 578px) {
+  .loading:before {
+    background-position: center center;
+  }
+}
+
+.hideSecurityCode{
+  display:none;
+}
+.editPen{
+  min-height: 22px;
+  min-width:22px;
+  margin-left: auto;
+  background-image: url("../images/fa-pen.svg");
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: 20px 20px;
+}
+
+/*Alert Icon*/
+.paymentpage-wrapper h3 {
+  text-align: center;
+  margin: 2% 0 7% 0;
+}
+.paymentpage-wrapper .alert-row {
+  width: 100%;
+  min-height: 85px;
+  margin-top: 5%;
+}
+.paymentpage-wrapper .alert-row .alert-wrapper {
+  width: 60px;
+  margin: auto;
+}
+.paymentpage-wrapper .alert-row .alert-circle {
+  width: 0;
+  height: 0;
+  border: 30px solid #FFC300;
+  border-bottom: 30px solid #FFC300;
+  border-radius: 50%;
+  animation: alert-circle 3s infinite;
+  -webkit-animation: alert-circle 3s infinite;
+}
+.paymentpage-wrapper .alert-row .alert-exclamation::before {
+  content: "!";
+}
+.paymentpage-wrapper .alert-row .alert-exclamation {
+  line-height: 50px;
+  font-size: 35px;
+  font-weight: 900;
+  margin-top: -55px;
+  text-align: center;
+  color: #fff;
+  font-family: Impact;
+  overflow: hidden;
+  height: 0px;
+  animation: alert-exclamation 3s infinite;
+  -webkit-animation: alert-exclamation 3s infinite;
+}
+@keyframes alert-circle {
+  0% {
+    border-left-width: 0px;
+    border-right-width: 0px;
+    margin-left: 30px;
+  }
+  50% {
+    border-left-width: 30px;
+    border-right-width: 30px;
+    margin-left: 0px;
+  }
+}
+@keyframes alert-exclamation {
+  50% {
+    height: 0px;
+  }
+  100% {
+    height: 50px;
+  }
+}
+
+/*max-attempt Icon*/
+.paymentpage-wrapper .max-attempt_wrapper {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+}
+.paymentpage-wrapper .text-center {
+  text-align: center;
+}
+.paymentpage-wrapper .max-attempt_wrapper .confirmation-subscribed {
+  margin: 0 auto;
+  padding: 1rem;
+  width: 388px;
+}
+.paymentpage-wrapper .max-attempt_wrapper .confirmation-subscribed h2 {
+  color: #26547c;
+  text-transform: uppercase;
+  font-size: 20px;
+}
+.paymentpage-wrapper .max-attempt_wrapper .confirmation-subscribed .btn {
+  width:80%;
+  margin: 0 auto;
+  padding: 10px 5px;
+  font-size: 16px;
+  font-weight: 700;
+  opacity: 1;
+  height: auto;
+  text-align: center;
+  cursor: pointer;
+  display: block;
+  border-radius: 3px;
+  text-decoration: none;
+}
+.paymentpage-wrapper .max-attempt_wrapper .confirmation-subscribed .btn-secondary {
+  color: #fff;
+  background-color: #869cb4;
+}
+.paymentpage-wrapper .max-attempt_wrapper .confirmation-subscribed .terms {
+  color: #85868b;
+}
+.paymentpage-wrapper .max-attempt_wrapper .confirmation-subscribed .terms a {
+  color: #85868b;
+  
+}
+.paymentpage-wrapper .max-attempt_wrapper .confirmation-subscribed .info-icon {
+  margin: 1.5rem auto;
+  max-width: 60px;
+  max-height: 60px;
+}
+.paymentpage-wrapper .payment-succeed_wrapper .succeed-icon{
+    margin:1.5rem auto;
+  }
+
+
+.paymentpage-wrapper .tooltip-right{
+  position: absolute;
+  top: 1.6rem;
+  right: calc(1.2rem);
+}
+.tooltip-icon:before {
+  content: url(../images/question-circle.svg);
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  position: relative;
+  color: #85868b;
+  z-index: 1;
+  font-size: 1.2rem;
+}
+.tooltip-icon:hover .tooltip {
+  visibility: visible;
+}
+.tooltip{
+  visibility: hidden;
+  right: 0%;
+  top: -4px;
+  width: 120px;
+  transform: translateX(0%) translateY(-100%);
+  background: rgba(0,0,0,0.8);
+  text-align: left;
+  color: #fff;
+  padding: 0.65rem;
+  font-size: 14px;
+  line-height: 1.2;
+  max-width: 250px;
+  pointer-events: none;
+  z-index: 99;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+}
+.tooltip:before{
+  content: "";
+  position: absolute;
+  bottom: -3px;
+  right: 5px;
+  transform: translateX(0%);
+  border-width: 4px 6px 0 6px;
+  border-style: solid;
+  border-color: rgba(0,0,0,0.8) transparent transparent transparent;
+  z-index: 99;
+}
+
+.tooltip-text{
+  background-image: url(../images/ic-card-back.svg);
+  background-position: 1rem 1rem;
+  background-repeat: no-repeat;
+  padding: 1rem 1rem 1.5rem 4.5rem;
+  position: absolute;
+}
+
+
+.paymengt_card-detail{
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin-bottom: 20px;
+  border: 0;
+  border-bottom: 1px solid #C6C6C6;
+}
+ .card-detail{
+  font-family:"Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 21px;
+  line-height: 40px;
+  color: #333333;
+}
+.payment_button-goBack{
+  float:right;
+  margin-top:8px;
+  display:block;
+  position:relative;
+  color:#ffffff;
+  background-color:#000000;
+  border-radius:3px;
+  padding:2px 10px;
+  font-size:14px;
+  outline:none;
+}
+
+/* Center align the "결제 완료" section */
+
+/* Center the button horizontally */
+button {
+  display: block;
+  margin: 0 auto;
+  margin-top: 20px; 
+}
+
+body {
+   display: flex;
+   flex-direction: column;
+   justify-content: left-center;
+   align-items: center;
+   height: 100vh; 
+}
+
+/* animation style */
+body {
+      font-family: sans-serif;
+      background: white;
+      color: #808080;
+      text-align: center;
+    }
+
+    .animation-ctn {
+      text-align: center;
+      margin-top: 5em;
+    }
+
+    @-webkit-keyframes checkmark {
+      0% {
+        stroke-dashoffset: 100px
+      }
+
+      100% {
+        stroke-dashoffset: 200px
+      }
+    }
+
+    @-ms-keyframes checkmark {
+      0% {
+        stroke-dashoffset: 100px
+      }
+
+      100% {
+        stroke-dashoffset: 200px
+      }
+    }
+
+    @keyframes checkmark {
+      0% {
+        stroke-dashoffset: 100px
+      }
+
+      100% {
+        stroke-dashoffset: 0px
+      }
+    }
+
+    @-webkit-keyframes checkmark-circle {
+      0% {
+        stroke-dashoffset: 480px
+      }
+
+      100% {
+        stroke-dashoffset: 960px;
+      }
+    }
+
+    @-ms-keyframes checkmark-circle {
+      0% {
+        stroke-dashoffset: 240px
+      }
+
+      100% {
+        stroke-dashoffset: 480px
+      }
+    }
+
+    @keyframes checkmark-circle {
+      0% {
+        stroke-dashoffset: 480px
+      }
+
+      100% {
+        stroke-dashoffset: 960px
+      }
+    }
+
+    @keyframes colored-circle {
+      0% {
+        opacity: 0
+      }
+
+      100% {
+        opacity: 100
+      }
+    }
+
+    /* other styles */
+    /* .svg svg {
+    display: none
+}
+ */
+    .inlinesvg .svg svg {
+      display: inline
+    }
+
+    /* .svg img {
+    display: none
+} */
+    .icon--order-success svg polyline {
+      -webkit-animation: checkmark 0.25s ease-in-out 0.7s backwards;
+      animation: checkmark 0.25s ease-in-out 0.7s backwards
+    }
+
+    .icon--order-success svg circle {
+      -webkit-animation: checkmark-circle 0.6s ease-in-out backwards;
+      animation: checkmark-circle 0.6s ease-in-out backwards;
+    }
+
+    .icon--order-success svg circle#colored {
+      -webkit-animation: colored-circle 0.6s ease-in-out 0.7s backwards;
+      animation: colored-circle 0.6s ease-in-out 0.7s backwards;
+    }
+
+    h1 {
+      margin-top: 25px;
+      font-size: 18px;
+      font-family: sans-serif;
+    }
+
+    p {
+      margin-top: 15px;
+      font-size: 14px;
+      font-family: sans-serif;
+    }
+    
+    h2 {
+      text-align: left;
+    }

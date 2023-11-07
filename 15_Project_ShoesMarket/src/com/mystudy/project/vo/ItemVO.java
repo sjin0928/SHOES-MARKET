@@ -13,6 +13,7 @@ public class ItemVO {
 	private Date modDate;
 	private String brand;
 	private String itemStatus;
+	private int quantity; 
 
 	public ItemVO() {}
 	
@@ -40,7 +41,7 @@ public class ItemVO {
 	}
 
 	public ItemVO(int itemNum, String name, int price, int stock, String imagePath,
-			String itemDetail, Date regDate, Date modDate, String brand, String itemStatus) {
+			String itemDetail, Date regDate, Date modDate, String brand, String itemStatus, int quantity) {
 		super();
 		this.itemNum = itemNum;
 		this.name = name;
@@ -52,6 +53,7 @@ public class ItemVO {
 		this.modDate = modDate;
 		this.brand = brand;
 		this.itemStatus = itemStatus;
+		this.quantity = quantity;
 		
 	}
 

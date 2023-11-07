@@ -54,7 +54,7 @@ function order_go() {
 	<!-- List가 아닌 ItemVO 타입 전달받음 ! (${itemVo.name }) -->
 	
 
-    
+    <br><br><br>
     <!-- ------------------------------------------------------------------------ -->
     <div id="cart" class="mx-auto" style="width:1000px; ">
     	<div class="th">
@@ -104,7 +104,7 @@ function order_go() {
 	    </form>
     
     </div>
-    
+    <br><br><br>
     <!-- ------------------------------------------------------------------------ -->
     
     <%@ include file="include/footer.jspf" %>

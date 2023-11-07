@@ -11,6 +11,18 @@ public class OrderItemsVO {
 	private Date regDate;
 
 	public OrderItemsVO() {}
+	
+	
+
+	public OrderItemsVO(int itemNum, int buyNum, int quantity, int price) {
+		super();
+		this.itemNum = itemNum;
+		this.buyNum = buyNum;
+		this.quantity = quantity;
+		this.price = price;
+	}
+
+
 
 	public OrderItemsVO(int orderItemNum, int itemNum, int buyNum, int quantity, int price, Date regDate) {
 		super();

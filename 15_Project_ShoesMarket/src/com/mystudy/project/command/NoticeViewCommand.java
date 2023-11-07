@@ -33,7 +33,7 @@ public class NoticeViewCommand implements Command {
 		
 		
 		int idx = -1;
-		int keyword = -1;
+		String keyword = null;
 
 		if(request.getParameter("idx") != "") {
 			idx = Integer.parseInt(request.getParameter("idx"));
@@ -41,7 +41,7 @@ public class NoticeViewCommand implements Command {
 		System.out.println("idx : " + idx);
 		
 		if(request.getParameter("keyword") != "") {
-			keyword = Integer.parseInt(request.getParameter("keyword"));
+			keyword = request.getParameter("keyword");
 		}
 		System.out.println("keyword : " + keyword);
 		

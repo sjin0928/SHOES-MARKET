@@ -12,7 +12,7 @@
 <script>
 
 	function update_go(){
-		alert("update_go() 시작");
+		//alert("update_go() 시작");
 		let form = document.forms["myItemForm"];
 
 		form.action ="controller?type=itemUpdate";
@@ -20,7 +20,7 @@
 	}
 	
 	function delete_go(){
-		alert("delete_go() 시작");
+		//alert("delete_go() 시작");
 		location.href ="controller?type=itemDelete";
 	}
 	

@@ -9,6 +9,23 @@ import com.mystudy.project.vo.CartVO;
 
 public class CartDAO {
 	
+	// 주문 시, 해당 제품 장바구니 리스트에서 삭제 
+	public static int deleteCartItem(int cartNum) {
+		SqlSession ss = null;
+		int result = -1;
+
+		try {
+			ss = DBService.getFactory().openSession(true);
+			result = ss.delete("shoesmarket.deleteCartItem", cartNum);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			ss.close();
+		}
+		
+		return result;
+	}
+	
 	// 장바구니 담기 
 	public static int putCart(CartVO cartVo) {
 		SqlSession ss = null;
@@ -56,11 +73,19 @@ public class CartDAO {
 	}
 
     
-    // 장바구니 수량 업데이트
-    public static int updateCart(CartVO vo) {
-        SqlSession ss = DBService.getFactory().openSession(true);
-        int result = ss.update("shoesmarket.cartUpdate", vo);
-        ss.close();
+	// 장바구니 수량 업데이트 (10/28 예외처리 추가)
+	public static int updateCart(CartVO vo) {
+        SqlSession ss = null;
+        int result =  1;	
+        
+        try {
+        	ss = DBService.getFactory().openSession(true);
+        	result = ss.update("shoesmarket.cartUpdate", vo);
+        } catch (Exception e) {
+        	e.printStackTrace();
+        } finally {
+        	ss.close();
+        }
         return result;
     }
 	
