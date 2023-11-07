@@ -37,8 +37,8 @@
 신발 구매 사이트는 다른 사이트에도 있는 기본 기능(로그인, 회원가입 등)은 다 갖추고 있으며, 다양한 브랜드가 입점되어 있어 다양한 검색 기능을 만들 수 있다고 생각했습니다.<br>
 </p>
 
+<div>
 <h3>4. 프로젝트 설계</h3>
-<p>
   &nbsp<h4>1) 요구사항 명세서</h4>
   &nbsp&nbsp<a href="https://www.notion.so/cd11c361c83d4c30bc6ee9faeaf0342f?v=ff682c6147644b7ca0da413389245086&pvs=4">요구사항 명세서</a>
   &nbsp<h4>2) 화면구현</h4>
@@ -50,7 +50,7 @@
   &nbsp&nbsp<a href="https://share.balsamiq.com/c/vB9Ku8AbA2cptHSioPZdNY.png">마이페이지</a><br>
   &nbsp&nbsp<a href="https://share.balsamiq.com/c/r44SBrLUh9cvN9CGexULCX.png">고객센터 및 게시판</a><br>
   &nbsp&nbsp<a href="https://share.balsamiq.com/c/mwSvBNNghazwSA2T1FV1gs.png">관리자페이지 화면구현</a><br>
-<p>
+</div>
 
 <h3>5. 개발 후기</h3>
 <p>
