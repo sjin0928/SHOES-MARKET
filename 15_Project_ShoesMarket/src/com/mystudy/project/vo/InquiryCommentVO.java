@@ -8,6 +8,7 @@ public class InquiryCommentVO {
 	private String contents;
 	private Date regDate;
 	private Date modDate;
+	private int cusNum;
 	
 	public InquiryCommentVO() {}
 
@@ -18,6 +19,7 @@ public class InquiryCommentVO {
 		this.contents = contents;
 		this.regDate = regDate;
 		this.modDate = modDate;
+		this.cusNum = cusNum;
 	}
 
 	public int getIqCommentNum() {
@@ -60,10 +62,18 @@ public class InquiryCommentVO {
 		this.modDate = modDate;
 	}
 
+	public int getCusNum() {
+		return cusNum;
+	}
+
+	public void setCusNum(int cusNum) {
+		this.cusNum = cusNum;
+	}
+
 	@Override
 	public String toString() {
 		return "InquiryCommentVO [iqCommentNum=" + iqCommentNum + ", inquiryNum=" + inquiryNum + ", contents="
-				+ contents + ", regDate=" + regDate + ", modDate=" + modDate + "]";
+				+ contents + ", regDate=" + regDate + ", modDate=" + modDate + ", cusNum=" + cusNum + "]";
 	}
 
 }

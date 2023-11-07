@@ -62,7 +62,7 @@
 		</div>
 		<div class="form-group">
 			<label for="password">내용</label>
-			<textarea class="form-control" name="text" title="내용" id="exampleFormControlTextarea1" rows="5" "></textarea>
+			<textarea class="form-control" name="contents" title="내용" id="exampleFormControlTextarea1" rows="5" "></textarea>
 		</div>
 		<div class="form-group">
 			<label for="password">비밀번호 확인</label>

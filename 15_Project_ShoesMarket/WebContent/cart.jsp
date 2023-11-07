@@ -7,17 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>장바구니</title>
+<!-- 이거 -->
 <script>
-	
-	function go_main() {
-		window.location.href = "main.jsp";
-	}
-	
-	function go_login() {
-		//location.href = "list.jsp";
-		location.href = "login";
-	}
-	
 	function go_before() {
 	    window.history.back(); // 이전 페이지로 이동
 	}
@@ -26,18 +17,20 @@
 	// F12 개발자도구에서 document.getElementsByName("selectedItems") 전달값 확인하기
 	// "구매하기" 버튼 클릭
     function buySelectedItems() {
-        var selectedItems = [];
+        var selectedItems = []; // 체크된 체크박스의 값을 저장할 배열 
         var checkboxes = document.getElementsByName("selectedItems");
-
+		alert(checkboxes);
      	//존재 여부 확인
+     	
+     	// 체크가 될 때 실행 
         if (checkboxes && checkboxes.length > 0) {
             for (var i = 0; i < checkboxes.length; i++) {
                 if (checkboxes[i].checked) {
-                    selectedItems.push(checkboxes[i].value);
+                    selectedItems.push(checkboxes[i].value); // value = cartNum
                 }
             }
-        
-            if (selectedItems.length > 0) {
+            
+            if (selectedItems.length > 0) { 
                 var selectedItemsParam = selectedItems.join(',');
                 location.href = "controller?type=buy&selectedItems=" + encodeURIComponent(selectedItemsParam);
             }
@@ -110,7 +103,7 @@
 	    }
 	}
 	
-	// 1-2. HTML 문서 로드될 때 실행되는 코드
+	// 1-2. HTML 문서가 완전히 로드될 때 실행!
 	window.onload = function() {
 	    var checkboxes = document.querySelectorAll('input[name="selectedItems"]');
 	    checkboxes.forEach(function(checkbox) {
@@ -119,7 +112,33 @@
 	            toggleSelection(cartNum);
 	        });
 	    });
+	    
+	// 전체 선택 체크박스 이벤트 핸들러 추가 (10/28 전체선택 토글 기능 추가!)
+	    var selectAllCheckbox = document.getElementById("selectAll");
+	    selectAllCheckbox.addEventListener("click", toggleAllSelection);
 	};
+
+	// toggleAllSelection 함수 (10/28 전체선택 토글 기능 추가!)
+	function toggleAllSelection() {
+	    var checkboxes = document.querySelectorAll('input[name="selectedItems"]');
+	    var selectAllCheckbox = document.getElementById("selectAll");
+
+	    if (selectAllCheckbox.checked) {
+	        checkboxes.forEach(function (checkbox) {
+	            checkbox.checked = true;
+	            var cartNum = checkbox.value;
+	            toggleSelection(cartNum);
+	        });
+	    } else {
+	        checkboxes.forEach(function (checkbox) {
+	            checkbox.checked = false;
+	            var cartNum = checkbox.value;
+	            toggleSelection(cartNum);
+	        });
+	    }
+	}
+	
+	
 	//----------------------------------------------
 
 	// Delete 기능 수행 (Ajax)
@@ -183,6 +202,7 @@
 
 </script>
 <style>
+	
 	table {
         width: 100%;
         border-collapse: collapse;
@@ -205,7 +225,7 @@
     }
     
     button {
-        background-color: #007BFF;
+        background-color: #eda1ad; /* 버튼 색상 변경 */
         color: #fff;
         border: none;
         padding: 5px 10px;
@@ -243,33 +263,36 @@
 </style>
 </head>
 <body>
-    <button onclick="go_main()">HOME</button>
+	<h2>cart.jsp</h2>
+	<!-- 10/28 합치기 전에 가지고 있던 상단 버튼 제거 -->
+      <button onclick="go_main()">HOME</button>
     <button onclick="go_login()">로그인</button>
 
-    <h1>장바구니 [ cart.jsp ]</h1>
-    <form id="cart" action="buy.jsp" method="post">
+    <form id="cart" method="post">
         <div id="cartListContainer">
             <table border=bold>
                 <thead>
-                    <tr>
-                        <th width="50">선택</th>
-                        <th width="70">상품번호</th>
+                    <tr>   <!-- 10/28 테이블 데이터 정보 잘 나오게끔 수정함! + 전체 선택 토글 추가! -->
+                       <th width="50">
+                        <input type="checkbox" id="selectAll" onclick="toggleAllSelection()">
+                    </th>
                         <th width="200">상품명</th>
-                        <th width="200">상품설명</th>
                         <th width="100">가격</th>
                         <th width="95">수량</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <c:forEach var="vo" items="${cartList}">
+                    <c:forEach var="vo" items="${cartList}" varStatus="cartStatus">
                         <tr>
+                        	<!-- 체크박스 -->
                             <td>
                                 <input type="checkbox" name="selectedItems" value="${vo.cartNum}">
                             </td>
-                            <td>${vo.cartNum}</td>
-                            <td>${vo.itemNum}</td>
-                            <td>${vo.cusNum}</td>
-                            <td>${vo.cartQuantity}</td>
+                            <!-- 상품명 -->
+                            <td>${itemList[cartStatus.index].price }</td>
+                            <!-- 가격 -->
+                            <td>${itemList[cartStatus.index].name }</td>
+                            <!-- 수량 -->
                             <td>
                                 <div class="quantity-controls">
                                     <button type="button" style="font-size: 12px; padding: 3px;" onclick="decreaseQuantity(${vo.cartNum})">-</button>
@@ -279,15 +302,36 @@
                             </td>
                         </tr>
                     </c:forEach>
-                    <c:forEach var="itemVo" items="${itemList}">
-                    	<p>${itemVo.itemNum}</p>
-                    	<p>${itemVo.name}</p>
-                    	<p>${itemVo.price}</p>
-                    	<p>${itemVo.itemDetail}</p>
-                    </c:forEach>
+ 
                 </tbody>
             </table>
         </div>
+        
+        
+        <!-- 샘플 테이블 -->
+      <%--   <br><br>
+        <table>
+        	<thead>
+        		<tr>
+        			<th>상품명</th>
+        			<th>가격</th>
+        			<th>수량</th>
+        		</tr>
+        	</thead>
+        	<tbody>
+        		<c:forEach var="vo" items="${cartList}"  >
+        		<tr>
+        			<td>
+        				<input type="checkbox" name="selectedItems" value="${vo.cartNum}">
+        			</td>
+        			<td>${itemList[cartStatus.index].name }</td>
+        			<td>${itemList[cartStatus.index].price }</td>
+        			<td>${vo.cartQuantity }</td>
+        		</tr>
+        		</c:forEach>
+        	
+        	</tbody>
+        </table> --%>
 
         <div style="height: 10px; background-color: white;"></div>
         <button type="button" onclick="deleteSelectedItems()" style="margin-right: 5px;">선택한 아이템 삭제</button>
@@ -297,5 +341,6 @@
             <button type="button" onclick="buySelectedItems()" style="margin-right: 5px;">구매하기</button>
         </div>
     </form>
+    
 </body>
 </html>

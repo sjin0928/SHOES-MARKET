@@ -9,8 +9,24 @@ import org.apache.ibatis.session.SqlSession;
 import com.mystudy.project.mybatis.DBService;
 import com.mystudy.project.vo.InquiryVO;
 
-/* 231024 박수진 */
 public class InquiryDAO {
+	// 내가 쓴 게시글 조회
+	public static List<InquiryVO> getInquiryList(int cusNum){
+		SqlSession ss = null;
+		List<InquiryVO> inquiryList = null;
+		
+		try {
+			ss = DBService.getFactory().openSession();
+			inquiryList = ss.selectList("shoesmarket.getInquiryList", cusNum);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			ss.close();
+		}
+		
+		return inquiryList;
+	}
+	//박수진
 
 	//게시글 전체 건수 조회
 	public static int getTotalCount() {
@@ -182,7 +198,25 @@ public class InquiryDAO {
 		}
 		return result;
 	}
-	// 게시글 작성
+	// 게시글 작성 (파일O)
+	public static int inquiryWriteFile(InquiryVO vo) {
+		SqlSession ss = null;
+		int result = -1;
+		
+		try {
+			ss = DBService.getFactory().openSession(true);
+			result = ss.insert("shoesmarket.inquiryWriteFile", vo);
+			System.out.println("result" + result);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (ss != null) {
+				ss.close();
+			}
+		}
+		return result;
+	}
+	// 게시글 작성(파일x)
 	public static int inquiryWrite(InquiryVO vo) {
 		SqlSession ss = null;
 		int result = -1;
@@ -216,8 +250,5 @@ public class InquiryDAO {
 			}
 		}
 		return itemNum;
-		
 	}
-	
-	
 }

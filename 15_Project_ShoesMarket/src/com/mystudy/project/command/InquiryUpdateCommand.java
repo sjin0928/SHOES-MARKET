@@ -5,8 +5,10 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.mystudy.project.dao.InquiryDAO;
+import com.mystudy.project.vo.CustomerVO;
 import com.mystudy.project.vo.InquiryVO;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
@@ -19,6 +21,16 @@ public class InquiryUpdateCommand implements Command {
 		
 		String path = "C:\\temp";
 		System.out.println("> path : " + path);
+		
+		// 세션에 저장된 로그인 정보
+		HttpSession session = request.getSession();
+		CustomerVO customer = null;
+		if(session.getAttribute("customer") != null) {
+			customer = (CustomerVO)session.getAttribute("customer");
+		}
+		if(customer == null) {
+			return "not_login.jsp";
+		}
 		
 		MultipartRequest mr = new MultipartRequest(
 			request, //요청객체
@@ -57,7 +69,7 @@ public class InquiryUpdateCommand implements Command {
 			keyword = Integer.parseInt(mr.getParameter("keyword"));
 		}
 
-		System.out.println(", cPage : " + cPage
+		System.out.println("cPage : " + cPage
 				 + ", idx : " + idx+ ", keyword : " + keyword);
 		
 		//원래 데이터 확인
@@ -82,8 +94,8 @@ public class InquiryUpdateCommand implements Command {
 			InquiryVO upVO = InquiryDAO.getView(inquiryNum);
 			request.setAttribute("vo", upVO);
 			
-			System.out.println("upVO" + upVO);
-			System.out.println("Up" + Up);
+			System.out.println("upVO : " + upVO);
+			System.out.println("Up : " + Up);
 			
 			return "board_inquiry_view.jsp";
 		} 

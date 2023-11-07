@@ -41,6 +41,7 @@ import com.mystudy.project.command.ItemDetailCommand;
 import com.mystudy.project.command.LoginCommand;
 import com.mystudy.project.command.LogoutCommand;
 import com.mystudy.project.command.MainCommand;
+import com.mystudy.project.command.ManageCustomerCommand;
 import com.mystudy.project.command.ManagerCommentDeleteCommand;
 import com.mystudy.project.command.ManagerCommentWriteCommand;
 import com.mystudy.project.command.ManagerInquiryCommand;
@@ -53,6 +54,7 @@ import com.mystudy.project.command.ManagerNoticeListCommand;
 import com.mystudy.project.command.ManagerNoticeSearchCommand;
 import com.mystudy.project.command.ManagerNoticeUpdateCommand;
 import com.mystudy.project.command.ManagerNoticeUpdateViewCommand;
+import com.mystudy.project.command.MyInfoCommand;
 import com.mystudy.project.command.MypageCommand;
 import com.mystudy.project.command.NewBalCommand;
 import com.mystudy.project.command.NewCommand;
@@ -85,7 +87,6 @@ public class FrontControllerCommand extends HttpServlet {
 		}
 		if ("new".equals(type)) {
 			command = new NewCommand();
-			System.out.println("FrontControllerCommand NewCommand 끝");
 		}
 		if ("best".equals(type)) {
 			command = new BestCommand();
@@ -123,6 +124,12 @@ public class FrontControllerCommand extends HttpServlet {
 		if("converse".equals(type)) {
 			command = new ConverseCommand();
 		}
+		if ("myInfo".equals(type)) { // 주문 내역 , 고객이 작성한 게시물 내역 조회하는 곳 , 여기서 개인정보 수정하러 가는 곳 있음
+			command = new MyInfoCommand();
+		}
+		if("manageCoustomer".equals(type)) { // 관리자가 고객 정보 조회하는 곳 
+			command = new ManageCustomerCommand();
+		}
 		// 효정 -----------------------------------------------
 		if ("customer".equals(type)) {
 			command = new CustomerCommand();
@@ -136,7 +143,7 @@ public class FrontControllerCommand extends HttpServlet {
 		if ("logout".equals(type)) {
 			command = new LogoutCommand();
 		}
-		if ("myPage".equals(type)) {
+		if ("myPage".equals(type)) { // 개인정보 수정
 			command = new MypageCommand();
 		}
 		if ("findId".equals(type)) {
@@ -258,6 +265,7 @@ public class FrontControllerCommand extends HttpServlet {
 		if ("managerNoticeDelete".equals(type)) {
 			command = new ManagerNoticeDeleteCommand();
 		}
+		
 		String path = command.exec(request, response); 
 		request.getRequestDispatcher(path).forward(request, response);
 	}

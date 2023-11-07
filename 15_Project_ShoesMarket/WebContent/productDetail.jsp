@@ -71,12 +71,24 @@ function order_go() {
 						<dt class="tit"></dt>
 						<dd class="desc-container">${itemVo.itemDetail }</dd>
 					</dl>
+					<dl class="item1">
+					<!-- 사이즈 추가할 거면 select name , option value 추가 해야함 -->
+					 <select class="form-select" aria-label="Default select example" style="width:250px; height:25px ">
+					  <option selected>사이즈</option>
+					  <option>230</option>
+					  <option>240</option>
+					  <option>250</option>
+					  <option>260</option>
+					  <option>270</option>
+					  <option >280</option>
+					</select>
+					</dl>
 					<dl class="item1" >
 						<dd class="cart">
 							 수량 
-				            <input type="button" class="amount" value=" - " onclick="del();">
+				            <input type="button" class="amount" value=" - " onclick="del();" style="padding: 3px 3px;">
 				            <input type="text" name="cartQuantity" value="1" size="3" readonly>
-				            <input type="button" class="amount" value=" + " onclick="add();">
+				            <input type="button" class="amount" value=" + " onclick="add();" style="padding: 3px 2px;">
 						</dd>
 					</dl>
 					

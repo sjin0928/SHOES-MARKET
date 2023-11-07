@@ -5,52 +5,56 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>상품관리게시판</title>
-	<!-- 메뉴바 외 코드 -->
+<title>회원관리게시판</title>
+<!-- 메뉴바 외 코드 -->
 	<link href="css/style.css" rel="stylesheet" />
-	
 	<!-- 부트스트랩 -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/lux/bootstrap.min.css" integrity="sha384-9+PGKSqjRdkeAU7Eu4nkJU8RFaH8ace8HGXnkiKMP9I9Te0GJ4/km3L1Z8tXigpG" crossorigin="anonymous">
-	
-<script>
+ <script>
  <%@ include file="include/popup.js" %>
-</script>
+ <%@ include file="include/search.js" %>
+ </script>
 </head>
 <body>
-
-	<%@ include file="include/managerHeader.jspf" %>
-	
-	<!-- ------------------------------------------------------------------------ -->
-	<br><br>
+<%@ include file="include/managerHeader.jspf" %>
+  	
+  	<!-- ------------------------------------------------------------------------ -->
+<br><br>
 	<div  class="container">
 	<h3>회원 관리 게시판</h3>
 	<table class="table table-hover">
 		  <thead>
-		    <tr class="table-active">
-		      <th scope="col" style="width: 10%;">상품번호</th>
-		      <th scope="col" style="width: 15%;">브랜드</th>
-		      <th scope="col" style="width: 15%;">상품명</th>
-		      <th scope="col" style="width: 10%;">가격</th>
-		      <th scope="col" style="width: 20%;">등록일</th>
+		    <tr class="table-active">  
+		      <th scope="col" style="width: 10%;">고객번호</th>
+			  <th scope="col" style="width: 10%;">ID</th>
+			  <th scope="col" style="width: 10%;">비밀번호</th>
+			  <th scope="col" style="width: 10%;">이름</th>
+			  <th scope="col" style="width: 10%;">닉네임</th>
+			  <th scope="col" style="width: 20%;">이메일</th>
+			  <th scope="col" style="width: 15%;">전화번호</th>
+			  <th scope="col" style="width: 20%;">가입일자</th>
 		    </tr>
 		  </thead>
 	  <tbody class="table-group-divider">
 	  <c:choose>
-		<c:when test="${empty list }">
+		<c:when test="${empty allCustomerList }">
 			<tr>
 				<td colspan="5">
-					<h2>현재 등록된 게시글이 없습니다</h2>
+					<h2>가입 고객이 없습니다.</h2>
 				</td>
 			</tr>
 		</c:when>
 		<c:otherwise>
-			<c:forEach var="vo" items="${list }">
+			<c:forEach var="vo" items="${allCustomerList }">
 				<tr>
-					<th>${vo.itemNum }</th>
-					<th>${vo.brand }</th>
-					<th><a href="controller?type=itemDetail&itemNum=${vo.itemNum}">${vo.name }</a></th>
-					<th>${vo.price }</th>
-					<th>${vo.regDate }</th>
+					<th>${vo.cusNum }</th>
+					<th>${vo.cusId }</th>
+					<th>${vo.cusPassword }</th>
+					<th>${vo.cusName }</th>					
+					<th>${vo.cusNickName }</th>
+					<th>${vo.cusEmail }</th>
+					<th>${vo.cusPhoneNum }</th>
+					<th>${vo.cusRegDate }</th>
 				</tr>
 			</c:forEach>
 			</c:otherwise>
@@ -102,10 +106,7 @@
 					</ol>
 					
 				</td>
-				<td>
-					<input type="button" value="상품등록" class="btn btn-primary"
-						onclick="javascript:location.href='itemWrite.jsp'">					
-				</td>
+				
 			</tr>
 		</tfoot>
 		</table>
@@ -113,8 +114,8 @@
 	<br>
 	
 	<!-- ------------------------------------------------------------------------ -->
-	
-	<%@ include file="include/managerFooter.jspf" %>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+      
+      <%@ include file="include/footer.jspf" %>
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 </body>
 </html>

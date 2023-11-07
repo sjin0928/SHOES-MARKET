@@ -70,7 +70,7 @@
 				</div>
 				<div class="form-group">
 					<label for="content">내용</label>
-								<textarea class="form-control" name="text" title="내용" id="exampleFormControlTextarea1" rows="5"></textarea>
+					<textarea class="form-control" name="contents" title="내용" id="exampleFormControlTextarea1" rows="5"></textarea>
 				</div>
 				<div class="mb-3">
 					<label for="imagePath" class="form-label">첨부파일</label>

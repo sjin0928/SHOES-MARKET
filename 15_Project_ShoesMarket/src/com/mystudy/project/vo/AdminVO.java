@@ -9,6 +9,11 @@ public class AdminVO {
 	
 	public AdminVO() {}
 
+	public AdminVO(String adminId, String adminPassword) {
+		super();
+		this.adminId = adminId;
+		this.adminPassword = adminPassword;
+	}
 	public AdminVO(String adminId, String adminPassword, int adminNum) {
 		super();
 		this.adminId = adminId;
@@ -16,7 +21,6 @@ public class AdminVO {
 		this.adminNum = adminNum;
 		
 	}
-
 	public String getAdminId() {
 		return adminId;
 	}
@@ -32,7 +36,7 @@ public class AdminVO {
 	public void setAdminPassword(String adminPassword) {
 		this.adminPassword = adminPassword;
 	}
-	
+
 	public int getAdminNum() {
 		return adminNum;
 	}

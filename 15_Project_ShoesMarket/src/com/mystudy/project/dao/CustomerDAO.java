@@ -8,9 +8,50 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.mystudy.project.mybatis.DBService;
 import com.mystudy.project.vo.CustomerVO;
+import com.mystudy.project.vo.ItemVO;
 
 public class CustomerDAO {
-	// 회원정보조회
+	
+	// 고객수 조회
+	public static int getCustomerTotalCount() {
+		SqlSession ss = null;
+		int totalCount = 0;
+		
+		try {
+			ss = DBService.getFactory().openSession();
+			totalCount = ss.selectOne("shoesmarket.customerTotalCount");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			ss.close();
+		}
+		
+		return totalCount;
+	}
+	
+	// 페이지에 해당하는 고객 게시글 가져오기 - 회원 관리 게시판
+	public static List<CustomerVO> getPagelist(int begin, int end){
+		Map<String, Integer> map = new HashMap<>();
+		map.put("begin", begin);
+		map.put("end", end);
+		
+		SqlSession ss = null;
+		List<CustomerVO> list = null;
+		
+		try {
+			ss = DBService.getFactory().openSession();
+			list = ss.selectList("shoesmarket.customerList", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			ss.close();
+		}
+		
+		return list;
+	}
+	
+	
+	// 회원정보 전체 조회
 	public static List<CustomerVO> selectAll() {
 		SqlSession ss = DBService.getFactory().openSession();
 		List<CustomerVO> customer = ss.selectList("shoesmarket.customer");

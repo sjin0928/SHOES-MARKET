@@ -20,23 +20,24 @@ public class InquiryViewCommand implements Command {
 
 		System.out.println("InquiryViewCommand");
 		// 세션에 저장된 로그인 정보
-		HttpSession session = request.getSession();
-
+		
 		int inquiryNum = Integer.parseInt(request.getParameter("inquiryNum"));
 		System.out.println("inquiryNum : " + inquiryNum);
 		InquiryVO vo = InquiryDAO.getView(inquiryNum);
 		
+		HttpSession session = request.getSession();
 		CustomerVO customer = (CustomerVO)session.getAttribute("customer");
 		
 		System.out.println("customer : " + customer);
 		
-		if(session.getAttribute("customer") == null && "on".equals(vo.getSecretStatus())) {
+		if(customer == null && "on".equals(vo.getSecretStatus())) {
 			return "not_customer.jsp";
 		}
-		if("on".equals(vo.getSecretStatus()) && customer.getCusNum() != vo.getCusNum()) {
-			return "not_customer.jsp";
+		if(customer != null) {
+			if("on".equals(vo.getSecretStatus()) && customer.getCusNum() != vo.getCusNum()) {
+				return "not_customer.jsp";
+			}
 		}
-
 		
 		// 파라미터 값 추출(확인)
 		request.setCharacterEncoding("UTF-8");
@@ -71,7 +72,9 @@ public class InquiryViewCommand implements Command {
 		System.out.println("vo : " + vo);
 		System.out.println("secretStatus : " + vo.getSecretStatus());
 		System.out.println("customer : " + customer);
-		System.out.println("customer.getCusNum() : " + customer.getCusNum());
+		if(customer != null) {
+			System.out.println("customer.getCusNum() : " + customer.getCusNum());
+		}
 		System.out.println("vo.getCusNum() : " + vo.getCusNum());
 		
 

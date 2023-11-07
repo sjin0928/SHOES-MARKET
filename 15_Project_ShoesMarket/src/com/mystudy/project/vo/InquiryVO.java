@@ -22,6 +22,20 @@ public class InquiryVO {
 	}
 
 	public InquiryVO(int inquiryNum, int cusNum, String secretStatus, String title, String contents, Date regDate,
+			Date modDate, int itemNum) {
+		super();
+		this.inquiryNum = inquiryNum;
+		this.cusNum = cusNum;
+		this.secretStatus = secretStatus;
+		this.title = title;
+		this.contents = contents;
+		this.regDate = regDate;
+		this.modDate = modDate;
+		this.itemNum = itemNum;
+	}
+
+
+	public InquiryVO(int inquiryNum, int cusNum, String secretStatus, String title, String contents, Date regDate,
 			Date modDate, int itemNum, String cusNickname, String cusEmail, String cusPassword, String inqImgPath, String inqImgName) {
 		super();
 		this.inquiryNum = inquiryNum;
@@ -166,7 +180,5 @@ public class InquiryVO {
 				+ ", itemNum=" + itemNum + ", cusNickname=" + cusNickname + ", cusEmail=" + cusEmail + ", cusPassword="
 				+ cusPassword + ", inqImgPath=" + inqImgPath + ", inqImgName=" + inqImgName + "]";
 	}
-
-
 
 }

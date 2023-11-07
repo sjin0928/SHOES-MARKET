@@ -9,34 +9,35 @@
 	<!-- 메뉴바 부트스트랩 템플릿 사용 -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/lux/bootstrap.min.css" integrity="sha384-9+PGKSqjRdkeAU7Eu4nkJU8RFaH8ace8HGXnkiKMP9I9Te0GJ4/km3L1Z8tXigpG" crossorigin="anonymous">
 <!--     <link rel="stylesheet" type="text/css" href="css/login.css">   -->
+	<link href="css/style1.css" rel="stylesheet" />
  <script>
  <%@ include file="include/popup.js" %>
  <%@ include file="include/search.js" %>
  </script>
     <script src="loginScript.jsp"></script>
     <script>
-        function validateForm() {
-            var cusId = document.forms["loginForm"]["cusId"].value;
-            var cusPassword = document.forms["loginForm"]["cusPassword"].value;
-	
-            // 빈칸 있을 경우 확인 
-            if (cusId == "" && cusPassword == "") {
-                alert("아이디와 비밀번호를 입력하세요.");
-                return false;
-            }
+    function validateForm() {
+        var cusId = document.forms["loginForm"]["cusId"].value;
+        var cusPassword = document.forms["loginForm"]["cusPassword"].value;
 
-            if (cusId == "") {
-                alert("아이디를 입력하세요.");
-                return false;
-            }
-
-            if (cusPassword == "") {
-                alert("비밀번호를 입력하세요.");
-                return false;
-            }
-
-            return true;
+        // 빈칸 있을 경우 확인 
+        if (cusId == "" && cusPassword == "") {
+            alert("아이디와 비밀번호를 입력하세요.");
+            return false;
         }
+
+        if (cusId == "") {
+            alert("아이디를 입력하세요.");
+            return false;
+        }
+
+        if (cusPassword == "") {
+            alert("비밀번호를 입력하세요.");
+            return false;
+        }
+
+        return true;
+    }
     </script>
 </head>
 <body>
@@ -44,24 +45,24 @@
 	<%@ include file="include/header.jspf" %>
 	<!-- ------------------------------------------------------------------------ -->
 	<br><br><br><br>
-	<h2>로그인</h2>
-    <form name="loginForm" action="controller?type=login" method="post" onsubmit="return validateForm()">
-    	아이디: <input type="text" name="cusId" placeholder="아이디를 입력해주세요"><br> 
-    	비밀번호: <input type="password" name="cusPassword" placeholder="비밀번호를 입력해주세요"><br> 
-    	<input type="submit" value="Login">
+  	 <form name="loginForm" action="controller?type=login" method="post" onsubmit="return validateForm()" class="login-form">
+        <h2>로그인</h2>
+        아이디: <input type="text" name="cusId" placeholder="아이디를 입력해주세요"><br> 
+        비밀번호: <input type="password" name="cusPassword" placeholder="비밀번호를 입력해주세요"><br> 
+        <input type="submit" value="로그인">
     </form>
-    
     <div class="links">
         <a href="find_id.jsp">아이디 찾기</a>
         <a href="find_password.jsp">비밀번호 찾기</a>
-        <a href="home.jsp">메인페이지</a>
     </div>
     <br><br><br><br>
-    <% String message = (String) request.getAttribute("message"); %>
-    <% if (message != null) { %>
-        <script>
-            alert('<%= message %>');
+    <% String successMessage = (String) session.getAttribute("successMessage"); %>
+<% if (successMessage != null) { %>
+    <script>
+        alert('<%= successMessage %>');
+        location.href = 'beforeMain.jsp';
         </script>
+        <% session.removeAttribute("successMessage"); %> 
     <% } %>
     
      <!-- ------------------------------------------------------------------------ -->

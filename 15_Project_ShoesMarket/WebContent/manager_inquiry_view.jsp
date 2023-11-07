@@ -137,7 +137,6 @@
 		<ul>
 			<li>작성자: 관리자 &nbsp;&nbsp; </li>
 			<li>작성일: ${inqCommVO.regDate }</li>
-			<li>수정일: ${inqCommVO.modDate }</li>
 			<li>내용 : ${inqCommVO.contents }</li>
 			</ul>
 			<input type="button" value="삭제" onclick="manager_comment_delete()">

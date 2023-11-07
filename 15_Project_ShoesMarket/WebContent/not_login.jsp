@@ -4,7 +4,7 @@
 <html>
 <head>
 <script>
-	alert("로그인 후 게시글 작성 가능합니다.");
+	alert("로그인 후 가능합니다.");
 	location.href="login.jsp";
 </script>
 <meta charset="UTF-8">

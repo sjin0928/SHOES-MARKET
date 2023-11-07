@@ -23,35 +23,6 @@ function redirectToPurchasePage() {
 }
 
 
-<!--	function calculateTotalPrice() {
-	    var selectedItems = document.getElementsByName("selectedItems");
-	    var totalPrice = 0;
-	
-	    for (var i = 0; i < selectedItems.length; i++) {
-	        if (selectedItems[i].checked) {
-	            // 각 선택된 항목의 가격을 가져와 totalPrice에 더함
-	            var itemPrice = parseInt(selectedItems[i].value);
-	            totalPrice += itemPrice;
-	        }
-	    }
-	
-	    // 총 결제금액을 totalAmount 스팬에 표시
-	    var totalAmountSpan = document.getElementById("totalAmount");
-	    totalAmountSpan.textContent = totalPrice + "원";
-	}
-	
-	// 페이지가 로드될 때 총 결제금액을 계산
-	window.onload = calculateTotalPrice;
-	
-	// 체크박스 상태가 변경될 때마다 총 결제금액을 업데이트
-	var checkboxes = document.getElementsByName("selectedItems");
-	for (var i = 0; i < checkboxes.length; i++) {
-	    checkboxes[i].addEventListener("change", calculateTotalPrice);
-	}
--->	
-	
-
-	
 </script>
 </head>
 <style>
@@ -127,26 +98,25 @@ input[type="submit"] {
 <body>
 	<div class="container">
 		<h1>상품 결제</h1>
+		<h1>총 금액 확인 : ${totalCount }</h1>
 		<div class="order-summary">
 			<h2>주문 내역</h2>
 			<table>
 				<thead>
 					<tr>
-						<th>상품번호</th>
 						<th>상품명</th>
-						<th>상품설명</th>
 						<th>상품가격</th>
+						<th>수량</th>
 					</tr>
 				</thead>
 				<tbody>
-
-					<c:forEach var="vo" items="${selectedItems}">
+					 <c:forEach var="vo" items="${selectedCart}" varStatus="cartStatus">
 						<tr>
-							<td>${vo.itemNum}</td>
-							<td>${vo.name}</td>
-							<td>${vo.itemDetail}</td>
-							<td>${vo.price}</td>
-					</c:forEach>
+							<td>${selectedItemList[cartStatus.index].price }</td>
+							<td>${selectedItemList[cartStatus.index].price }</td>
+							<td>${vo.cartQuantity }</td>
+						</tr>
+					 </c:forEach>
 				</tbody>
 			</table>
 			<table>

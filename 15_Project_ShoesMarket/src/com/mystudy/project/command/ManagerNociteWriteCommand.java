@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import com.mystudy.project.dao.AdminDAO;
 import com.mystudy.project.dao.NoticeDAO;
 import com.mystudy.project.vo.AdminVO;
+import com.mystudy.project.vo.CustomerVO;
 import com.mystudy.project.vo.NoticeVO;
 
 public class ManagerNociteWriteCommand implements Command {
@@ -18,14 +19,20 @@ public class ManagerNociteWriteCommand implements Command {
 	@Override
 	public String exec(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("--ManagerNociteWriteCommand--");
+		request.setCharacterEncoding("UTF-8");
 		
-		AdminVO aVO = AdminDAO.getAdmin();
-		System.out.println("aVO : " + aVO);
-				
+		// 세션에 저장된 로그인 정보
+		HttpSession session = request.getSession();
+		AdminVO AdminVo = null;
+						
+		if(session.getAttribute("AdminVo") != null) {
+			AdminVo = (AdminVO)session.getAttribute("AdminVo");
+		}
+
 		NoticeVO vo = new NoticeVO();
 		vo.setNoticeTitle(request.getParameter("noticeTitle"));
 		vo.setContents(request.getParameter("contents"));
-		vo.setAdminNum(aVO.getAdminNum());
+		vo.setAdminNum(AdminVo.getAdminNum());
 		System.out.println(vo);
 		// 공지사항 입력
 		

@@ -18,6 +18,23 @@ public class BuyDAO {
 //			ss.close();
 //			return buy;
 //		}
+	
+	// 주문 내역 조회
+	public static List<BuyVO> getOrderedList(int cusNum){
+		SqlSession ss = null;
+		List<BuyVO> orderedList = null;
+		
+		try {
+			ss = DBService.getFactory().openSession();
+			orderedList = ss.selectList("shoesmarket.getOrderedList", cusNum);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			ss.close();
+		}
+		
+		return orderedList;
+	}
 		
 	// 주문상품 insertOrder
 	public static List<CartVO> insertCartOrder(int selectedItems) {

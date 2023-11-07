@@ -19,6 +19,7 @@ public class InquiryWriteCommand implements Command {
 	@Override
 	public String exec(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("--InquiryWriteCommand--");
+		request.setCharacterEncoding("UTF-8");
 		
 		// 세션에 저장된 로그인 정보
 		HttpSession session = request.getSession();
@@ -28,7 +29,6 @@ public class InquiryWriteCommand implements Command {
 			customer = (CustomerVO)session.getAttribute("customer");
 		}
 
-		
 		String path = "C:\\temp";
 		System.out.println("> path : " + path);
 		
@@ -39,27 +39,52 @@ public class InquiryWriteCommand implements Command {
 			"UTF-8", //인코딩 형식
 			new DefaultFileRenamePolicy() //동일파일명 있으면 이름 자동 변경저장
 		);
+
+		String secretStatus = "off";
+		if (secretStatus != null && "on".equals(mr.getParameter("secretStatus"))) {
+			secretStatus = mr.getParameter("secretStatus");
+		}
 		
-		InquiryVO vo = new InquiryVO();
-		vo.setTitle(mr.getParameter("title"));
-		vo.setCusNickname(mr.getParameter("cusNickname"));
-		vo.setContents(mr.getParameter("contents"));
-		vo.setSecretStatus(mr.getParameter("secretStatus"));
-		vo.setInqImgName(mr.getFilesystemName("inqImgPath"));
-		vo.setInqImgPath(path);
-		
+		String title = mr.getParameter("title");
+		String cusNickname = mr.getParameter("cusNickname");
+		String contents = mr.getParameter("contents");
+		String inqImgName = mr.getFilesystemName("inqImgPath");
 		String itemName = mr.getParameter("itemName");
-		System.out.println(itemName);
-		
+		System.out.println("title : " + title + ", cusNickname : " + cusNickname
+				+ ", contents : " + contents + ", secretStatus : " + secretStatus
+				+ ", inqImgName : " + inqImgName + ", itemName : " + itemName);
 		int itemNum = InquiryDAO.inquiryItemSearch(itemName);
 		System.out.println("itemNum : " + itemNum);
-		vo.setItemNum(itemNum);
+		
+		int result = -1;
+		InquiryVO vo = new InquiryVO();
+		// 파일 없을 때
+		if(mr.getFilesystemName("inqImgPath") == null) {
+			vo.setTitle(title);
+			vo.setCusNickname(cusNickname);
+			vo.setContents(contents);
+			vo.setSecretStatus(secretStatus);
+			vo.setCusNum(customer.getCusNum());
+			vo.setItemNum(itemNum);
+			
+			result = InquiryDAO.inquiryWrite(vo);
+			
+		} 
+		//파일 있을 때
+		if (mr.getFilesystemName("inqImgPath") != null) {
+			vo.setTitle(title);
+			vo.setCusNickname(cusNickname);
+			vo.setContents(contents);
+			vo.setSecretStatus(secretStatus);
+			vo.setInqImgName(inqImgName);
+			vo.setInqImgPath(path);
+			vo.setItemNum(itemNum);
+			vo.setCusNum(customer.getCusNum());
+			
+			result = InquiryDAO.inquiryWriteFile(vo);
+		}
 		
 		System.out.println("inqImgName : " + mr.getFilesystemName("inqImgPath"));
-		
-		// 합친 후 session에서 고객번호 받아서 넣어주기
-		vo.setCusNum(Integer.parseInt(customer.getCusName()));
-		int result = InquiryDAO.inquiryWrite(vo);
 		
 		request.setAttribute("mr", mr);
 		request.setAttribute("vo", vo);

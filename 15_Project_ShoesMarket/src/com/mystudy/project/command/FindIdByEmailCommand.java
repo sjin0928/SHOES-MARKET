@@ -13,9 +13,10 @@ public class FindIdByEmailCommand implements Command {
     @Override
     public String exec(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if ("POST".equalsIgnoreCase(request.getMethod())) {
+        	System.out.println("Executing FindIdByEmailCommand");
         	String cusName = request.getParameter("cusName");
             String cusEmail = request.getParameter("cusEmail");
-
+            
             if (cusName == null || cusName.trim().isEmpty() ||
             	cusEmail == null || cusEmail.trim().isEmpty()) {
                 

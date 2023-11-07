@@ -23,15 +23,17 @@ public class RegisterCommand implements Command {
 			String cusEmail = request.getParameter("cusEmail");
 			String cusPhoneNum = request.getParameter("cusPhoneNum");
 
-			if (cusId == null || cusId.trim().isEmpty() || cusPassword == null || cusPassword.trim().isEmpty()
-					|| cusPasswordConfirm == null || cusPasswordConfirm.trim().isEmpty() || // 비밀번호 확인 값 체크
-					cusName == null || cusName.trim().isEmpty() || cusNickName == null || cusNickName.trim().isEmpty()
-					|| cusEmail == null || cusEmail.trim().isEmpty() || cusPhoneNum == null
-					|| cusPhoneNum.trim().isEmpty()) {
-
-				request.setAttribute("registerMessage", "입력되지 않은 항목이 있습니다.");
-				return "register.jsp";
-			}
+			if (cusId == null || cusId.trim().isEmpty() || cusId.length() < 5 || cusId.length() > 12 ||
+				    cusPassword == null || cusPassword.trim().isEmpty() || cusPassword.length() < 5 || cusPassword.length() > 12 ||
+				    cusPasswordConfirm == null || cusPasswordConfirm.trim().isEmpty() || 
+				    cusPasswordConfirm.length() < 5 || cusPasswordConfirm.length() > 12 || 
+				    cusName == null || cusName.trim().isEmpty() || cusName.length() < 2 || 
+				    cusNickName == null || cusNickName.trim().isEmpty() || cusNickName.length() < 2 ||
+				    cusEmail == null || cusEmail.trim().isEmpty() || !cusEmail.contains("@") || 
+				    cusPhoneNum == null || cusPhoneNum.trim().isEmpty() || !cusPhoneNum.matches("[0-9]+")) {
+				    request.setAttribute("registerMessage", "입력이 올바르지 않습니다.");
+				    return "register.jsp";
+				}
 
 			if (CustomerDAO.isDuplicateId(cusId)) {
 				request.setAttribute("registerMessage", "이미 존재하는 아이디입니다. 다른 아이디를 사용해주세요.");
@@ -63,9 +65,11 @@ public class RegisterCommand implements Command {
 			CustomerDAO.insertCustomer(newCustomer);
 
 			request.setAttribute("registerMessage", "회원가입이 완료되었습니다.");
-			return "home.jsp";
+			return "beforeMain.jsp";
 		}
 
 		return "register.jsp";
 	}
+
+
 }
