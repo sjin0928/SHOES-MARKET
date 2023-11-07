@@ -62,14 +62,9 @@ Back-End, Front-End 모두 적용하여 개발해 본 프로젝트는 이번이 
 <br>
 가능한 UI를 일치시키기 위해 footer와 header를 처음에 만들어 팀원들과 공유를 했습니다. 프로젝트 마무리 직전에 다른 팀원이 구현한 페이지의
 css가 footer의 css와 충돌하여 글씨 색이 변한채로 발표를 진행했던 점이 아쉬웠습니다.
-<p>
-<h3>6.참고자료<h3>
+<div>
+<h3>6.참고자료</h3>
 <a href="https://www.shoemarker.co.kr">SHOEMARKER</a><br>
 <a href="https://grandstage.a-rt.com">ABC마트</a><br>
-<p>
-</p>
-이 프로젝트는 어떤 문제를 해결하나요?
-이 프로젝트를 통해 무엇을 배우셨나요?
-이 프로젝트의 특징은 무엇인가요?
-만약 프로젝트의 특징이 너무 많다면, '특징' 섹션을 추가해서 이곳에 나열하세요.
+</div>
 </div>
