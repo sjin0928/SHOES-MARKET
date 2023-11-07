@@ -3,7 +3,7 @@
 <!-- 방문자수 --!>
 <a href="https://hits.seeyoufarm.com"><img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fqkrtn0928@naver.com%2Fhit-counter&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false"/></a>
 
-![sjin0928's GitHub stats](https://github-readme-stats.vercel.app/api?username=anuraghazra&theme=dark&show_icons=true)
+?theme=THEME_NAME.![sjin0928's GitHub stats](https://github-readme-stats.vercel.app/api?username=anuraghazra&theme=swift&show_icons=true)
 <div> 
 <p>techStack</p>
 <img src="https://img.shields.io/badge/javascript?style=for-the-badge&logo=javascript&logoColor=#F7DF1E">
