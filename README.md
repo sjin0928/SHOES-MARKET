@@ -83,56 +83,56 @@
 <hr>
 <h3>5. 기능 설명</h3>
 <h4>- 사이트 관리자 기능 -</h4>
-&nbsp1) CREATE<br>
+&nbsp;1) CREATE<br>
 &emsp;- 판매할 상품을 직접 등록하는 기능<br>
 &emsp;- 공지사항을 등록하는 기능<br>
 &emsp;- 문의게시글에 답변을 등록하는 기능<br>
-&nbsp2) READ<br>
+&nbsp;2) READ<br>
 &emsp;- 관리자로 로그인하는 기능<br>
 &emsp;- 상품을 조회하는 기능<br>
 &emsp;- 공지사항을 조회하는 기능<br>
 &emsp;- 회원이 남긴 문의게시글을 조회하는 기능<br>
 &emsp;- 가입 된 회원을 조회하는 기능<br>
-&nbsp3) UPDATE<br>
+&nbsp;3) UPDATE<br>
 &emsp;- 상품을 수정하는 기능<br>
 &emsp;- 공지사항을 수정하는 기능<br>
-&nbsp4) DELETE<br>
+&nbsp;4) DELETE<br>
 &emsp;- 상품을 삭제하는 기능<br>
 &emsp;- 공지사항을 삭제하는 기능<br>
 &emsp;- 문의게시글에 남긴 답변을 삭제하는 기능<br>
-&nbsp5) LIST (ALL)<br>
+&nbsp;5) LIST (ALL)<br>
 &emsp;- 상품의 전체 목록을 조회하는 기능<br>
 &emsp;- 공지사항의 전체 목록을 조회하는 기능<br>
 &emsp;- 문의게시글의 전체 목록을 조회하는 기능<br>
-&nbsp6) LIST (SEARCH)<br>
+&nbsp;6) LIST (SEARCH)<br>
 &emsp;- 제목으로 검색된 공지사항 목록을 조회하는 기능<br>
 &emsp;- 키워드(작성자, 제목, 상품명)로 검색된 문의게시글 목록을 조회하는 기능<br>
 
 <h4>- 회원 기능 -</h4>
-&nbsp1) CREATE<br>
+&nbsp;1) CREATE<br>
 &emsp;- 회원가입 기능<br>
 &emsp;- 상품을 장바구니에 담는 기능<br>
 &emsp;- 장바구니에 담은 상품을 주문 및 결제하는 기능<br>
 &emsp;- 문의게시글을 등록하는 기능<br>
-&nbsp2) READ<br>
+&nbsp;2) READ<br>
 &emsp;- 가입한 아이디로 로그인하는 기능<br>
 &emsp;- 아이디와 비밀번호를 찾는 기능<br>
 &emsp;- 주문한 상품을 조회하는 기능<br>
 &emsp;- 비밀 문의게시글은 작성한 회원만 조회할 수 있는 기능<br>
 &emsp;- 공개 문의게시글은 모든 회원이 조회할 수 있는 기능<br>
 &emsp;- 공지사항을 조회하는 기능<br>
-&nbsp3) UPDATE<br>
+&nbsp;3) UPDATE<br>
 &emsp;- 회원 정보를 수정하는 기능<br>
 &emsp;- 장바구니에 담긴 상품의 개수를 수정하는 기능<br>
 &emsp;- 문의 게시글을 수정하는 기능<br>
-&nbsp4) DELETE<br>
+&nbsp;4) DELETE<br>
 &emsp;- 장바구니에 담긴 상품을 삭제하는 기능<br>
 &emsp;- 문의게시글을 삭제하는 기능<br>
-&nbsp5) LIST (ALL)<br>
+&nbsp;5) LIST (ALL)<br>
 &emsp;- 상품의 전체 목록을 조회하는 기능<br>
 &emsp;- 공지사항의 전체 목록을 조회하는 기능<br>
 &emsp;- 문의게시글의 전체 목록을 조회하는 기능<br>
-&nbsp6) LIST (SEARCH)<br>
+&nbsp;6) LIST (SEARCH)<br>
 &emsp;- 키워드(상품명, 브랜드)로 검색된 상품 목록을 조회하는 기능<br>
 &emsp;- 제목으로 검색된 공지사항 목록을 조회하는 기능<br>
 &emsp;- 키워드(작성자, 제목, 상품명)로 검색된 문의게시글 목록을 조회하는 기능<br>
@@ -267,8 +267,8 @@
 </table>
 <hr>
 
-<h3>6.참고자료</h3>
+<h3>8.참고자료</h3>
 <a href="https://www.shoemarker.co.kr">SHOEMARKER</a><br>
 <a href="https://grandstage.a-rt.com">ABC마트</a><br>
-</div>
-</div>
+
+
