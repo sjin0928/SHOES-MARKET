@@ -267,7 +267,7 @@
 </table>
 <hr>
 
-<h3>8.참고자료</h3>
+<h3>7.참고자료</h3>
 <a href="https://www.shoemarker.co.kr">SHOEMARKER</a><br>
 <a href="https://grandstage.a-rt.com">ABC마트</a><br>
 
