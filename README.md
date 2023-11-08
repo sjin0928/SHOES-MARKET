@@ -1,4 +1,3 @@
-# SHOES-MARKET
 ![header](https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=0,2,2,5,30&height=300&section=header&text=SHOES%20MARKET&fontSize=90&animation=fadeIn&fontAlignY=38&desc=sujin's%20portfolio)
 
 <h2>프로젝트 이름 : SHOES-MARKET</h2>
@@ -42,7 +41,7 @@
   <h4>1) 요구사항 명세서</h4>
   &nbsp&nbsp<a href="https://pricey-fear-6c4.notion.site/610d7fd51c624a00b831b3f22e26c939?v=144a992173424e0db42a9d018964a75d">요구사항 명세서</a>
   <h4>2) 화면구현</h4>
-  &nbsp&nbsp<a href="https://share.balsamiq.com/c/3p2Z1s6ePVpknwkYtB9Qq4.png">메인</a><br>
+  > <a href="https://share.balsamiq.com/c/3p2Z1s6ePVpknwkYtB9Qq4.png">메인</a><br>
   &nbsp&nbsp<a href="https://share.balsamiq.com/c/4PmazuHffRBnPg8jsjHx1h.png">회원가입</a><br>
   &nbsp&nbsp<a href="https://share.balsamiq.com/c/viK4sR9oy8Xdo4L24DQKWG.png">로그인</a><br>
   &nbsp&nbsp<a href="https://share.balsamiq.com/c/gkmSeif993LZYTkPrFqNSr.png">상품목록 및 상세</a><br>
@@ -53,6 +52,7 @@
   <h4>3) ERD</h4>
   &nbsp&nbsp<img width="500" src="https://github.com/sjin0928/SHOES-MARKET/assets/143140370/ddb4239a-1bda-4667-9a99-606566220621">
 </div>
+<h3>5. 기능 설명</h3>
 
 <h3>5. 개발 후기</h3>
 <p>
