@@ -141,129 +141,129 @@
 <h3>6. 화면구성</h3>
 <h4>1) 일반 회원 페이지</h4>
 <table style="text-align:center">
-  <tr>
-    <td><img width="400" src="https://github.com/sjin0928/SHOES-MARKET/assets/143140370/b4c2bd89-763d-49c5-8fa3-6ea5355cb2ac"</td>
-    <td><img width="400" src="https://github.com/sjin0928/SHOES-MARKET/assets/143140370/4be38ed9-73bf-4a7e-aabf-405ecd1f865b"</td>
-  </tr>
-  <tr>
+  <thead><tr>
     <td>메인페이지(상)</td>
     <td>메인페이지(하)</td>
-  </tr>
-  <tr>
-    <td><img width="400" src="https://github.com/sjin0928/SHOES-MARKET/assets/143140370/6057cf39-9b28-4adf-b681-6062ec6bc072"</td>
-    <td><img width="400" src="https://github.com/sjin0928/SHOES-MARKET/assets/143140370/cd528d6a-6869-43d1-8aa1-27cb27d97f1d"</td>
-  </tr>
-  <tr>
+  </tr></thead>
+ <tbody><tr>
+    <td><img width="400" src="https://github.com/sjin0928/SHOES-MARKET/assets/143140370/b4c2bd89-763d-49c5-8fa3-6ea5355cb2ac"</td>
+    <td><img width="400" src="https://github.com/sjin0928/SHOES-MARKET/assets/143140370/4be38ed9-73bf-4a7e-aabf-405ecd1f865b"</td>
+  </tr></tbody>
+  <thead><tr>
     <td>회원가입</td>
     <td>로그인</td>
-  </tr>
-  <tr>
-    <td><img width="400" src="https://github.com/sjin0928/SHOES-MARKET/assets/143140370/9e13ba7a-c18f-4345-9e92-21a66317d490"</td>
-    <td><img width="400" src="https://github.com/sjin0928/SHOES-MARKET/assets/143140370/36050f6e-85d3-499a-9336-e00cf900f968"</td>
-  </tr>
-  <tr>
+  </tr></thead>
+  <tbody><tr>
+    <td><img width="400" src="https://github.com/sjin0928/SHOES-MARKET/assets/143140370/6057cf39-9b28-4adf-b681-6062ec6bc072"</td>
+    <td><img width="400" src="https://github.com/sjin0928/SHOES-MARKET/assets/143140370/cd528d6a-6869-43d1-8aa1-27cb27d97f1d"</td>
+  </tr></tbody>
+  <thead><tr>
     <td>아이디 찾기</td>
     <td>아이디찾기 결과</td>
-  </tr>
-    <tr>
-    <td><img width="400" src="https://github.com/sjin0928/SHOES-MARKET/assets/143140370/7868b644-8666-4bf3-953b-9938ed3439b9"</td>
-    <td><img width="400" src="https://github.com/sjin0928/SHOES-MARKET/assets/143140370/e7d70a12-17be-4791-91f4-a9f3b264008e"</td>
-  </tr>
-  <tr>
+  </tr></thead>
+  <tbody><tr>
+    <td><img width="400" src="https://github.com/sjin0928/SHOES-MARKET/assets/143140370/9e13ba7a-c18f-4345-9e92-21a66317d490"</td>
+    <td><img width="400" src="https://github.com/sjin0928/SHOES-MARKET/assets/143140370/36050f6e-85d3-499a-9336-e00cf900f968"</td>
+  </tr></tbody>
+  <thead><tr>
     <td>마이페이지</td>
     <td>회원_정보수정</td>
-  </tr>
-    <tr>
-    <td><img width="400" src="https://github.com/sjin0928/SHOES-MARKET/assets/143140370/c51f402c-1fb5-48b5-8f28-2ff08d4290d2"</td>
-    <td><img width="400" src="https://github.com/sjin0928/SHOES-MARKET/assets/143140370/639d166c-560b-4a79-99ab-52f3fbc51016"</td>
-  </tr>
-  <tr>
+  </tr></thead>
+    <tbody><tr>
+    <td><img width="400" src="https://github.com/sjin0928/SHOES-MARKET/assets/143140370/7868b644-8666-4bf3-953b-9938ed3439b9"</td>
+    <td><img width="400" src="https://github.com/sjin0928/SHOES-MARKET/assets/143140370/e7d70a12-17be-4791-91f4-a9f3b264008e"</td>
+  </tr></tbody>
+  <thead><tr>
     <td>상품상세</td>
     <td>장바구니</td>
-  </tr>
-  <tr>
-    <td><img width="400" src="https://github.com/sjin0928/SHOES-MARKET/assets/143140370/89fc11f1-71c1-47aa-a353-6e2220731f1f"</td>
-    <td><img width="400" src="https://github.com/sjin0928/SHOES-MARKET/assets/143140370/de287377-0630-4a1c-812a-82f23cfb0493"</td>
-  </tr>
-  <tr>
+  </tr></thead>
+  <tbody><tr>
+    <td><img width="400" src="https://github.com/sjin0928/SHOES-MARKET/assets/143140370/c51f402c-1fb5-48b5-8f28-2ff08d4290d2"</td>
+    <td><img width="400" src="https://github.com/sjin0928/SHOES-MARKET/assets/143140370/639d166c-560b-4a79-99ab-52f3fbc51016"</td>
+  </tr></tbody>
+  <thead><tr>
     <td>주문페이지</td>
     <td>결제완료</td>
-  </tr>
-  <tr>
-    <td><img width="400" src="https://github.com/sjin0928/SHOES-MARKET/assets/143140370/e357ec1c-3296-4efd-a339-52f79287c3fd"</td>
-    <td><img width="400" src="https://github.com/sjin0928/SHOES-MARKET/assets/143140370/893d7878-2150-44e2-ac08-a55849d6772e"</td>
-  </tr>
-  <tr>
+  </tr></thead>
+  <tbody><tr>
+    <td><img width="400" src="https://github.com/sjin0928/SHOES-MARKET/assets/143140370/89fc11f1-71c1-47aa-a353-6e2220731f1f"</td>
+    <td><img width="400" src="https://github.com/sjin0928/SHOES-MARKET/assets/143140370/de287377-0630-4a1c-812a-82f23cfb0493"</td>
+  </tr></tbody>
+  <thead><tr>
     <td>주문완료</td>
     <td>게시판_메인</td>
-  </tr>
-  <tr>
-    <td><img width="400" src="https://github.com/sjin0928/SHOES-MARKET/assets/143140370/608d2c07-e841-4a90-88b7-89b32894181c"</td>
-    <td><img width="400" src="https://github.com/sjin0928/SHOES-MARKET/assets/143140370/9060ac98-41be-41ca-8263-e8ffa09f6714"</td>
-  </tr>
-  <tr>
+  </tr></thead>
+  <tbody><tr>
+    <td><img width="400" src="https://github.com/sjin0928/SHOES-MARKET/assets/143140370/e357ec1c-3296-4efd-a339-52f79287c3fd"</td>
+    <td><img width="400" src="https://github.com/sjin0928/SHOES-MARKET/assets/143140370/893d7878-2150-44e2-ac08-a55849d6772e"</td>
+  </tr></tbody>
+  <thead><tr>
     <td>게시판_공지_리스트</td>
     <td>게시판_공지_상세</td>
-  </tr>
-  <tr>
-    <td><img width="400" src="https://github.com/sjin0928/SHOES-MARKET/assets/143140370/397551df-f4c0-48ae-b1bc-6aa54d10de0d"</td>
-    <td><img width="400" src="https://github.com/sjin0928/SHOES-MARKET/assets/143140370/69916248-6bb8-404d-b104-ab4ad0748654"</td>
-  </tr>
-  <tr>
+  </tr></thead>
+  <tbody><tr>
+    <td><img width="400" src="https://github.com/sjin0928/SHOES-MARKET/assets/143140370/608d2c07-e841-4a90-88b7-89b32894181c"</td>
+    <td><img width="400" src="https://github.com/sjin0928/SHOES-MARKET/assets/143140370/9060ac98-41be-41ca-8263-e8ffa09f6714"</td>
+  </tr></tbody>
+  <thead><tr>
     <td>게시판_문의_리스트</td>
     <td>게시판_문의_상세</td>
-  </tr>
-  <tr>
-    <td><img width="400" src="https://github.com/sjin0928/SHOES-MARKET/assets/143140370/49af9930-31a4-4a43-af24-0eecef055792"</td>
-    <td></td>
-  </tr>
-  <tr>
+  </tr></thead>
+  <tbody><tr>
+    <td><img width="400" src="https://github.com/sjin0928/SHOES-MARKET/assets/143140370/397551df-f4c0-48ae-b1bc-6aa54d10de0d"</td>
+    <td><img width="400" src="https://github.com/sjin0928/SHOES-MARKET/assets/143140370/69916248-6bb8-404d-b104-ab4ad0748654"</td>
+  </tr></tbody>
+  <thead><tr>
     <td>게시판_문의_수정</td>
     <td></td>
-  </tr>
+  </tr></thead>
+  <tbody><tr>
+    <td><img width="400" src="https://github.com/sjin0928/SHOES-MARKET/assets/143140370/49af9930-31a4-4a43-af24-0eecef055792"</td>
+    <td></td>
+  </tr></tbody>
   </table>
   <h4>2) 관리자 페이지</h4>
   <table>
-  <tr>
-    <td><img width="400" src="https://github.com/sjin0928/SHOES-MARKET/assets/143140370/76e47582-061a-4c67-a9df-8aa738970925"</td>
-    <td><img width="400" src="https://github.com/sjin0928/SHOES-MARKET/assets/143140370/1dbc6bf6-de7b-4a60-977c-f5d51cb80b12"</td>
-  </tr>
-  <tr>
+  <thead><tr>
     <td>관리자_회원관리</td>
     <td>관리자_게시판_상품관리</td>
-  </tr>
-  <tr>
-    <td><img width="400" src="https://github.com/sjin0928/SHOES-MARKET/assets/143140370/1afa63aa-9b65-429e-8b3b-6bfe62c84939"</td>
-    <td><img width="400" src="https://github.com/sjin0928/SHOES-MARKET/assets/143140370/f8a60063-1dd0-4fe0-aca1-013724fdabb1"</td>
-  </tr>
-  <tr>
+  </tr></thead>
+  <tbody><tr>
+    <td><img width="400" src="https://github.com/sjin0928/SHOES-MARKET/assets/143140370/76e47582-061a-4c67-a9df-8aa738970925"</td>
+    <td><img width="400" src="https://github.com/sjin0928/SHOES-MARKET/assets/143140370/1dbc6bf6-de7b-4a60-977c-f5d51cb80b12"</td>
+  </tr></tbody>
+  <thead><tr>
     <td>관리자_게시판_상품관리_상세</td>
     <td>관리자_게시판_상품등록</td>
-  </tr>
-  <tr>
-    <td><img width="400" src="https://github.com/sjin0928/SHOES-MARKET/assets/143140370/7e99a47d-9138-451c-a84f-faae4d1774fc"</td>
-    <td><img width="400" src="https://github.com/sjin0928/SHOES-MARKET/assets/143140370/c67c3a46-accb-48d6-8adc-62dfeb7c1baf"</td>
-  </tr>
-  <tr>
+  </tr></thead>
+  <tbody><tr>
+    <td><img width="400" src="https://github.com/sjin0928/SHOES-MARKET/assets/143140370/1afa63aa-9b65-429e-8b3b-6bfe62c84939"</td>
+    <td><img width="400" src="https://github.com/sjin0928/SHOES-MARKET/assets/143140370/f8a60063-1dd0-4fe0-aca1-013724fdabb1"</td>
+  </tr></tbody>
+  <thead><tr>
     <td>관리자_게시판_공지_리스트</td>
     <td>관리자_게시판_공지_상세</td>
-  </tr>
-  <tr>
-    <td><img width="400" src="https://github.com/sjin0928/SHOES-MARKET/assets/143140370/d46e71d8-79c7-41ef-8c9b-5b248c5b7111"</td>
-    <td><img width="400" src="https://github.com/sjin0928/SHOES-MARKET/assets/143140370/239b04e8-0a28-44f5-b48c-07819ebeadb3"</td>
-  </tr>
-  <tr>
+  </tr></thead>
+  <tbody><tr>
+    <td><img width="400" src="https://github.com/sjin0928/SHOES-MARKET/assets/143140370/7e99a47d-9138-451c-a84f-faae4d1774fc"</td>
+    <td><img width="400" src="https://github.com/sjin0928/SHOES-MARKET/assets/143140370/c67c3a46-accb-48d6-8adc-62dfeb7c1baf"</td>
+  </tr></thead>
+  <tbody><tr>
     <td>관리자_게시판_공지_수정</td>
     <td>관리자_게시판_문의_리스트</td>
-  </tr>
-  <tr>
-    <td><img width="400" src="https://github.com/sjin0928/SHOES-MARKET/assets/143140370/6094751c-1c26-4361-8679-57678bb2dc98"</td>
-    <td></td>
-  </tr>
-  <tr>
+  </tr></thead>
+  <tbody><tr>
+    <td><img width="400" src="https://github.com/sjin0928/SHOES-MARKET/assets/143140370/d46e71d8-79c7-41ef-8c9b-5b248c5b7111"</td>
+    <td><img width="400" src="https://github.com/sjin0928/SHOES-MARKET/assets/143140370/239b04e8-0a28-44f5-b48c-07819ebeadb3"</td>
+  </tr></tbody>
+  <thead><tr>
     <td>관리자_게시판_문의_상세</td>
     <td></td>
-  </tr>
+  </tr></thead>
+  <tbody><tr>
+    <td><img width="400" src="https://github.com/sjin0928/SHOES-MARKET/assets/143140370/6094751c-1c26-4361-8679-57678bb2dc98"</td>
+    <td></td>
+  </tr></tbody>
 </table>
 <hr>
 
